@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 16:59:29 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/10/22 18:02:53 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*p1;
+	unsigned char	*p2;
+
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	while (n > 0 && *p1 == *p2)
+	{
+		p1++;
+		p2++;
+		n--;
+	}
+	return (*p1 - *p2);
+}
+
+/*
+int	main()
+{
+	char	*s1 = "alo si btata";
+	char	*s2 = "alo si btayta";
+
+	printf("%d\n", memcmp(s1,s2,12));
+	printf("%d\n", ft_memcmp(s1,s2,12));
+}
+*/

@@ -1,28 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/22 14:58:41 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/10/22 16:07:54 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t	i = 0;
-	char	*p = (char *)s;
+	//long unsigned	i;
+	char			*p;
 
-	while (i < n)
+	//i = 0;
+	p = (char *)s;
+	while (n--)
 	{
-		p[i] = '\0';
-		i++;
+		*p = 0;
+		p++;
 	}
 }
 
-/*int main()
+int main()
 {
 	char	buffer[] = "A L O HH";
 	size_t	n = sizeof(buffer);
-
-	ft_bzero(buffer, n);
-	for (int i = 0; i < sizeof(buffer); i++)
+	bzero(buffer - 2, n-2);
+	for (long unsigned i = 0; i < n; i++)
 	{
 		printf("%d ", buffer[i]);
 	}
-	printf("\n");
-	printf("buffer as str : %s\n", buffer);
+	printf("\nbuffer as str(built-in) : %s\n", buffer);
+	ft_bzero(buffer - 2, n-2);
+	for (long unsigned j = 0; j < n; j++)
+	{
+		printf("%d ", buffer[j]);
+	}
+	printf("\nbuffer as str(my func) : %s\n", buffer);
 }
-*/
