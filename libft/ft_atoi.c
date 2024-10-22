@@ -1,3 +1,5 @@
+#include "libft.h"
+
 int	ft_atoi(const char *str)
 {
 	int	i = 0;
@@ -21,9 +23,6 @@ int	ft_atoi(const char *str)
 }
 
 /*
-#include <stdio.h>
-#include <stdlib.h>
-
 int	main()
 {
 	printf("%d\n", atoi("    -123abc"));
