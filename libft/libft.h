@@ -6,6 +6,15 @@
 #include <strings.h>
 #include <string.h>
 #include <ctype.h>
+#include <limits.h>
+#include <stddef.h>
+
+// #if UINT_MAX == 0xFFFFFFFF
+// 	typedef unsigned int		size_t;
+// #elif ULONG_MAX == 0xFFFFFFFFFFFFFFFF
+// 	typedef unsigned long		size_t;
+// #elif ULLONG_MAX == 0xFFFFFFFFFFFFFFFF
+// 	typedef unsigned long long	size_t;
 
 
 int		ft_atoi(const char *str);
@@ -18,6 +27,9 @@ int		ft_isprint(int c);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*ft_memmove(void *dest, const void *src, size_t n);
+size_t	ft_strlen(char const *s);
+
 
 
 
