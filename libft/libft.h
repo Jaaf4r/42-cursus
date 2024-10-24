@@ -1,6 +1,7 @@
 # ifndef LIBFT_H
 # define LIBFT_H
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
@@ -10,9 +11,9 @@
 #include <stddef.h>
 
 // #if UINT_MAX == 0xFFFFFFFF
-// 	typedef unsigned int		size_t;
+// 	typedef unsigned int size_t;
 // #elif ULONG_MAX == 0xFFFFFFFFFFFFFFFF
-// 	typedef unsigned long		size_t;
+// 	typedef unsigned long size_t;
 // #elif ULLONG_MAX == 0xFFFFFFFFFFFFFFFF
 // 	typedef unsigned long long	size_t;
 
@@ -29,6 +30,9 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlen(char const *s);
+void	*ft_memset(void *str, int c, size_t n);
+char	*ft_strchr(const char *str, int search_str);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 
 

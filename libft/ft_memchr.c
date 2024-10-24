@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:30:19 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/22 17:23:21 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/24 09:54:07 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	unsigned char	*q;
 	
 	q = (unsigned char *)s;
-	while (n >= 0)
+	while (n > 0)
 	{
 		if (*q == (unsigned char)c)
-			return (void *(q));
+			return ((void *)q);
 		q++;
 		n--;
 	}
@@ -30,8 +30,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 /*
 int	main()
 {
-	char	p[] = "alo si btata!";
-	char	*test = memchr(p, 'b', sizeof(p));
-	char	*res = ft_memchr(p, 'b', sizeof(p));
-	printf("built-in func: [%s]\nmy func: [%s]\n", test, res);
+	const char	p[] = "alo si btata!";
+	void		*test = memchr(p, 'i', sizeof(p));
+	void		*res = ft_memchr(p, 'i', sizeof(p));
+
+	printf("built-in func: [%s]\nmy func: [%s]\n", (char *)test, (char *)res);
 }*/

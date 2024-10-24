@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:58:41 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/22 16:07:54 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/24 10:19:26 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
+/*
 int main()
 {
 	char	buffer[] = "A L O HH";
@@ -43,3 +44,4 @@ int main()
 	}
 	printf("\nbuffer as str(my func) : %s\n", buffer);
 }
+*/

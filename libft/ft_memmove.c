@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:31:01 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/23 12:48:38 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/24 09:55:00 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	else
 		*d++ = *s++;
-	return (dest);
+	return ((void *)dest);
 }
 
 /*
