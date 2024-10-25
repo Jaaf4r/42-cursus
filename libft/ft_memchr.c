@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:30:19 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/24 09:54:07 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:37:22 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned char	*q;
-	
+
 	q = (unsigned char *)s;
 	while (n > 0)
 	{

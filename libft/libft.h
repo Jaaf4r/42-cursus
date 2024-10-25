@@ -9,6 +9,7 @@
 #include <ctype.h>
 #include <limits.h>
 #include <stddef.h>
+#include <stdint.h>
 
 // #if UINT_MAX == 0xFFFFFFFF
 // 	typedef unsigned int size_t;
@@ -17,7 +18,7 @@
 // #elif ULLONG_MAX == 0xFFFFFFFFFFFFFFFF
 // 	typedef unsigned long long	size_t;
 
-/* LIBC */
+/*       LIBC FUNCTIONS       */
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 int		ft_isalnum(int c);
@@ -39,7 +40,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-
+void	*ft_calloc(size_t nelem, size_t size);
+char	*ft_strdup(const char *s);
 
 
 

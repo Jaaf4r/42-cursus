@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:03:49 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/24 09:54:42 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:37:34 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char	*d;
 	unsigned char	*s;
-	
+
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
 	while (n--)

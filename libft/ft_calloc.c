@@ -1,25 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 12:07:16 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/25 17:47:03 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/25 12:42:21 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/10/25 18:25:51 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	*ft_calloc(size_t n_elem, size_t size)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (0);
+	char	*arr;
+
+	if (n_elem > SIZE_MAX / size)
+		return (NULL);
+	arr = (char *)malloc(size * n_elem);
+	if (!arr)
+		return (NULL);
+	ft_bzero(arr, size * n_elem);
+	return ((void *)arr);
 }
 
-/*int	main()
+int	main()
 {
-	printf("[%c] in uppercase = [%c]\n", 'c' ,ft_toupper('c'));
-}*/
+	char	*q = ft_calloc(2000000000, sizeof(char));
+	
+	int		i = 0;
+
+	while (i < 2000000000)
+	{
+		printf("%d ", q[i]);
+		i++;
+	}
+	printf("\n");
+}
