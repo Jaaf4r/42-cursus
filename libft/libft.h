@@ -17,7 +17,7 @@
 // #elif ULLONG_MAX == 0xFFFFFFFFFFFFFFFF
 // 	typedef unsigned long long	size_t;
 
-
+/* LIBC */
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 int		ft_isalnum(int c);
@@ -36,6 +36,9 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
+char	*ft_strrchr(const char *s, int c);
+int		ft_tolower(int c);
+int		ft_toupper(int c);
 
 
 
