@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:46:52 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/24 21:15:52 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/25 21:53:52 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	srcln;
 	size_t	i;
 
-	srcln = ft_strlen(src);
 	if (!dst || !src)
 		return (0);
+	srcln = ft_strlen(src);
 	if (size == 0)
 		return (srcln);
 	i = 0;
@@ -33,11 +33,35 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 }
 
 /*int main() {
-    char dst[10] = "Hello";  // Existing content in the destination buffer
-    char src[] = "World!";
-    
-    size_t ret = ft_strlcpy(dst, src, ft_strlen(dst));
-    
-    printf("New dst: <%s>\n", dst);         // Output: <World!>
-    printf("Returned: [%ld]\n", ret);       // Output: Length of src, which is 6
+    char dest[20];
+    const char *source = "Hello, world!";
+    size_t copied_length;
+
+    // Normal case
+    copied_length = ft_strlcpy(dest, source, sizeof(dest));
+    printf("Copied string: '%s', Length of source: %zu\n", dest, copied_length);
+
+    // Test case 1: NULL destination
+    dest[0] = '\0';  // Clear dest for clarity
+    copied_length = ft_strlcpy(NULL, source, sizeof(dest));
+    printf("Copied string: '%s', Length of source: %zu (NULL dst)\n", dest, copied_length);
+
+    // Test case 2: NULL source
+    dest[0] = '\0';  // Clear dest for clarity
+    copied_length = ft_strlcpy(dest, NULL, sizeof(dest));
+    printf("Copied string: '%s', Length of source: %zu (NULL src)\n", dest, copied_length);
+
+    // Test case 3: Both pointers NULL
+    dest[0] = '\0';  // Clear dest for clarity
+    copied_length = ft_strlcpy(NULL, NULL, sizeof(dest));
+    printf("Copied string: '%s', Length of source: %zu (NULL both)\n", dest, copied_length);
+
+    return 0;
+
+	// amjnan case
+	char	d[] = "klb";
+	char	s[] = "baysal";
+	
+	printf("%ld\n", ft_strlcpy(d,s,2));
+	printf("%s\n", d);
 }*/

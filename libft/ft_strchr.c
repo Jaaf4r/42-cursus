@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:30:36 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/25 17:45:01 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/25 21:16:01 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ char	*ft_strchr(const char *str, int search_str)
 /*int main ()
 {
 	const char	str[] = "alo si btata";
-	const char	ch = 't';
+	const char	ch = 'z';
 
 	char	*ret = strchr(str, ch);
 	char	*x = ft_strchr(str, ch);
-	printf("CHARACTER is |%c|\nbuilt-in func output: |%s|\n
-			my func output: |%s|\n", ch, ret, x);
+	printf("- CHARACTER is |%c|\n- Built-in func output: |%s|\n", ch, ret);
+	printf("- My func output: |%s|\n", x);
 }*/
