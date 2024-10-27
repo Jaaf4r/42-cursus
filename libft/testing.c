@@ -30,6 +30,6 @@ int main() {
 
 int main()
 {
-	size_t	x = 1024;
-	printf("%lu", ULONG_MAX);
+	unsigned char x = 189;
+	printf("%u\n", x);
 }
