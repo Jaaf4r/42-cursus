@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:48:01 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/25 17:59:14 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:17:43 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 char	*ft_strdup(const char *s)
 {
 	char	*dst;
-	char	*d;
+	size_t	size;
 
-	dst = (d = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1)));
-	if (!d)
+	size = ft_strlen(s);
+	dst = (char *)malloc(sizeof(char) * (size + 1));
+	if (!dst)
 		return (NULL);
-	while (*s)
-	{
-		*d++ = *s++;
-	}
-	*d = '\0';
+	ft_memcpy(dst, s, size);
+	dst[size] = '\0';
 	return (dst);
 }
 
 /*int	main()
 {
-	char	*s = "alo hh";
+	char	*s = "Loading...";
 	char	*d = ft_strdup(s);
 
 	printf("%s\n", d);

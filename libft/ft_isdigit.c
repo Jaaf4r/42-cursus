@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:02:18 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/24 10:42:06 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:15:45 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	return (c >= '0' && c <= '9');
 }
 
-/*
-int	main()
+/*int	main()
 {
 	printf("%d\n%d\n%d\n", ft_isdigit('1'), ft_isdigit(67), ft_isdigit(48));
-}
-*/
+}*/

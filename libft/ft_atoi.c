@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:58:37 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/22 15:54:23 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:37:57 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-/*
-int	main()
+/*int	main()
 {
 	printf("%d\n", atoi("    -123abc"));
 	printf("%d\n", ft_atoi("    -123abc"));
-}
-*/
+}*/

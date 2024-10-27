@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:58:47 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/25 17:36:20 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:14:01 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	ft_isalnum(int c)
 {
-	if ((c >= '0' && c <= '9')
+	return ((c >= '0' && c <= '9')
 		|| (c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z'))
-		return (1);
-	else
-		return (0);
+		|| (c >= 'a' && c <= 'z'));
 }
 
-/*
-int	main()
+
+/*int	main()
 {
 	printf("%d\n%d\n%d\n", ft_isalnum('c'), ft_isalnum('4'), ft_isalnum('.'));
 }*/
