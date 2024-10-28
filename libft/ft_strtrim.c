@@ -6,13 +6,13 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 10:59:12 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/26 15:13:58 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:55:34 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_check_set(char c, char const *set)
+static int	ft_check_set(char c, char const *set)
 {
 	while (*set)
 	{
