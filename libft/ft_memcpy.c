@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:03:49 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/25 17:37:34 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/28 23:51:48 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,18 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
-	while (n--)
-	{
-		*d++ = *s++;
-	}
+	ft_memmove(d, s, n);
 	return ((void *)dest);
 }
 
-/*
-int	main()
+/*int	main()
 {
-	char	dst[20];
-	char	*src = "si btata\n";
-	
-	ft_memcpy(dst, src, strlen(src) + 1);
-	printf("%s", dst);
-}
-*/
+	char	*src = "alooo";
+	char	dst[9];
+	char	d[9];
+
+	memcpy(d, src, 9);
+	printf("%s\n", d);
+	ft_memcpy(dst, src, 9);
+	printf("%s\n", dst);
+}*/

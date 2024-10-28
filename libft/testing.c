@@ -1,35 +1,55 @@
 #include "libft.h"
-/*
-int main() {
-	char test_char1 = 'z';
-	char test_char2 = 'Z';
-	char test_char3 = ',';
-	char test_char4 = '#';
+#include <stdio.h>
 
-	printf("%c is alphanumeric: %d\n", test_char1, isalnum(test_char1));
-	printf("%c is alphanumeric: %d\n", test_char2, isalnum(test_char2));
-	printf("%c is alphanumeric: %d\n", test_char3, isalnum(test_char3));
-	printf("%c is alphanumeric: %d\n", test_char4, isalnum(test_char4));
+// void checkIfPassed(int grade) {
+//     if (grade >= 50)
+//         printf("Student passed with grade %d.\n", grade);
+//     else
+//         printf("Student failed with grade %d.\n", grade);
+// }
 
-}
+// void checkIfScholarship(int grade) {
+//     if (grade >= 90)
+//         printf("Student qualifies for a scholarship with grade %d.\n", grade);
+//     else
+//         printf("Student does not qualify for a scholarship with grade %d.\n", grade);
+// }
+// void checkStudents(int *grades, int size, void (*checkFunc)(int)) {
+//     for (int i = 0; i < size; i++) {
+//         checkFunc(grades[i]);
+//     }
+// }
+// int main() {
+//     int grades[] = {75, 60, 92};
 
+//     printf("Checking if students passed:\n");
+//     checkStudents(grades, 3, checkIfPassed);
 
-int main() {
-	char test_char = 'A'; // Test character
-	int result = isalnum(test_char);
+//     printf("\nChecking if students qualify for scholarships:\n");
+//     checkStudents(grades, 3, checkIfScholarship);
 
-	if (result) {
-		printf("'%c' is alphanumeric: %d\n", test_char, result); // result could be 1 or another positive value
-	} else {
-		printf("'%c' is not alphanumeric.\n", test_char);
+//     return 0;
+// }
+ void	printSquare(int number) {
+		printf("%d\n", number * number);
 	}
 
-	return 0;
+void	printDouble(int number) {
+	printf("%d\n", number * 2);
 }
-*/
 
-int main()
+void	processNumbers(int *numbers, int size, void (*operation)(int)) {
+	for (int i = 0; i < size; i++) {
+		operation(numbers[i]);
+	}
+}
+
+int	main()
 {
-	unsigned char x = 189;
-	printf("%u\n", x);
+	int	numbers[] = {2,4,6,8};
+	//printSquare(numbers[0]);
+	printf("The square of numbers is:\n");
+	processNumbers(numbers, 4, printSquare);
+	//printf("The double of numbers is:\n");
+	//processNumbers(numbers, 4, printDouble);
 }
