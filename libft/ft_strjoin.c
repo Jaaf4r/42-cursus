@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 09:43:35 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/29 11:54:22 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:18:09 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new);
 }
 
-int	main()
+/*int	main()
 {
 	char	*s1 = "alo ";
 	char	*s2 = "si btata";
 	char	*new = ft_strjoin(s1,s2);
 	printf("%s\n", new);
-}
+}*/

@@ -60,26 +60,51 @@
 #include <unistd.h>   // For close, read, write
 #include <stdio.h>
 
+// int main() {
+//     // Open a file with read-only permissions
+//     int fd = open("example.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+//     if (fd == -1) {
+//         perror("Error opening file");
+//         return 1;
+//     }
+// 	printf("%d\n", fd);
+
+//     char buffer[100] = "wash a shabab";
+//     ssize_t bytesRead = write(fd, buffer, sizeof(buffer) - 1); // Read into buffer
+//     if (bytesRead == -1) {
+//         perror("Error reading file");
+//         close(fd);
+//         return 1;
+//     }
+
+//     buffer[bytesRead] = '\0'; // Null-terminate the buffer
+//     printf("File contents:\n%s\n", buffer);
+
+//     // close(fd); // Always close file descriptors when done
+//     return 0;
+// }
+
+typedef struct s_list
+{
+    void *content;
+    struct s_list *next;
+} t_list;
+
 int main() {
-    // Open a file with read-only permissions
-    int fd = open("example.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-    if (fd == -1) {
-        perror("Error opening file");
-        return 1;
-    }
-	printf("%d\n", fd);
-
-    char buffer[100] = "wash a shabab";
-    ssize_t bytesRead = write(fd, buffer, sizeof(buffer) - 1); // Read into buffer
-    if (bytesRead == -1) {
-        perror("Error reading file");
-        close(fd);
-        return 1;
+    // Create a new node
+    t_list *node = malloc(sizeof(t_list));
+    if (!node) {
+        return 1; // Handle memory allocation failure
     }
 
-    buffer[bytesRead] = '\0'; // Null-terminate the buffer
-    printf("File contents:\n%s\n", buffer);
+    node->content = "Hello, World!"; // Assign content
+    node->next = NULL; // No next node yet
 
-    // close(fd); // Always close file descriptors when done
+    // Output the content
+    printf("%s\n", (char *)node->content);
+
+    // Free the allocated memory
+    free(node);
+
     return 0;
 }
