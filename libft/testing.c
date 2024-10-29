@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stdio.h>
 
 // void checkIfPassed(int grade) {
 //     if (grade >= 50)
@@ -30,26 +29,57 @@
 
 //     return 0;
 // }
- void	printSquare(int number) {
-		printf("%d\n", number * number);
-	}
 
-void	printDouble(int number) {
-	printf("%d\n", number * 2);
-}
+//  void	printSquare(int number) {
+// 		printf("%d\n", number * number);
+// 	}
 
-void	processNumbers(int *numbers, int size, void (*operation)(int)) {
-	for (int i = 0; i < size; i++) {
-		operation(numbers[i]);
-	}
-}
+// void	printDouble(int number) {
+// 	printf("%d\n", number * 2);
+// }
 
-int	main()
-{
-	int	numbers[] = {2,4,6,8};
-	//printSquare(numbers[0]);
-	printf("The square of numbers is:\n");
-	processNumbers(numbers, 4, printSquare);
-	//printf("The double of numbers is:\n");
-	//processNumbers(numbers, 4, printDouble);
+// void	processNumbers(int *numbers, int size, void (*operation)(int)) {
+// 	for (int i = 0; i < size; i++) {
+// 		operation(numbers[i]);
+// 	}
+// }
+
+// int	main()
+// {
+// 	int	numbers[] = {2,4,6,8};
+// 	//printSquare(numbers[0]);
+// 	printf("The square of numbers is:\n");
+// 	processNumbers(numbers, 4, printSquare);
+// 	//printf("The double of numbers is:\n");
+// 	//processNumbers(numbers, 4, printDouble);
+// }
+
+/*-----------------------------------------------------------------------------------*/
+
+#include <fcntl.h>    // For open
+#include <unistd.h>   // For close, read, write
+#include <stdio.h>
+
+int main() {
+    // Open a file with read-only permissions
+    int fd = open("example.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+    if (fd == -1) {
+        perror("Error opening file");
+        return 1;
+    }
+	printf("%d\n", fd);
+
+    char buffer[100] = "wash a shabab";
+    ssize_t bytesRead = write(fd, buffer, sizeof(buffer) - 1); // Read into buffer
+    if (bytesRead == -1) {
+        perror("Error reading file");
+        close(fd);
+        return 1;
+    }
+
+    buffer[bytesRead] = '\0'; // Null-terminate the buffer
+    printf("File contents:\n%s\n", buffer);
+
+    // close(fd); // Always close file descriptors when done
+    return 0;
 }

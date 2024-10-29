@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:14:16 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/28 11:58:21 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:50:49 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	count_words(const char *s, char c)
 
 	i = 0;
 	count = 0;
-
 	while (s[i])
 	{
 		while (s[i] && s[i] == c)
