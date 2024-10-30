@@ -84,27 +84,54 @@
 //     return 0;
 // }
 
-typedef struct s_list
+// typedef struct s_list
+// {
+//     void *content;
+//     struct s_list *next;
+// } t_list;
+
+// int main() {
+//     // Create a new node
+//     t_list *node = malloc(sizeof(t_list));
+//     if (!node) {
+//         return 1; // Handle memory allocation failure
+//     }
+
+//     node->content = "Hello, World!"; // Assign content
+//     node->next = NULL; // No next node yet
+
+//     // Output the content
+//     printf("%s\n", (char *)node->content);
+
+//     // Free the allocated memory
+//     free(node);
+
+//     return 0;
+// }
+
+void *ft_memset(void *str, int c, size_t n)
 {
-    void *content;
-    struct s_list *next;
-} t_list;
+    unsigned char *q = (unsigned char *)str;
 
-int main() {
-    // Create a new node
-    t_list *node = malloc(sizeof(t_list));
-    if (!node) {
-        return 1; // Handle memory allocation failure
+    while (n > 0)
+    {
+        *q = (unsigned char)c;
+        q++;
+        n--;
     }
+    return (void *)str;
+}
 
-    node->content = "Hello, World!"; // Assign content
-    node->next = NULL; // No next node yet
+int main()
+{
+    int arr[] = {4, 2, 5, 67, 3};
 
-    // Output the content
-    printf("%s\n", (char *)node->content);
-
-    // Free the allocated memory
-    free(node);
-
-    return 0;
+    ft_memset(arr, 0, sizeof(arr));
+    size_t i = 0;
+    while (i < 5)
+    {
+        printf("%d, ", arr[i]);
+        i++;
+    }
+    printf("\n");
 }

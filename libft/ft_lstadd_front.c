@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 09:43:35 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 10:49:06 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/30 11:22:10 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/10/30 12:22:08 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char	*new;
-	size_t	size;
-
-	if (!s1 || !s2)
-		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	new = (char *)malloc(sizeof(char) * size);
-	if (!new)
-		return (NULL);
-	ft_strlcat(new, s1, size);
-	ft_strlcat(new, s2, size);
-	return (new);
+	
 }
-
-/*int	main()
-{
-	char	*s1 = "alo ";
-	char	*s2 = "si btata";
-	char	*new = ft_strjoin(s1,s2);
-	printf("%s\n", new);
-}*/

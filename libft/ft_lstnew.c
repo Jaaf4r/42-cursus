@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 09:43:35 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 10:49:06 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/30 10:49:15 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/10/30 10:49:22 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*ft_lstnew(void *content)
 {
-	char	*new;
-	size_t	size;
+	t_list	*node;
 
-	if (!s1 || !s2)
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
 		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	new = (char *)malloc(sizeof(char) * size);
-	if (!new)
-		return (NULL);
-	ft_strlcat(new, s1, size);
-	ft_strlcat(new, s2, size);
-	return (new);
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }
 
 /*int	main()
 {
-	char	*s1 = "alo ";
-	char	*s2 = "si btata";
-	char	*new = ft_strjoin(s1,s2);
-	printf("%s\n", new);
+	t_list	*node = ft_lstnew("alo si btata");
+
+	printf("%s\n", (char *)node->content);
 }*/
