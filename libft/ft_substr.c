@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:13:47 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/29 13:17:28 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/30 18:51:25 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,20 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*q;
+	char			*q;
+	unsigned int	slen;
 
+	slen = ft_strlen(s);
+	if (slen <= start)
+	{
+		q = malloc(1);
+		if (!q)
+			return (NULL);
+		q[0] = '\0';
+		return (q);
+	}
+	if (len > slen - start)
+		len = slen - start;
 	q = (char *)malloc(sizeof(char) * (len + 1));
 	if (!q)
 		return (NULL);
@@ -25,8 +37,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 /*int main()
 {
-	char    *s = "jaafar";
-	char    *q = ft_substr(s, 2, 3);
+	char    *q = ft_substr("0123456789", 5, 10);
 
-	printf("%s\n", q);
+	printf("%s", q);
 }*/
