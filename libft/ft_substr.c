@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:13:47 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 18:51:25 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:12:31 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	q = (char *)malloc(sizeof(char) * (len + 1));
 	if (!q)
 		return (NULL);
-	ft_strlcpy(q, &s[start], len);
+	ft_strlcpy(q, &s[start], len + 1);
 	return (q);
 }
 
 /*int main()
 {
-	char    *q = ft_substr("0123456789", 5, 10);
+	char    *q = ft_substr("alo si btata!", 3, 20);
 
 	printf("%s", q);
 }*/
