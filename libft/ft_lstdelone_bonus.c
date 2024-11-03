@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 10:49:15 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 10:49:22 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/31 10:10:09 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/03 19:30:21 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_list	*node;
-
-	node = (t_list *)malloc(sizeof(t_list));
-	if (!node)
-		return (NULL);
-	node->content = content;
-	node->next = NULL;
-	return (node);
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
 }
 
-/*int	main()
+/*void	del(void *content)
 {
-	t_list	*node = ft_lstnew("alo si btata");
+	free(content);
+}
+
+int	main()
+{
+	t_list	*node = ft_lstnew(ft_strdup("wash a si btata"));
+
+	printf("%s\n", (char *)node->content);
+
+	ft_lstdelone(node, del);
 
 	printf("%s\n", (char *)node->content);
 }*/

@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:30:36 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/25 21:16:01 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/03 22:15:31 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *str, int search_str)
 {
 	const char	*q;
 
+	if (!str)
+		return (NULL);
 	q = str;
 	while (*q)
 	{

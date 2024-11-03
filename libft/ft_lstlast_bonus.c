@@ -1,46 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 11:22:10 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 15:57:19 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/30 21:31:15 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/03 19:43:04 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (!new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	t_list	*curr;
+
+	curr = lst;
+	if (!lst)
+		return (NULL);
+	while (curr->next)
+	{
+		curr = curr->next;
+	}
+	return (curr);
 }
 
 /*int main()
 {
 	t_list *head = NULL;
 
-	t_list *node1 = ft_lstnew("first node");
+	t_list *node1 = ft_lstnew("salam");
 	ft_lstadd_front(&head, node1);
-	
-	t_list *node2 = ft_lstnew("2nd node");
+
+	t_list *node2 = ft_lstnew("ana btata");
 	ft_lstadd_front(&head, node2);
 
-	t_list *current = head;
-	while (current)
-	{
-		printf("Node content: %s\n", (char *)current->content);
-		current = current->next;
-	}
-	
-	while (head)
-	{
-		t_list *tmp = head;
-		head = head->next;
-		free(tmp);
-	}
+	t_list *node3 = ft_lstnew("alooo");
+	ft_lstadd_front(&head, node3);
+
+	printf("%s", (char *)ft_lstlast(head)->content);
 }*/

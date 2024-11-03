@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 09:43:35 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 10:49:06 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/03 21:48:45 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new = (char *)malloc(sizeof(char) * size);
 	if (!new)
 		return (NULL);
-	ft_strlcat(new, s1, size);
+	ft_strlcpy(new, s1, size);
 	ft_strlcat(new, s2, size);
 	return (new);
 }

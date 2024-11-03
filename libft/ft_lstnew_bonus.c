@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 21:31:15 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 21:54:49 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/30 10:49:15 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/03 19:30:57 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_list	*ft_lstnew(void *content)
 {
-	t_list	*curr;
+	t_list	*node;
 
-	curr = lst;
-	while (curr->next)
-	{
-		curr = curr->next;
-	}
-	return (curr);
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->content = content;
+	node->next = NULL;
+	return (node);
 }
 
-/*int main()
+/*int	main()
 {
-	t_list *head = NULL;
+	t_list	*node = ft_lstnew("alo si btata");
 
-	t_list *node1 = ft_lstnew("salam");
-	ft_lstadd_front(&head, node1);
-
-	t_list *node2 = ft_lstnew("ana btata");
-	ft_lstadd_front(&head, node2);
-
-	t_list *node3 = ft_lstnew("alooo");
-	ft_lstadd_front(&head, node3);
-
-	printf("%s", (char *)ft_lstlast(head)->content);
+	printf("%s\n", (char *)node->content);
 }*/

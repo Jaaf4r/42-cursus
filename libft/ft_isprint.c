@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:58:16 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/26 14:16:28 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/03 19:10:37 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,3 @@ int	ft_isprint(int c)
 {
 	return (c >= 32 && c <= 126);
 }
-
-/*int	main()
-{
-	printf("%d\n%d\n%d\n", ft_isprint(1), ft_isprint(67), ft_isprint(126));
-}*/

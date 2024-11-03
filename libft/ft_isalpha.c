@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:58:50 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/26 14:14:26 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/03 19:10:28 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,3 @@ int	ft_isalpha(int c)
 {
 	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
-
-/*int	main()
-{
-	printf("%d\n%d\n%d\n", ft_isalpha('c'), ft_isalpha('.'), ft_isalpha('Z'));
-}*/
