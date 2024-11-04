@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:57:22 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 22:12:38 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:39:14 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*ft_itoa(int n)
 	long	num;
 
 	num = n;
-	len = ft_length(n);
-	s = (char *)malloc(len + sizeof(char));
+	len = ft_length(num);
+	s = (char *)malloc((len + 1) * sizeof(char));
 	if (!s)
 		return (NULL);
 	s[len] = '\0';
@@ -45,7 +45,7 @@ char	*ft_itoa(int n)
 	{
 		s[0] = '-';
 		num *= -1;
-	}	
+	}
 	while (num)
 	{
 		s[--len] = num % 10 + 48;
