@@ -23,7 +23,7 @@ NAME	= libft.a
 LIBC	= ar rcs
 RM		= rm -f
 
-.c=.o:
+.c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
@@ -35,10 +35,10 @@ bonus: $(NAME) $(OBJSB)
 		$(LIBC) $(NAME) $(OBJSB)
 
 clean:
-		$(RM) $(OBJS)
+		$(RM) $(OBJS) $(OBJSB)
 
 fclean: clean
-		$(RM) $(NAME)
+		$(RM) $(NAME) $(bonus)
 
 re: fclean all
 
