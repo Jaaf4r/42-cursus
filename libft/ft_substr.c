@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:13:47 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/04 10:43:16 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:38:44 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(q, &s[start], len + 1);
 	return (q);
 }
-
-/*int main()
-{
-	char    *q = ft_substr("alo si btata!", 3, 20);
-
-	printf("%s", q);
-}*/

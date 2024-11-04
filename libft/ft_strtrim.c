@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 10:59:12 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/04 10:43:14 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:38:40 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	new[i] = '\0';
 	return (new);
 }
-
-/*int	main()
-{
-	char	*s1 = "-!!-Hello,!!----!!Worl--!!d-!-!";
-	char	*set = "!-";
-	char	*res = ft_strtrim(s1, set);
-
-	if (res)
-	{
-		printf("Trimmed string: '%s'\n", res);
-		free(res);
-	}
-}*/

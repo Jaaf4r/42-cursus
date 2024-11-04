@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:48:01 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/26 10:17:43 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:37:55 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,3 @@ char	*ft_strdup(const char *s)
 	dst[size] = '\0';
 	return (dst);
 }
-
-/*int	main()
-{
-	char	*s = "Loading...";
-	char	*d = ft_strdup(s);
-
-	printf("%s\n", d);
-}*/

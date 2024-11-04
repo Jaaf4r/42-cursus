@@ -6,22 +6,11 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:14:16 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/30 11:24:12 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:37:51 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// static int	check_sep(const char *s, char c)
-// {
-// 	while (*s)
-// 	{
-// 		if (*s == c)
-// 			return (1);
-// 		s++;
-// 	}
-// 	return (0);
-// }
 
 static int	count_words(const char *s, char c)
 {
@@ -92,16 +81,3 @@ char	**ft_split(char const *s, char c)
 	arr[i] = NULL;
 	return (arr);
 }
-
-/*int	main()
-{
-	char	*s = "baysal raso kbir";
-	char	**arr = ft_split(s, 'a');
-	int		i = 0;
-
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-}*/
