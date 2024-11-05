@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:31:01 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/05 12:15:55 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:57:02 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	unsigned char	*s;
 
 	if (!dest && !src)
-		return NULL;
+		return (NULL);
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
 	if (d <= s)
