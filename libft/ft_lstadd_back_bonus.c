@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 19:29:39 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 19:29:40 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:02:41 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,12 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*last;
-
 	if (!lst || !new)
 		return ;
-	if (*lst == NULL)
-	{
+	if (*lst)
+		ft_lstlast(*lst)->next = new;
+	else
 		*lst = new;
-		return ;
-	}
-	last = *lst;
-	while (last->next)
-	{
-		last = last->next;
-	}
-	last->next = new;
 }
 
 /*int main()

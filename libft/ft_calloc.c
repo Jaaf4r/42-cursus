@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 12:42:21 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 22:19:03 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 22:01:22 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*p;
+	void	*p;
 
-	p = (char *)malloc(nmemb * size);
+	if (size && nmemb > SIZE_MAX / size)
+		return (NULL);
+	p = malloc(nmemb * size);
 	if (!p)
 		return (NULL);
 	ft_bzero(p, nmemb * size);
-	return ((void *)p);
+	return (p);
 }

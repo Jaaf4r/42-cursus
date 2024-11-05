@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:28:51 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 19:30:09 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:09:11 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 
-	if (!lst || !(*lst) || !del)
+	if (!lst || !del)
 		return ;
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
+		ft_lstdelone(*lst, del);
 		*lst = tmp;
 	}
 	*lst = NULL;

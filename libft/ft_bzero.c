@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:58:41 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 19:09:14 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:32:08 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*p;
 
-	p = s;
+	p = (unsigned char *)s;
 	while (n--)
 		*p++ = 0;
 }

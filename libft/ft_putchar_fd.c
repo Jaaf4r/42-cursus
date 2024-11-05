@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:33:40 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/29 10:55:29 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:14:59 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-/*int	main()
-{
-	ft_putchar_fd('a', 1);
-}*/

@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 10:43:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/29 11:46:57 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:16:09 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ void	ft_putstr_fd(char *s, int fd)
 		return ;
 	while (*s)
 	{
-		ft_putchar_fd(*s, fd);
+		write(fd, s, 1);
 		s++;
 	}
 }
-
-/*int	main()
-{
-	ft_putstr_fd("alo hh\n", 1);
-}*/
