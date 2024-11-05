@@ -6,21 +6,22 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 13:19:43 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/10/29 13:55:35 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:00:22 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <fcntl.h>
 # include <unistd.h>
-# include <stdio.h>
+# include <limits.h>
 # include <stdlib.h>
+
+# include <fcntl.h>
+# include <stdio.h>
 # include <strings.h>
 # include <string.h>
 # include <ctype.h>
-# include <limits.h>
 # include <stddef.h>
 # include <stdint.h>
 

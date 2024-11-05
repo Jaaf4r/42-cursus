@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 10:59:12 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/04 12:38:40 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:59:23 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*new;
 	size_t	i;
 
+	if (!s1 || !set)
+		return (NULL);
 	start = 0;
 	end = ft_strlen(s1);
 	while (s1[start] && ft_check_set(s1[start], set))

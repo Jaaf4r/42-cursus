@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:14:16 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/04 12:37:51 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:53:48 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,30 @@ static char	*malloc_words(const char *s, char c)
 	return (word);
 }
 
+static char	**ft_split_helper(char const *s, char c, char **arr, int *i)
+{
+	while (*s)
+	{
+		while (*s && *s == c)
+			s++;
+		if (*s)
+		{
+			arr[*i] = malloc_words(s, c);
+			if (!arr[*i])
+			{
+				while (*i > 0)
+					free(arr[--(*i)]);
+				free(arr);
+				return (NULL);
+			}
+			(*i)++;
+		}
+		while (*s && *s != c)
+			s++;
+	}
+	return (arr);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	int		i;
@@ -66,18 +90,7 @@ char	**ft_split(char const *s, char c)
 	if (!arr)
 		return (NULL);
 	i = 0;
-	while (*s)
-	{
-		while (*s && *s == c)
-			s++;
-		if (*s)
-		{
-			arr[i] = malloc_words(s, c);
-			i++;
-		}
-		while (*s && *s != c)
-			s++;
-	}
+	arr = ft_split_helper(s, c, arr, &i);
 	arr[i] = NULL;
 	return (arr);
 }

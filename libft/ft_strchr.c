@@ -6,26 +6,26 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:30:36 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/04 12:34:01 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:06:01 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int search_str)
+char	*ft_strchr(const char *s, int c)
 {
 	const char	*q;
 
-	if (!str)
+	if (!s)
 		return (NULL);
-	q = str;
+	q = s;
 	while (*q != '\0')
 	{
-		if (*q == search_str)
+		if (*q == (char)c)
 			return ((char *)q);
 		q++;
 	}
-	if (search_str == '\0')
+	if (c == 0)
 		return ((char *)q);
 	return (NULL);
 }
