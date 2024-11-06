@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 13:19:43 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/05 17:00:22 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/06 01:05:06 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdlib.h>
-
-# include <fcntl.h>
-# include <stdio.h>
-# include <strings.h>
-# include <string.h>
-# include <ctype.h>
-# include <stddef.h>
-# include <stdint.h>
+// # include <fcntl.h>
+// # include <stdio.h>
+// # include <strings.h>
+// # include <string.h>
+// # include <ctype.h>
+// # include <stddef.h>
+// # include <stdint.h>
 
 typedef struct s_list
 {
