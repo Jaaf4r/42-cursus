@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 19:29:39 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/05 21:02:41 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/30 21:31:15 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/07 11:05:49 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (!lst || !new)
-		return ;
-	if (*lst)
-		ft_lstlast(*lst)->next = new;
-	else
-		*lst = new;
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
 }
 
 /*int main()
@@ -36,9 +37,4 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	ft_lstadd_front(&head, node3);
 
 	printf("%s", (char *)ft_lstlast(head)->content);
-
-	t_list *node4 = ft_lstnew("hhh");
-	ft_lstadd_back(&head, node4);
-
-	printf("\n%s", (char *)ft_lstlast(head)->content);
 }*/

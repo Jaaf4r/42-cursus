@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
-bonus: $(NAME) $(OBJSB)
+bonus: $(OBJSB)
 		$(LIBC) $(NAME) $(OBJSB)
 
 clean:

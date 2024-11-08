@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:34:53 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 19:30:37 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:45:04 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*iter;
-
 	if (!lst || !f)
 		return ;
-	iter = lst;
-	while (iter)
+	while (lst)
 	{
-		f(iter->content);
-		iter = iter->next;
+		f(lst->content);
+		lst = lst->next;
 	}
 }
 

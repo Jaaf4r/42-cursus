@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 21:31:15 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/03 19:43:04 by jabouhni         ###   ########.fr       */
+/*   Created: 2024/10/30 15:59:26 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/07 11:13:14 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*curr;
+	int		l;
 
-	curr = lst;
-	if (!lst)
-		return (NULL);
-	while (curr->next)
+	l = 0;
+	while (lst)
 	{
-		curr = curr->next;
+		l++;
+		lst = lst->next;
 	}
-	return (curr);
+	return (l);
 }
 
-/*int main()
+/*int	main()
 {
 	t_list *head = NULL;
 
-	t_list *node1 = ft_lstnew("salam");
+	t_list *node1 = ft_lstnew("aloo");
 	ft_lstadd_front(&head, node1);
 
-	t_list *node2 = ft_lstnew("ana btata");
+	t_list *node2 = ft_lstnew("suiiiiiiii");
 	ft_lstadd_front(&head, node2);
 
-	t_list *node3 = ft_lstnew("alooo");
+	t_list *node3 = ft_lstnew("apah");
 	ft_lstadd_front(&head, node3);
 
-	printf("%s", (char *)ft_lstlast(head)->content);
+	printf("%d\n", ft_lstsize(head));
+
 }*/
