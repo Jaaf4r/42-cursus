@@ -28,7 +28,7 @@ This repository contains a collection of my projects from the 42 curriculum. Eac
 Clone the repository to check out each project:
 
 ```bash
-git clone https://github.com/yourusername/42-cursus.git
+git clone https://github.com/Jaaf4r/42-cursus.git
 cd 42-cursus
 ```
 
