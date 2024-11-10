@@ -8,8 +8,6 @@
 #include <stdlib.h>
 
 int		ft_printf(const char *format, ...);
-char	*ft_itoa(int n);
-size_t	ft_strlen(const char *s);
-
+int     ft_formats(char format, va_list args);
 
 #endif
