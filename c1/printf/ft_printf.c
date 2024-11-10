@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:08:12 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/10 22:08:31 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:18:21 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,23 @@
 int	handle_format(char format, va_list args)
 {
 	if (format == 'c')
-		c += ft_char(va_arg(args, int));
+		return (ft_char(va_arg(args, int)));
 	else if (format == 's')
-		c += ft_str(va_arg(args, char *));
+		return (ft_str(va_arg(args, char *)));
 	else if (format == 'd' || format == 'i')
-		c += ft_digit(va_arg(args, int), 10, 0);
+		return (ft_digit(va_arg(args, int), 10, 0));
 	else if (format == 'u')
-		c += ft_digit(va_arg(args, unsigned int), 10, 0);
+		return (ft_digit(va_arg(args, unsigned int), 10, 0));
 	else if (format == 'p')
 	{
 		return (write(1, "0x", 2)
 			+ ft_digit(va_arg(args, unsigned long), 16, 0));
 	}
 	else if (format == 'x')
-		c += ft_digit(va_arg(args, unsigned long), 16, 0);
+		return (ft_digit(va_arg(args, unsigned long), 16, 0));
 	else if (format == 'X')
-		c += ft_digit(va_arg(args, unsigned long), 16, 1);
-	else
-	{
-		c += write(1, "%", 1);
-		c += write(1, &format, 1);
-	}
-	return (c);
+		return (ft_digit(va_arg(args, unsigned long), 16, 1));
+	return (write(1, "%", 1) + ft_char(format));
 }
 
 int	process_format(const char **format, va_list args)

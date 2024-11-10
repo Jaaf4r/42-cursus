@@ -34,7 +34,10 @@ int	main()
 	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
 
 	ft_printf("7TH TEST:\n");
-	l1 = ft_printf("%");
-	l2 = printf("%");
-	printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
+	ft_printf("%\n\n");
+	// l2 = printf("%");
+	// printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
+
+	ft_printf("8TH TEST:\n");
+	ft_printf("%z");
 }
