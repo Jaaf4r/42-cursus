@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_formats.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/10 22:08:19 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/10 22:08:20 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
-static int ft_char(int c)
+int	ft_char(int c)
 {
 	return (write(1, &c, 1));
 }
 
-static int	ft_str(char *s)
+int	ft_str(char *s)
 {
 	int	c;
 
@@ -21,7 +33,7 @@ static int	ft_str(char *s)
 	return (c);
 }
 
-static int	ft_digit(long n, int base, int uplowcase)
+int	ft_digit(long n, int base, int uplowcase)
 {
 	int		c;
 	char	*nums;
@@ -43,34 +55,4 @@ static int	ft_digit(long n, int base, int uplowcase)
 		c += ft_digit(n / base, base, uplowcase);
 		return (c + ft_char(nums[n % base]));
 	}
-}
-
-int ft_formats(char format, va_list args)
-{
-	int		c;
-
-	c = 0;
-	if (format == 'c')
-		c += ft_char(va_arg(args, int));
-	else if (format == 's')
-		c += ft_str(va_arg(args, char *));
-	else if (format == 'd' || format == 'i')
-		c += ft_digit(va_arg(args, int), 10, 0);
-	else if (format == 'u')
-		c += ft_digit(va_arg(args, unsigned int), 10, 0);
-	else if (format == 'p')
-	{
-		c += write(1, "0x", 2);
-		c += ft_digit(va_arg(args, unsigned long), 16, 0);
-	}
-	else if (format == 'x')
-		c += ft_digit(va_arg(args, unsigned long), 16, 0);
-	else if (format == 'X')
-		c += ft_digit(va_arg(args, unsigned long), 16, 1);
-	else
-	{
-		c += write(1, "%", 1);
-		c += write(1, &format, 1);
-	}
-	return (c);
 }

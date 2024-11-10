@@ -1,69 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/10 22:08:12 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/11/10 22:08:31 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
+
+int	handle_format(char format, va_list args)
+{
+	if (format == 'c')
+		c += ft_char(va_arg(args, int));
+	else if (format == 's')
+		c += ft_str(va_arg(args, char *));
+	else if (format == 'd' || format == 'i')
+		c += ft_digit(va_arg(args, int), 10, 0);
+	else if (format == 'u')
+		c += ft_digit(va_arg(args, unsigned int), 10, 0);
+	else if (format == 'p')
+	{
+		return (write(1, "0x", 2)
+			+ ft_digit(va_arg(args, unsigned long), 16, 0));
+	}
+	else if (format == 'x')
+		c += ft_digit(va_arg(args, unsigned long), 16, 0);
+	else if (format == 'X')
+		c += ft_digit(va_arg(args, unsigned long), 16, 1);
+	else
+	{
+		c += write(1, "%", 1);
+		c += write(1, &format, 1);
+	}
+	return (c);
+}
+
+int	process_format(const char **format, va_list args)
+{
+	int	n;
+
+	n = 0;
+	if (**format == '%')
+	{
+		if (**format == '\0')
+		{
+			va_end(args);
+			return (-1);
+		}
+		(*format)++;
+		if (**format == '%')
+			n += write(1, "%", 1);
+		else
+			n += handle_format(**format, args);
+	}
+	else
+		n += ft_char(**format);
+	return (n);
+}
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		n;
+	int		len;
 
 	if (!format)
 		return (-1);
-	n = 0;
+	len = 0;
 	va_start(args, format);
 	while (*format)
 	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == '\0')
-				break ;
-			if (*format == '%')
-				n += write(1, "%", 1);
-			else
-				n += ft_formats(*format, args);
-		}
-		else
-			n += write(1, format, 1);
+		len += process_format(&format, args);
 		format++;
 	}
 	va_end(args);
-	return (n);
-}
-
-int	main()
-{
-	ft_printf("1ST TEST:\n");
-	int l1 = printf("- alo %s 3alaykom, %% lyom %d f shher %i li howa %covember \n", "salamo", 9, 9, 'N');
-	int l2 = ft_printf("- alo %s 3alaykom, %% lyom %d f shher %i li howa %covember \n", "salamo", 9, 9, 'N');
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
-
-	ft_printf("2ND TEST:\n");
-	int l3 = ft_printf("-wash %s, 7na f %p fl memory\n", "a dyalna", "a dyalna");
-	int l4 = printf("-wash %s, 7na f %p fl memory\n", "a dyalna", "a dyalna");
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l3, l4, (l3 == l4) ? "OK" : "KO");
-
-	ft_printf("3RD TEST:\n");
-	int l5 = ft_printf("-hexa d 99999999 howa: %x lowercase | %X uppercase\n", 99999999, 99999999);
-	int l6 = printf("-hexa d 99999999 howa: %x lowercase | %X uppercase\n", 99999999, 99999999);
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l5, l6, (l5 == l6) ? "OK" : "KO");
-
-	ft_printf("4TH TEST:\n");
-	int l7 = ft_printf("-number [-24] unsigned int howa: [%u]\n", 24);
-	int l8 = printf("-number [-24] unsigned int howa: [%u]\n", 24);
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l7, l8, (l7 == l8) ? "OK" : "KO");
-
-	ft_printf("5TH TEST:\n");
-	char	*s = "skill issue\n";
-	int l9 = ft_printf("-%s", s);
-	int l10 = printf("-%s", s);
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l9, l10, (l9 == l10) ? "OK" : "KO");
-
-	ft_printf("6TH TEST:\n");
-	int l11 = ft_printf("a\n");
-	int l12 = printf("a\n");
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l11, l12, (l11 == l12) ? "OK" : "KO");
-
-	ft_printf("7TH TEST:\n");
-	int l13 = ft_printf("%");
-	int l14 = printf("%");
-	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l13, l14, (l13 == l14) ? "OK" : "KO");
+	return (len);
 }
