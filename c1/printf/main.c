@@ -1,4 +1,4 @@
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	main()
 {
@@ -34,10 +34,22 @@ int	main()
 	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
 
 	ft_printf("7TH TEST:\n");
-	ft_printf("%\n\n");
-	// l2 = printf("%");
-	// printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
+	l1 = ft_printf("This %p is even stranger\n", (void *)-1);
+	l2 = printf("This %p is even stranger\n", (void *)-1);
+	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
 
 	ft_printf("8TH TEST:\n");
-	ft_printf("%z");
+	l1 = ft_printf("%p\n", (void *)0);
+	l2 = printf("%p\n", (void *)0);
+	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
+
+	ft_printf("9TH TEST:\n");
+	l1 = ft_printf("%c - %s - %p %d - %i - %u - %x %X %%\n", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
+	l2 = printf("%c - %s - %p %d - %i - %u - %x %X %%\n", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
+	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
+
+	ft_printf("10TH TEST:\n");
+	l1 = ft_printf("%c\n", '\0');
+	l2 = printf("%c\n", '\0');
+	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
 }

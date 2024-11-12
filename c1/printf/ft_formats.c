@@ -6,11 +6,21 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:08:19 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/10 22:08:20 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/12 23:06:23 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+
+// static size_t	ft_strlen(const char *s)
+// {
+// 	size_t	len;
+
+// 	len = 0;
+// 	while (s[len])
+// 		len++;
+// 	return (len);
+// }
 
 int	ft_char(int c)
 {
@@ -19,21 +29,17 @@ int	ft_char(int c)
 
 int	ft_str(char *s)
 {
-	int	c;
+	int	l;
 
+	l = 0;
 	if (!s)
-		s = "(null)";
-	c = 0;
-	while (*s)
-	{
-		write(1, s, 1);
-		c++;
-		s++;
-	}
-	return (c);
+		return (write(1, "(null)", 6));
+	while (s[l])
+		l++;
+	return (write(1, s, l));
 }
 
-int	ft_digit(long n, int base, int uplowcase)
+int	ft_digit(unsigned long n, int base, int uplowcase, int is_signed)
 {
 	int		c;
 	char	*nums;
@@ -43,16 +49,16 @@ int	ft_digit(long n, int base, int uplowcase)
 		nums = "0123456789ABCDEF";
 	else
 		nums = "0123456789abcdef";
-	if (n < 0)
+	if (is_signed && (long)n < 0)
 	{
-		write(1, "-", 1);
-		return (ft_digit(-n, base, uplowcase) + 1);
+		c += write(1, "-", 1);
+		n = -n;
 	}
-	if (n < base)
+	if (n < (unsigned long)base)
 		return (ft_char(nums[n]));
 	else
 	{
-		c += ft_digit(n / base, base, uplowcase);
+		c += ft_digit(n / base, base, uplowcase, 0);
 		return (c + ft_char(nums[n % base]));
 	}
 }
