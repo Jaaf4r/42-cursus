@@ -52,4 +52,9 @@ int	main()
 	l1 = ft_printf("%c\n", '\0');
 	l2 = printf("%c\n", '\0');
 	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
+
+	ft_printf("11TH TEST:\n");
+	l1 = ft_printf("%i%i%i%i%i%i%i\n", 10, 23, -2, 37, 200, -9999, 977779);
+	l2 = printf("%i%i%i%i%i%i%i\n", 10, 23, -2, 37, 200, -9999, 977779);
+	ft_printf("+ length --> OG : %d | --> Mine : %d | %s\n\n", l1, l2, (l1 == l2) ? "OK" : "KO");
 }

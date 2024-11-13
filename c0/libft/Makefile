@@ -29,13 +29,16 @@ RM		= rm -f
 $(NAME): $(OBJS)
 		$(LIBC) $(NAME) $(OBJS)
 
+bonus_done: $(OBJSB)
+		$(LIBC) $(NAME) $(OBJSB)
+		touch bonus_done
+
+bonus:	bonus_done
+
 all: $(NAME)
 
-bonus: $(OBJSB)
-		$(LIBC) $(NAME) $(OBJSB)
-
 clean:
-		$(RM) $(OBJS) $(OBJSB)
+		$(RM) $(OBJS) $(OBJSB) bonus_done
 
 fclean: clean
 		$(RM) $(NAME)

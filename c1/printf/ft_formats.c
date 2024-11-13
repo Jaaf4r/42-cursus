@@ -6,21 +6,11 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:08:19 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/12 23:06:23 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:19:55 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-// static size_t	ft_strlen(const char *s)
-// {
-// 	size_t	len;
-
-// 	len = 0;
-// 	while (s[len])
-// 		len++;
-// 	return (len);
-// }
 
 int	ft_char(int c)
 {
@@ -55,7 +45,7 @@ int	ft_digit(unsigned long n, int base, int uplowcase, int is_signed)
 		n = -n;
 	}
 	if (n < (unsigned long)base)
-		return (ft_char(nums[n]));
+		return (c + ft_char(nums[n]));
 	else
 	{
 		c += ft_digit(n / base, base, uplowcase, 0);
