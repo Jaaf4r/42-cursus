@@ -1,4 +1,3 @@
-
 #include "ft_printf.h"
 
 int	handle_format(char format, va_list args)

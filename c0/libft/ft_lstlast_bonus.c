@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:31:15 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/07 11:05:49 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/14 21:18:00 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
-		return (NULL);
+		return (NULL);dgd
 	while (lst->next)
 	{
 		lst = lst->next;
