@@ -1,3 +1,4 @@
+
 #include "ft_printf.h"
 
 int	handle_format(char format, va_list args)
@@ -31,6 +32,8 @@ int	process_format(const char **format, va_list args)
 	int	n;
 
 	n = 0;
+	if (**format == '%' && *(*format + 1) == '\0')
+		return (-1);
 	if (**format == '%')
 	{
 		(*format)++;
@@ -44,10 +47,12 @@ int	process_format(const char **format, va_list args)
 	return (n);
 }
 
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		len;
+	int		res;
 
 	if (!format)
 		return (-1);
@@ -55,9 +60,16 @@ int	ft_printf(const char *format, ...)
 	va_start(args, format);
 	while (*format)
 	{
-		len += process_format(&format, args);
+		res = process_format(&format, args);
+		if (res == -1)
+		{
+			va_end(args);
+			return (-1);
+		}
+		len += res;
 		format++;
 	}
 	va_end(args);
 	return (len);
 }
+
