@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 01:04:28 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/11/15 01:04:30 by jabouhni         ###   ########.fr       */
+/*   Updated: 2024/11/15 22:54:25 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <limits.h>
 
 int	ft_char(int c);
 int	ft_str(char *s);
