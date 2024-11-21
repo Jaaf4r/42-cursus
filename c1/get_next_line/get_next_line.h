@@ -20,6 +20,7 @@ char	*get_next_line(int fd);
 /*         HELPER FUNCTIONS        */
 
 char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
 
 
 #endif

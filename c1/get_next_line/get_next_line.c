@@ -22,14 +22,12 @@ char	*get_next_line(int fd)
 		{
 			if (bytes_read < BUFFER_SIZE)
 				buffer[bytes_read] = '\0';
-			if (strchr(buffer, '\n'))
+			if (ft_strchr(buffer, '\n'))
 				break ;
+			stock = ft_strdup(buffer);
 		}
 	}
 
-	if (bytes_read == 0)
-		return (NULL);
-	
 	return (NULL);
 }
 
