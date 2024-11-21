@@ -1,0 +1,8 @@
+1- fd parameter less than 0 || buffer_size less than or equals 0 == NULL
+2- malloc buffer with buffer_size + 1
+3- loop through the 1st line of a file
+4- inside the loop, if (bytes_read < buffer_size), we should '\0' the buffer[bytes_read]
+5- 
+
+buffer size = 10000000
+read() return = 22
