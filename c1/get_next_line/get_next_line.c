@@ -1,68 +1,69 @@
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char    *get_next_line(int fd)
 {
-	static char	*stock;
-	char		*tmp_buf;
-	ssize_t		bytes_read;
+	char		*buf;
+	ssize_t		rdret;
+	static char	*stock = NULL;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return(NULL);
-	tmp_buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!tmp_buf)
-		return (free(tmpbuf), NULL);
-	while (1)
-	{
-		bytes_read = read(fd, tmp_buf, BUFFER_SIZE);
+		return (NULL);
 
-		tmp_buf[bytes_read] = '\0';
-		stock = ft_strjoin(stock, tmp_buf);
+	buf = malloc(BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
+	while ((rdret = read(fd, buf, BUFFER_SIZE)) > 0)
+	{
+		buf[rdret] = '\0';
 		if (!stock)
-		{
-			free(tmp_buf);
-			return (NULL);
-		}
-		if (strchr(stock, '\n'))
+			stock = ft_strdup("");
+		char	*tmp = stock;
+		stock = ft_strjoin(tmp, buf);
+		free(tmp);
+		if (!stock)
+			return (free(buf), NULL);
+		if (ft_strchr(stock, '\n'))
 			break ;
 	}
-	free(tmp_buf);
+	free(buf);
+	if (rdret < 0 || (rdret == 0 && (!stock || !*stock)))
+		return (free(stock), NULL);
 
-	if (bytes_read < 0 || (bytes_read == 0 && (!stock || !*stock)))
+	ssize_t	newl_pos = 0;
+	while (stock[newl_pos] && stock[newl_pos] != '\n')
+		newl_pos++;
+	char	*line = malloc(newl_pos + (stock[newl_pos] == '\n') + 1);
+	if (!line)
+		return (free(stock), NULL);
+	ssize_t	i = 0;
+	while (i < newl_pos)
 	{
-		free(stock);
-		stock = NULL;
-		return (NULL);
+		line[i] = stock[i];
+		i++;
 	}
+	if (stock[newl_pos] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
 
-	newline_pos = strchr(stock, '\n');
-	if (newline_pos)
-	{
-		char	*line = malloc(sizeof(char) * (new_line_pos + 1));
-		if (!line)
-		{
-			free(line);
-			line = NULL;
-			return (NULL);
-		}
-		
-	}
-	else
-	{
-
-	}
-
-
-
+	char	*remain = ft_strdup(stock + newl_pos + (stock[newl_pos] == '\n'));
+	free(stock);
+	stock = remain;
 	return (line);
 }
 
-int main()
+int	main(int ac, char **av)
 {
+	char	*line;
 	int		fd;
-	char	*line
 
-	fd = open("text.txt", O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s", line);
+	fd = open(av[1], O_RDONLY);
+	// line = get_next_line(fd);
+	// printf("%s", line);
+	// free(line);
+	while ((line = get_next_line(fd)))
+	{
+		printf("%s", line);
+		free(line);
+	}
 	close(fd);
 }
