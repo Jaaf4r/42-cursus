@@ -6,11 +6,11 @@
 /*   By: jaafar <jaafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:27:00 by jaafar            #+#    #+#             */
-/*   Updated: 2024/11/27 10:20:34 by jaafar           ###   ########.fr       */
+/*   Updated: 2024/11/27 10:58:45 by jaafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {

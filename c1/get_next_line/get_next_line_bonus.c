@@ -6,11 +6,11 @@
 /*   By: jaafar <jaafar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:27:03 by jaafar            #+#    #+#             */
-/*   Updated: 2024/11/27 10:21:16 by jaafar           ###   ########.fr       */
+/*   Updated: 2024/11/27 12:17:29 by jaafar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*readfd(int fd, char *stock)
 {
@@ -36,7 +36,7 @@ static char	*readfd(int fd, char *stock)
 			break ;
 	}
 	free(buf);
-	if (rdret < 0)
+	if (rdret < 0 || (rdret == 0 && (!stock || !*stock)))
 		return (free(stock), NULL);
 	return (stock);
 }
@@ -67,53 +67,33 @@ static char	*get_line(char *stock)
 	return (line);
 }
 
-static char	*update_stock(char *stock)
+static void	update_stock(char **stock)
 {
 	ssize_t	newl_pos;
 	char	*remain;
 
 	newl_pos = 0;
-	while (stock[newl_pos] && stock[newl_pos] != '\n')
+	while ((*stock)[newl_pos] && (*stock)[newl_pos] != '\n')
 		newl_pos++;
-	remain = ft_strdup(stock + newl_pos + (stock[newl_pos] == '\n'));
-	free(stock);
-	return (remain);
+	remain = ft_strdup(*stock + newl_pos + ((*stock)[newl_pos] == '\n'));
+	free(*stock);
+	*stock = remain;
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*stock;
+	static char	*stocks[MAX_FD] = {NULL};
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
-	stock = readfd(fd, stock);
-	if (!stock)
-		return (NULL);
-	line = get_line(stock);
-	stock = update_stock(stock);
-	if (!line && (!stock || !*stock))
+	if (!stocks[fd] || !ft_strchr(stocks[fd], '\n'))
 	{
-		free(stock);
-		stock = NULL;
+		stocks[fd] = readfd(fd, stocks[fd]);
+		if (!stocks[fd])
+			return (NULL);
 	}
+	line = get_line(stocks[fd]);
+	update_stock(&stocks[fd]);
 	return (line);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	(void)ac;
-// 	char	*line;
-// 	int		fd;
-
-// 	fd = open(av[1], O_RDONLY);
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	// line = get_next_line(fd);
-// 	// printf("%s", line);
-// 	// free(line);
-// 	close(fd);
-// }
