@@ -1,41 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaafar <jaafar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/27 09:27:03 by jaafar            #+#    #+#             */
+/*   Updated: 2024/11/27 10:17:30 by jaafar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char    *get_next_line(int fd)
+static char	*readfd(int fd, char *stock)
 {
-	char		*buf;
-	ssize_t		rdret;
-	static char	*stock = NULL;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+	char	*buf;
+	ssize_t	rdret;
+	char	*tmp;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	while ((rdret = read(fd, buf, BUFFER_SIZE)) > 0)
+	while (1)
 	{
+		rdret = read(fd, buf, BUFFER_SIZE);
+		if (rdret <= 0)
+			break ;
 		buf[rdret] = '\0';
 		if (!stock)
 			stock = ft_strdup("");
-		char	*tmp = stock;
+		tmp = stock;
 		stock = ft_strjoin(tmp, buf);
 		free(tmp);
-		if (!stock)
-			return (free(buf), NULL);
-		if (ft_strchr(stock, '\n'))
+		if (!stock || ft_strchr(stock, '\n'))
 			break ;
 	}
 	free(buf);
-	if (rdret < 0 || (rdret == 0 && (!stock || !*stock)))
+	if (rdret < 0)
 		return (free(stock), NULL);
+	return (stock);
+}
 
-	ssize_t	newl_pos = 0;
+static char	*get_line(char *stock)
+{
+	ssize_t	newl_pos;
+	char	*line;
+	ssize_t	i;
+
+	if (!stock || !*stock)
+		return (NULL);
+	newl_pos = 0;
 	while (stock[newl_pos] && stock[newl_pos] != '\n')
 		newl_pos++;
-	char	*line = malloc(newl_pos + (stock[newl_pos] == '\n') + 1);
+	line = malloc(newl_pos + (stock[newl_pos] == '\n') + 1);
 	if (!line)
-		return (free(stock), NULL);
-	ssize_t	i = 0;
+		return (NULL);
+	i = 0;
 	while (i < newl_pos)
 	{
 		line[i] = stock[i];
@@ -44,26 +64,56 @@ char    *get_next_line(int fd)
 	if (stock[newl_pos] == '\n')
 		line[i++] = '\n';
 	line[i] = '\0';
-
-	char	*remain = ft_strdup(stock + newl_pos + (stock[newl_pos] == '\n'));
-	free(stock);
-	stock = remain;
 	return (line);
 }
 
-int	main(int ac, char **av)
+static char	*update_stock(char *stock)
 {
-	char	*line;
-	int		fd;
+	ssize_t	newl_pos;
+	char	*remain;
 
-	fd = open(av[1], O_RDONLY);
-	// line = get_next_line(fd);
-	// printf("%s", line);
-	// free(line);
-	while ((line = get_next_line(fd)))
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
+	newl_pos = 0;
+	while (stock[newl_pos] && stock[newl_pos] != '\n')
+		newl_pos++;
+	remain = ft_strdup(stock + newl_pos + (stock[newl_pos] == '\n'));
+	free(stock);
+	return (remain);
 }
+
+char	*get_next_line(int fd)
+{
+	static char	*stock;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stock = readfd(fd, stock);
+	if (!stock)
+		return (NULL);
+	line = get_line(stock);
+	stock = update_stock(stock);
+	if (!line && (!stock || !*stock))
+	{
+		free(stock);
+		stock = NULL;
+	}
+	return (line);
+}
+
+// int	main(int ac, char **av)
+// {
+// 	(void)ac;
+// 	char	*line;
+// 	int		fd;
+
+// 	fd = open(av[1], O_RDONLY);
+// 	while ((line = get_next_line(fd)))
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	// line = get_next_line(fd);
+// 	// printf("%s", line);
+// 	// free(line);
+// 	close(fd);
+// }
