@@ -1,4 +1,4 @@
-#include "get_next_line_bonus.c"
+#include "../get_next_line_bonus.h"
 
 # define MAX_FILES 3
 
