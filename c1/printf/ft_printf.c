@@ -46,7 +46,6 @@ int	process_format(const char **format, va_list args)
 	return (n);
 }
 
-
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -71,4 +70,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
