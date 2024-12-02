@@ -105,10 +105,14 @@ char	*get_next_line(int fd)
 	if (!stock)
 		return (NULL);
 	b_read = readfd(stock, fd);
-	if (b_read < 0)
-		return (dellnode(&stock, fd), NULL);
-	line = get_line(&stock->buf);
-	if (!line || b_read == 0)
-		return (dellnode(&stock, fd), NULL);
-	return (line);
+	while (b_read)
+	{
+		line = get_line(&stock->buf);
+		if (line)
+			return (line);
+		b_read = readfd(stock, fd);
+	}
+	if (b_read < 0 || !stock->buf || !*stock->buf)
+		dellnode(&stock, fd);
+	return (NULL);
 }
