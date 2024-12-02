@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaafar <jaafar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 10:19:14 by jaafar            #+#    #+#             */
-/*   Updated: 2024/11/27 12:17:04 by jaafar           ###   ########.fr       */
+/*   Created: 2024/12/02 17:41:47 by jabouhni          #+#    #+#             */
+/*   Updated: 2024/12/02 17:41:48 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@
 
 # define MAX_FD 1024
 
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <string.h>
 
 /*          MAIN FUNCTIONS         */
 
