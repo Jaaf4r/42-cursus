@@ -81,3 +81,27 @@ char	*ft_strdup(const char *s)
 	dst[i] = '\0';
 	return (dst);
 }
+
+char	*ft_strndup(const char *s, size_t size)
+{
+	char	*dst;
+	size_t	i;
+	size_t	len;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	if (size > len)
+		size = len;
+	dst = (char *)malloc(sizeof(char) * (size + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		dst[i] = s[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
