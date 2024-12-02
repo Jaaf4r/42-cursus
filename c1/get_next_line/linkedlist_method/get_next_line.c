@@ -40,6 +40,7 @@ ssize_t	readfd(t_list *node, int fd)
 		free(node->buf);
 		node->buf = joinbuf;
 	}
+	printf("%s", node->buf);
 	free(tmpbuf);
 	return (b_read);
 }
@@ -109,7 +110,9 @@ char	*get_next_line(int fd)
 	{
 		line = get_line(&stock->buf);
 		if (line)
+		{
 			return (line);
+		}
 		b_read = readfd(stock, fd);
 	}
 	if (b_read < 0 || !stock->buf || !*stock->buf)

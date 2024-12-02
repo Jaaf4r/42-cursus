@@ -16,6 +16,7 @@ typedef struct s_list
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 t_list	*get_node(t_list **head, int fd);
 ssize_t	readfd(t_list *node, int fd);
