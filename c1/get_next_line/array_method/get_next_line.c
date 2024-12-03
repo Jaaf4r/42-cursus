@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 17:41:28 by jabouhni          #+#    #+#             */
-/*   Updated: 2024/12/02 17:41:29 by jabouhni         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
 
 static char	*readfd(int fd, char *stock)
@@ -36,8 +24,8 @@ static char	*readfd(int fd, char *stock)
 			break ;
 	}
 	free(buf);
-	if (rdret < 0)
-		return (free(stock), NULL);
+	if (rdret < 0 || (rdret == 0 && (!stock || !*stock)))
+		return (free(stock), stock = NULL, NULL);
 	return (stock);
 }
 
@@ -72,6 +60,8 @@ static char	*update_stock(char *stock)
 	ssize_t	newl_pos;
 	char	*remain;
 
+	if (!stock || !*stock)
+		return (NULL);
 	newl_pos = 0;
 	while (stock[newl_pos] && stock[newl_pos] != '\n')
 		newl_pos++;
@@ -92,7 +82,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line(stock);
 	stock = update_stock(stock);
-	if (!line && (!stock || !*stock))
+	if (!line)
 	{
 		free(stock);
 		stock = NULL;
