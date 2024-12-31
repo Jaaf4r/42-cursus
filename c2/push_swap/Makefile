@@ -1,6 +1,6 @@
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-SRC		= *.c
+SRC		= ft_split.c input.c
 OBJ		= $(SRC:.c=.o)
 NAME	= pushswap.a
 LIBC	= ar rcs
