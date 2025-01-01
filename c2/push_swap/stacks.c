@@ -43,4 +43,13 @@ int main()
 		curr = curr->next;
 	}
 	printf("NULL\n");
+
+	curr = head;
+	while (curr)
+	{
+		free(curr->data);
+		free(curr);
+		curr = curr->next;
+	}
+	return (0);
 }
