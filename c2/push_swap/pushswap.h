@@ -9,6 +9,15 @@
 #include <errno.h>
 #include <ctype.h>
 
+typedef struct s_pushswap
+{
+	void				*data;
+	struct s_pushswap	*next;
+	struct s_pushswap	*prev;
+}   t_pushswap;
+
+
+
 char    **ft_split(char const *s, char c);
 char    *ft_strdup(const char *s);
 
