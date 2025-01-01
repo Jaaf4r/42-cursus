@@ -8,12 +8,9 @@ int	is_invalid_num(char *s)
 	errno = 0;
 	if (!s || *s == '\0' || (isspace(*s) || (!isdigit(*s) && *s != '-' && *s != '+')))
         return (1);
-
     result = strtol(s, &endptr, 10);
-
     if (*endptr != '\0' || errno == ERANGE || result > INT_MAX || result < INT_MIN)
 		return (1);
-
 	return (0);
 }
 
