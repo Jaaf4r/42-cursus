@@ -36,6 +36,7 @@ int main()
 		t_pushswap	*new = ft_lstnew(val);
 		ft_addfront(&head, new);
 	}
+
 	t_pushswap	*curr = head;
 	while (curr)
 	{
