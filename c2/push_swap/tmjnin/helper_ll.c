@@ -70,15 +70,78 @@ void	ra(t_node **stack_a)
 {
 	if (*stack_a && (*stack_a)->next)
 	{
-		t_node	*tmp = *stack_a;
+		t_node	*first = *stack_a;
 		*stack_a = (*stack_a)->next;
-		t_node	*trav = *stack_a;
 
-		while (trav->next)
-			trav = trav->next;
-		trav->next = tmp;
-		tmp->next = NULL;
+		t_node	*last = *stack_a;
+		while (last->next)
+			last = last->next;
+		last->next = first;
+		first->next = NULL;
 	}
+}
+
+void	rb(t_node **stack_b)
+{
+	if (*stack_b && (*stack_b)->next)
+	{
+		t_node	*first = *stack_b;
+		*stack_b = (*stack_b)->next;
+
+		t_node	*last = *stack_b;
+		while (last->next)
+			last = last->next;
+		last->next = first;
+		first->next = NULL;
+	}
+}
+
+void	rr(t_node **stack_a, t_node **stack_b)
+{
+	ra(stack_a);
+	rb(stack_b);
+}
+
+void	rra(t_node **stack_a)
+{
+	if (*stack_a && (*stack_a)->next)
+	{
+		t_node	*last = *stack_a;
+		t_node	*second_last = NULL;
+
+		while (last->next)
+		{
+			second_last = last;
+			last = last->next;
+		}
+		second_last->next = NULL;
+		last->next = *stack_a;
+		*stack_a = last;
+	}
+}
+
+void	rrb(t_node **stack_b)
+{
+	if (*stack_b && (*stack_b)->next)
+	{
+		t_node	*last = *stack_b;
+		t_node	*second_last = NULL;
+
+		while (last->next)
+		{
+			second_last = last;
+			last = last->next;
+		}
+		second_last->next = NULL;
+		last->next = *stack_b;
+		*stack_b = last;
+	}
+}
+
+void	rrr(t_node **stack_a, t_node **stack_b)
+{
+	rra(stack_a);
+	rrb(stack_b);
 }
 
 void	ft_lstaddfront(t_node **lst, t_node *node)
@@ -87,6 +150,20 @@ void	ft_lstaddfront(t_node **lst, t_node *node)
 		return;
 	node->next = *lst;
 	*lst = node;
+}
+
+void	print_stack(t_node *head)
+{
+	t_node	*curr = head;
+	while (curr)
+	{
+		if (curr->next)
+			printf("%d -> ", curr->value);
+		else
+			printf("%d .", curr->value);
+		curr = curr->next;
+	}
+	printf("\n");
 }
 
 int	main()
@@ -102,26 +179,7 @@ int	main()
 	test = create_node(100);
 	ft_lstaddfront(&head, test);
 
-	t_node	*curr = head;
-	while (curr)
-	{
-		if (curr->next)
-			printf("%d -> ", curr->value);
-		else
-			printf("%d .", curr->value);
-		curr = curr->next;
-	}
-	printf("\n");
-
-	ra(&head);
-	curr = head;
-	while (curr)
-	{
-		if (curr->next)
-			printf("%d -> ", curr->value);
-		else
-			printf("%d .", curr->value);
-		curr = curr->next;
-	}
-	printf("\n");
+	print_stack(head);
+	rrb(&head);
+	print_stack(head);
 }
