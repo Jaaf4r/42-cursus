@@ -77,8 +77,31 @@ void	testing()
 	pb(&stack_a, &stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\n");
-
+	printf("\n\nra:\n");
+	ra(&stack_a);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nrb:\n");
+	rb(&stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nrr:\n");
+	rr(&stack_a, &stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nrra:\n");
+	rra(&stack_a);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nrrb:\n");
+	rrb(&stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nrrr:\n");
+	rrr(&stack_a, &stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n");
 }
 int	main()
 {
