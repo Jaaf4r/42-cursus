@@ -1,5 +1,5 @@
-#ifndef AI_PS_H
-#define AI_PS_H
+#ifndef PS_H
+#define PS_H
 
 #include <stdio.h>
 #include <unistd.h>

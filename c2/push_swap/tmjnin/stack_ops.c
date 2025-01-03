@@ -1,4 +1,4 @@
-#include "ai_ps.h"
+#include "ps.h"
 
 void	sa(t_node **stack_a)
 {

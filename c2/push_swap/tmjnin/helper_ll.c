@@ -1,4 +1,4 @@
-#include "ai_ps.h"
+#include "ps.h"
 
 t_node	*create_node(int value)
 {
