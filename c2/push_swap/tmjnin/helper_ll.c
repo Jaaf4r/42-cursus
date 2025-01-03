@@ -34,20 +34,53 @@ void	print_stack(t_node *head)
 	printf("\n");
 }
 
+void	testing()
+{
+	srand(time(NULL));
+
+	t_node	*stack_a = NULL;
+	t_node	*stack_b = NULL;
+
+	int	i = 0;
+	while (i < 5)
+	{
+		ft_lstaddfront(&stack_a, create_node(rand() % 100));
+		i++;
+	}
+	i = 0;
+	while (i < 5)
+	{
+		ft_lstaddfront(&stack_b, create_node(rand() % 100));
+		i++;
+	}
+	printf("\nstack a:\n");
+	print_stack(stack_a);
+	printf("stack b:\n");
+	print_stack(stack_b);
+	printf("\n\nsa:\n");
+	sa(&stack_a);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nsb:\n");
+	sb(&stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\nss:\n");
+	ss(&stack_a, &stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\npa:\n");
+	pa(&stack_a, &stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\npb:\n");
+	pb(&stack_a, &stack_b);
+	print_stack(stack_a);
+	print_stack(stack_b);
+	printf("\n\n");
+
+}
 int	main()
 {
-	t_node	*head = NULL;
-
-	t_node	*test = create_node(5);
-	ft_lstaddfront(&head, test);
-	test = create_node(19);
-	ft_lstaddfront(&head, test);
-	test = create_node(44);
-	ft_lstaddfront(&head, test);
-	test = create_node(100);
-	ft_lstaddfront(&head, test);
-
-	print_stack(head);
-	rrb(&head);
-	print_stack(head);
+	testing();
 }

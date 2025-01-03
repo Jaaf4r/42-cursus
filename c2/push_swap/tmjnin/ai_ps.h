@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <time.h>
 
 typedef struct s_node {
 	int		value;
