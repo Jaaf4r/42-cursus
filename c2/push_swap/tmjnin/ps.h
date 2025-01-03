@@ -11,6 +11,7 @@ typedef struct s_node {
 	int		value;
 	struct s_node	*next;
 }	t_node;
+
 /* LINKEDLIST HELPER FUNCTIONS */
 t_node	*create_node(int value);
 void	ft_lstaddfront(t_node **lst, t_node *node);
