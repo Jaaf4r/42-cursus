@@ -103,6 +103,7 @@ void	testing()
 	print_stack(stack_b);
 	printf("\n");
 }
+
 int	main()
 {
 	testing();
