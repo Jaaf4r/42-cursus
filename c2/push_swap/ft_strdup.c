@@ -1,4 +1,4 @@
-#include "pushswap.h"
+#include "ps.h"
 
 char	*ft_strdup(const char *s)
 {

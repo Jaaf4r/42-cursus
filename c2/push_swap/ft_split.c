@@ -1,4 +1,4 @@
-#include "pushswap.h"
+#include "ps.h"
 
 static int	count_words(const char *s, char c)
 {

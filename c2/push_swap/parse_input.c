@@ -1,4 +1,4 @@
-#include "pushswap.h"
+#include "ps.h"
 
 int	is_invalid_num(char *s)
 {
@@ -62,7 +62,7 @@ void	free_split(char **v)
 	free(v);
 }
 
-int	main(int ac, char **av)
+char	**parse_input(char **av)
 {
 	int		i;
 	int		j;
@@ -72,74 +72,54 @@ int	main(int ac, char **av)
 	int		all_i;
 
 	i = 0;
-	j = 0;
 	total_count = 0;
-	if (ac > 1)
+
+	// counting the splits
+	while (av[++i])
 	{
-		// counting the splits
-		while (av[++i])
+		vv = ft_split(av[i], ' ');
+		if (!vv)
+			return (NULL);
+		j = 0;
+		while (vv[j])
 		{
-			vv = ft_split(av[i], ' ');
-			if (!vv)
-				return (1);
-			j = 0;
-			while (vv[j])
-			{
-				total_count++;
-				j++;
-			}
-			free_split(vv);
+			total_count++;
+			j++;
 		}
-		// copying the splits to a new double arr
-		all_val = (char **)malloc(sizeof(char *) * (total_count + 1));
-		if (!all_val)
-			return (1);
-		i = 0;
-		all_i = 0;
-		while (av[++i])
-		{
-			vv = ft_split(av[i], ' ');
-			if (!vv)
-			{
-				free_split(all_val);
-				return (1);
-			}
-			j = 0;
-			while (vv[j])
-			{
-				all_val[all_i] = ft_strdup(vv[j]);
-				if (!all_val[all_i])
-				{
-					free_split(vv);
-					free_split(all_val);
-					return (1);
-				}
-				all_i++;
-				j++;
-			}
-			free_split(vv);
-		}
-		all_val[all_i] = NULL;
-		// checking for errors
-		i = 0;
-		while (all_val[i])
-		{
-			if (is_invalid_num(all_val[i]))
-			{
-				printf("Error\n");
-				free_split(all_val);
-				return (0);
-			}
-			i++;
-		}
-		if (check_dup(all_val))
-		{
-			printf("Error\n");
-			free_split(all_val);
-			return (0);
-		}
-		free_split(all_val);
-		printf("NOICE\n");
+		free_split(vv);
 	}
-	return (0);
+	// copying the splits to a new double arr
+	all_val = (char **)malloc(sizeof(char *) * (total_count + 1));
+	if (!all_val)
+		return (NULL);
+	i = 0;
+	all_i = 0;
+	while (av[++i])
+	{
+		vv = ft_split(av[i], ' ');
+		if (!vv)
+			return (free_split(all_val), NULL);
+		j = 0;
+		while (vv[j])
+		{
+			all_val[all_i] = ft_strdup(vv[j]);
+			if (!all_val[all_i])
+				return (free_split(vv), free_split(all_val), NULL);
+			all_i++;
+			j++;
+		}
+		free_split(vv);
+	}
+	all_val[all_i] = NULL;
+	// checking for errors
+	i = 0;
+	while (all_val[i])
+	{
+		if (is_invalid_num(all_val[i]))
+			return (free_split(all_val), NULL);
+		i++;
+	}
+	if (check_dup(all_val))
+		return (free_split(all_val), NULL);
+	return (all_val);
 }
