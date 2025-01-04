@@ -2,16 +2,21 @@
 
 void	print_stack(t_node *head)
 {
-	t_node	*curr = head;
-	while (curr)
+	if (head)
 	{
-		if (curr->next)
-			printf("%d -> ", curr->value);
-		else
-			printf("%d .", curr->value);
-		curr = curr->next;
+		t_node	*curr = head;
+		while (curr)
+		{
+			if (curr->next)
+				ft_printf("[%d] -> ", curr->value);
+			else
+				ft_printf("[%d] .", curr->value);
+			curr = curr->next;
+		}
+		printf("\n");
 	}
-	printf("\n");
+	else
+		ft_printf("EMPTY LIST\n");
 }
 
 void	testing()
@@ -33,55 +38,55 @@ void	testing()
 		ft_lstaddfront(&stack_b, create_node(rand() % 100));
 		i++;
 	}
-	printf("\nstack a:\n");
+	ft_printf("\nstack a:\n");
 	print_stack(stack_a);
-	printf("stack b:\n");
+	ft_printf("stack b:\n");
 	print_stack(stack_b);
-	printf("\n\nsa:\n");
+	ft_printf("\n\nsa:\n");
 	sa(&stack_a);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nsb:\n");
+	ft_printf("\n\nsb:\n");
 	sb(&stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nss:\n");
+	ft_printf("\n\nss:\n");
 	ss(&stack_a, &stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\npa:\n");
+	ft_printf("\n\npa:\n");
 	pa(&stack_a, &stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\npb:\n");
+	ft_printf("\n\npb:\n");
 	pb(&stack_a, &stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nra:\n");
+	ft_printf("\n\nra:\n");
 	ra(&stack_a);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nrb:\n");
+	ft_printf("\n\nrb:\n");
 	rb(&stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nrr:\n");
+	ft_printf("\n\nrr:\n");
 	rr(&stack_a, &stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nrra:\n");
+	ft_printf("\n\nrra:\n");
 	rra(&stack_a);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nrrb:\n");
+	ft_printf("\n\nrrb:\n");
 	rrb(&stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n\nrrr:\n");
+	ft_printf("\n\nrrr:\n");
 	rrr(&stack_a, &stack_b);
 	print_stack(stack_a);
 	print_stack(stack_b);
-	printf("\n");
+	ft_printf("\n");
 }
 
 /*int	main()

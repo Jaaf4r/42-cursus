@@ -30,16 +30,18 @@ int main(int ac, char **av)
         ft_printf("Initial stack_a:\n");
         print_stack(stack_a);
 
-        sa(&stack_a);
-        ft_printf("After sa (swap a):\n");
-        print_stack(stack_a);
+		is_sorted(stack_a);
 
-        pb(&stack_a, &stack_b);
-        ft_printf("After pb (push b):\n");
-        ft_printf("stack_a:\n");
-        print_stack(stack_a);
-        ft_printf("stack_b:\n");
-        print_stack(stack_b);
+        // sa(&stack_a);
+        // ft_printf("After sa (swap a):\n");
+        // print_stack(stack_a);
+
+        // pb(&stack_a, &stack_b);
+        // ft_printf("After pb (push b):\n");
+        // ft_printf("stack_a:\n");
+        // print_stack(stack_a);
+        // ft_printf("stack_b:\n");
+        // print_stack(stack_b);
 
         // Free stacks
         free_stack(stack_a);

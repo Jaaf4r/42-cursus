@@ -52,6 +52,6 @@ void	rrb(t_node **stack_b);
 void	rrr(t_node **stack_a, t_node **stack_b);
 
 /* ALGO FUNCTIONS */
-
+int	is_sorted(t_node *head);
 
 #endif
