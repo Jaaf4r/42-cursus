@@ -30,7 +30,11 @@ int main(int ac, char **av)
         ft_printf("Initial stack_a:\n");
         print_stack(stack_a);
 
-		is_sorted(stack_a);
+		if (!(is_sorted(stack_a)))
+			ft_printf("NEEDS SORTING\n");
+		else
+			ft_printf("Sorted!\n");
+
 
         // sa(&stack_a);
         // ft_printf("After sa (swap a):\n");

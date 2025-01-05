@@ -1,24 +1,5 @@
 #include "ps.h"
 
-void	print_stack(t_node *head)
-{
-	if (head)
-	{
-		t_node	*curr = head;
-		while (curr)
-		{
-			if (curr->next)
-				ft_printf("[%d] -> ", curr->value);
-			else
-				ft_printf("[%d] .", curr->value);
-			curr = curr->next;
-		}
-		printf("\n");
-	}
-	else
-		ft_printf("EMPTY LIST\n");
-}
-
 void	testing()
 {
 	srand(time(NULL));
@@ -89,7 +70,7 @@ void	testing()
 	ft_printf("\n");
 }
 
-/*int	main()
+int	main()
 {
 	testing();
-}*/
+}

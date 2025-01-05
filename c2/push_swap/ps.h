@@ -1,7 +1,6 @@
 #ifndef PS_H
 #define PS_H
 
-#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
