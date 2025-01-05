@@ -2,13 +2,15 @@
 
 int	ft_char_str(int c, char *s)
 {
+	int	len;
+
     if (s == NULL)
         return (write(1, "(null)", 6));
     else if (s == (char *)-1)
         return (write(1, &c, 1));
     else
     {
-        int len = 0;
+        len = 0;
         while (s[len])
             len++;
         return (write(1, s, len));
