@@ -31,7 +31,7 @@ int main(int ac, char **av)
         print_stack(stack_a);
 
 		if (!(is_sorted(stack_a)))
-			ft_printf("NEEDS SORTING\n");
+			ft_printf("NEEDS SORTING | LIS : %d\n", find_lis(&stack_a/*, &stack_b*/));
 		else
 			ft_printf("Sorted!\n");
 

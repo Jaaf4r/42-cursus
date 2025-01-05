@@ -52,5 +52,6 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 
 /* ALGO FUNCTIONS */
 int	is_sorted(t_node *head);
+int	find_lis(t_node **stack_a/*, t_node **stack_b*/);
 
 #endif
