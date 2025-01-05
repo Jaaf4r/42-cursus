@@ -34,10 +34,7 @@ int	find_lis(t_node **stack_a/*, t_node **stack_b*/)
 		while (tmp)
 		{
 			if (curr->value < tmp->value)
-			{
 				len++;
-				ft_printf("%d | %d\n", curr->value, tmp->value);
-			}
 			tmp = tmp->next;
 		}
 		if (max_len < len)
