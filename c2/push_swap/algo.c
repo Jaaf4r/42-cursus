@@ -17,30 +17,75 @@ int	is_sorted(t_node *stack)
 	return (1);
 }
 
-int	find_lis(t_node **stack_a/*, t_node **stack_b*/)
+void	find_lis(t_node *stack_a)
 {
-	t_node	*curr;
-	int		max_len;
-	//t_node	*longest;
+	if (!stack_a)
+		return;
 
-	if (!*stack_a)
-    	return (0);
-	curr = *stack_a;
-	max_len = 0;
-	while (curr->next)
+	t_node	*tmp = stack_a;
+	int		n = ft_lstsize(stack_a);
+	int		*arr = malloc(sizeof(int) * n);
+	int		*length = malloc(sizeof(int) * n);
+	int		*subs = malloc(sizeof(int) * n);
+	if (!arr || !length || !subs)
+		return;
+
+	for (int i = 0; i < n; i++)
 	{
-		t_node	*tmp = curr->next;
-		int		len = 1;
-		while (tmp)
-		{
-			if (curr->value < tmp->value)
-				len++;
-			tmp = tmp->next;
-		}
-		if (max_len < len)
-			max_len = len;
-		
-		curr = curr->next;
+		arr[i] = tmp->value;
+		length[i] = 1;
+		subs[i] = -1;
+		tmp = tmp->next;
 	}
-	return (max_len);
+
+	int	i = 1;
+	while (i < n)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (arr[i] > arr[j] && length[j] < length[i] + 1)
+			{
+				length[i] = length[j] + 1;
+				subs[i] = j;
+			}
+		}
+		i++;
+	}
+	int	maxlength = 0;
+	i = 0; 
+	while (i < n)
+	{
+		if (maxlength < length[i])
+			maxlength = length[i];
+		i++;
+	}
+	int	subs_backtrack = i; // corresponding index to i (index of biggest value)
+	int	*seq = malloc(sizeof(int) * n);
+	if (!seq)
+		return;
+	int	seq_index = maxlength - 1;
+	while (subs_backtrack != 0)
+	{
+		seq[seq_index] = subs[subs_backtrack];
+		subs_backtrack = subs[subs_backtrack];
+	}
+	
+	// ---------------------------------------------
+
+	for (int i = 0; i < n; i++)
+	{
+		ft_printf("%d       ", length[i]);
+	}
+	ft_printf("\n");
+	for (int i = 0; i < n; i++)
+	{
+		ft_printf("%d       ", subs[i]);
+	}
+	ft_printf("\n\n");
+
+	for (int i = 0; i < maxlength; i++)
+	{
+		ft_printf("%d       ", seq[i]);
+	}
+	ft_printf("\n");
 }

@@ -1,5 +1,14 @@
 #include "ps.h"
 
+
+/**
+ * ERRORS TO HANDLE = 
+ * ./a.out "43452 34854 438" "93 37 28 290" two strings
+ * ./a.out "         " many spaces
+*/
+
+
+
 int	is_invalid_num(char *s)
 {
 	char	*endptr;
@@ -54,6 +63,7 @@ int	check_dup(char **v)
 void	free_split(char **v)
 {
 	int	i;
+
 	if (!v)
         return;
 	i = 0;

@@ -20,6 +20,20 @@ void	ft_lstaddfront(t_node **lst, t_node *node)
 	*lst = node;
 }
 
+int	ft_lstsize(t_node *stack)
+{
+	int		count = 0;
+
+	if (!stack)
+		return (0);
+	while (stack)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
+
 void	print_stack(t_node *head)
 {
 	if (head)

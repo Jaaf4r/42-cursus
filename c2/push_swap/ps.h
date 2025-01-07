@@ -6,9 +6,13 @@
 #include <string.h>
 #include <time.h>
 #include <errno.h>
-#include <limits.h>
 #include <ctype.h>
 #include <stdarg.h>
+
+#define INT_MAX 0x7fffffff
+#define INT_MIN (-0x7fffffff - 1)
+#define LLONG_MAX 0x7fffffffffffffffLL
+#define LLONG_MIN (-0x7fffffffffffffffLL -1LL)
 
 typedef struct s_node {
 	int				value;
@@ -34,6 +38,7 @@ char	**parse_input(char **av);
 /* HELPER FUNCTIONS */
 t_node	*create_node(int value);
 void	ft_lstaddfront(t_node **lst, t_node *node);
+int		ft_lstsize(t_node *stack);
 void	print_stack(t_node *head);
 void	free_stack(t_node *stack);
 
@@ -51,7 +56,8 @@ void	rrb(t_node **stack_b);
 void	rrr(t_node **stack_a, t_node **stack_b);
 
 /* ALGO FUNCTIONS */
-int	is_sorted(t_node *head);
-int	find_lis(t_node **stack_a/*, t_node **stack_b*/);
+int		is_sorted(t_node *head);
+void	find_lis(t_node *stack_a);
+
 
 #endif

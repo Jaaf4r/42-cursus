@@ -30,8 +30,12 @@ int main(int ac, char **av)
         ft_printf("Initial stack_a:\n");
         print_stack(stack_a);
 
+		int	*length = 0;
 		if (!(is_sorted(stack_a)))
-			ft_printf("NEEDS SORTING | LIS : %d\n", find_lis(&stack_a/*, &stack_b*/));
+		{
+			ft_printf("NEEDS SORTING\n");
+			find_lis(stack_a);
+		}
 		else
 			ft_printf("Sorted!\n");
 
