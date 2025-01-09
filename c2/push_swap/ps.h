@@ -62,7 +62,7 @@ void	bubble_sort(int	*arr, int n);
 int		find_target_pos(t_node *stack_a, int value);
 int		get_node_index(t_node *stack, int value);
 int		calculate_moves(int stack_size, int index);
-void	best_move(t_node *stack_a, t_node *stack_b, int *best_value, int *min_moves);
+void	find_best_move(t_node *stack_a, t_node *stack_b, int *best_value, int *min_moves);
 
 
 #endif
