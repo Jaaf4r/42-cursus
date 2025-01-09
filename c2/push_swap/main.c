@@ -34,7 +34,16 @@ int main(int ac, char **av)
 		if (!(is_sorted(stack_a)))
 		{
 			ft_printf("NEEDS SORTING\n");
-			find_lis(stack_a);
+			int	lis_length;
+			int	*seq = get_lis(stack_a, &lis_length);
+			push_nonlis(&stack_a, &stack_b, seq, lis_length);
+
+			push_back_to_stack_a(&stack_a, &stack_b);
+
+			ft_printf("\nstack_a:\n");
+			print_stack(stack_a);
+			ft_printf("\nstack_b:\n");
+			print_stack(stack_b);
 		}
 		else
 			ft_printf("Sorted!\n");

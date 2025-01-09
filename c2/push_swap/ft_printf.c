@@ -1,6 +1,6 @@
 #include "ps.h"
 
-int	ft_char_str(int c, char *s)
+static int	ft_char_str(int c, char *s)
 {
 	int	len;
 
@@ -17,7 +17,7 @@ int	ft_char_str(int c, char *s)
     }
 }
 
-int	ft_digit(unsigned long n, int base, int uplowcase, int is_signed)
+static int	ft_digit(unsigned long n, int base, int uplowcase, int is_signed)
 {
 	int		c;
 	char	*nums;
@@ -41,7 +41,7 @@ int	ft_digit(unsigned long n, int base, int uplowcase, int is_signed)
 	}
 }
 
-int	handle_format(char format, va_list args)
+static int	handle_format(char format, va_list args)
 {
 	unsigned long	p;
 
@@ -67,7 +67,7 @@ int	handle_format(char format, va_list args)
 	return (write(1, "%", 1) + ft_char_str(format, (char *)-1));
 }
 
-int	process_format(const char **format, va_list args)
+static int	process_format(const char **format, va_list args)
 {
 	int	n;
 

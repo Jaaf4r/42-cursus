@@ -20,10 +20,6 @@ typedef struct s_node {
 }	t_node;
 
 /* FT_PRINTF */
-int	ft_char_str(int c, char *s);
-int	ft_digit(unsigned long n, int base, int uplowcase, int is_signed);
-int	handle_format(char format, va_list args);
-int	process_format(const char **format, va_list args);
 int	ft_printf(const char *format, ...);
 
 /* STRING FUNCTIONS */
@@ -57,7 +53,16 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 
 /* ALGO FUNCTIONS */
 int		is_sorted(t_node *head);
-void	find_lis(t_node *stack_a);
+int		*get_lis(t_node *stack_a, int *lis_length);
+void	push_nonlis(t_node **stack_a, t_node **stack_b, int *lis, int lis_length);
+int		find_pivot(t_node *stack_a);
+void	bubble_sort(int	*arr, int n);
+
+
+int		find_target_pos(t_node *stack_a, int value);
+int		get_node_index(t_node *stack, int value);
+int		calculate_moves(int stack_size, int index);
+void	best_move(t_node *stack_a, t_node *stack_b, int *best_value, int *min_moves);
 
 
 #endif
