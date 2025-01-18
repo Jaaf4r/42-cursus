@@ -1,8 +1,9 @@
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
-SRC		=	parse_input.c ft_split.c helper_funcs.c \
-			error_checks.c 
+SRC		=	parse_input.c ft_split.c func_str.c \
+			error_checks.c func_ll.c funcs_for_testing.c \
+			stack_ops.c stack_ops2.c stack_ops3.c
 
 OBJ		= $(SRC:.c=.o)
 RM		= rm -f

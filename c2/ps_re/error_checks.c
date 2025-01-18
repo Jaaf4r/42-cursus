@@ -33,10 +33,9 @@ static char	*normlize_num(char *s)
 
 int	is_dup(char **all_val)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*norm_i;
-	char	*norm_j;
 
 	i = 0;
 	while (all_val[i])
@@ -44,18 +43,21 @@ int	is_dup(char **all_val)
 		norm_i = normlize_num(all_val[i]);
 		if (!norm_i)
 			return (1);
+		all_val[i] = norm_i;
+		norm_i = NULL;
+		free(norm_i);
+		i++;
+	}
+	i = 0;
+	while (all_val[i])
+	{
 		j = i + 1;
 		while (all_val[j])
 		{
-			norm_j = normlize_num(all_val[j]);
-			if (!norm_j)
-				return (free(norm_i), 1);
-			if (ft_strcmp(norm_i, norm_j) == 0)
-				return (free(norm_i), free(norm_j), 1);
-			free(norm_j);
+			if (ft_strcmp(all_val[i], all_val[j]) == 0)
+				return (1);
 			j++;
 		}
-		free(norm_i);
 		i++;
 	}
 	return (0);
