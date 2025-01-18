@@ -26,6 +26,8 @@ int	main(int ac, char **av)
 		print_stack(stack_a);
 
 		pb(&stack_a, &stack_b);
+
+		rrr(&stack_a, &stack_b);
 		printf("after Stack OPERATION:\n");
 		print_stack(stack_a);
 		print_stack(stack_b);

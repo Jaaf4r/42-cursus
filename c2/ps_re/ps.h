@@ -1,14 +1,10 @@
 #ifndef PS_H
-#define PS_H
+# define PS_H
 
-#include <stdlib.h>
-#include <stdarg.h>
-#include <stdio.h>
-
-#define INT_MAX 2147483647
-#define INT_MIN (-2147483647 - 1)
-#define LONG_MAX 9223372036854775807L
-#define LONG_MIN (-9223372036854775807L - 1)
+# include <stdlib.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <limits.h>
 
 typedef struct s_node {
 	int				value;
@@ -32,6 +28,7 @@ char	**parse_input(char **av);
 t_node	*create_node(int value);
 void	ft_lstadd_front(t_node **lst, t_node *node);
 void	free_stack(t_node *stack);
+int		ft_lstsize(t_node *stack);
 
 /* TESTING FUNCTIONS */
 void	print_stack(t_node *stack);

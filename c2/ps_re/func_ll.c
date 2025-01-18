@@ -31,3 +31,16 @@ void	free_stack(t_node *stack)
 		free(tmp);
 	}
 }
+
+int	ft_lstsize(t_node *stack)
+{
+	int	c;
+
+	c = 0;
+	while (stack)
+	{
+		c++;
+		stack = stack->next;
+	}
+	return (c);
+}
