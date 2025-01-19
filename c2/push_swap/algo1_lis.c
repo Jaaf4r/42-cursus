@@ -158,7 +158,7 @@ void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
 	stack_size = ft_lstsize(curr);
 	while (i < stack_size)
 	{
-		if (curr->value != seq[seq_i])
+		while (seq_i < length - 1)
 		{
 			if (curr->value > pivot)
 			{
@@ -169,11 +169,10 @@ void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
 			{
 				pb(stack_a, stack_b);
 				rrb(stack_b);
-				printf("pb\nrrb\n");
+				printf("pb + rrb\n");
 			}
-		}
-		else
 			seq_i++;
+		}	
 		curr = curr->next;
 		i++;
 	}
