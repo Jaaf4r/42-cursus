@@ -1,19 +1,21 @@
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
-SRC		= ft_split.c ft_strdup.c ft_atoi.c parse_input.c helper_ll.c \
-		  stack_ops.c stack_ops2.c stack_ops3.c \
-		  ft_printf.c algo1_lis.c algo2_backInOrder.c
+SRC		=	parse_input.c ft_split.c func_str.c \
+			error_checks.c func_ll.c \
+			stack_ops.c stack_ops2.c stack_ops3.c \
+			algo1_lis.c  \
+			funcs_for_testing.c
 
 OBJ		= $(SRC:.c=.o)
-NAME	= pushswap.a
-LIBC	= ar rcs
 RM		= rm -f
+LIBC	= ar rcs
+NAME	= pushswap.a
 
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME) : $(OBJ)
 		$(LIBC) $(NAME) $(OBJ)
 
 all: $(NAME)
@@ -26,4 +28,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all fclean fclean re

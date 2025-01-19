@@ -1,135 +1,48 @@
 #include "ps.h"
 
-
-/**
- * ERRORS TO HANDLE = 
- * ./a.out "43452 34854 438" "93 37 28 290" two strings
- * ./a.out "         " many spaces
-*/
-
-
-
-int	is_invalid_num(char *s)
-{
-	char	*endptr;
-	long	result;
-
-	errno = 0;
-	if (!s || !*s || (isspace(*s) || (!isdigit(*s) && *s != '-' && *s != '+')))
-        return (1);
-    result = strtol(s, &endptr, 10);
-    if (*endptr != '\0' || errno == ERANGE || result > INT_MAX || result < INT_MIN)
-		return (1);
-	return (0);
-}
-
-char	*normalize_num(const char *s)
-{
-	while (*s == '0' && *(s + 1) != '\0')
-		s++;
-	return (ft_strdup(s));
-}
-
-int	check_dup(char **v)
+char    **parse_input(char **av)
 {
 	int		i;
 	int		j;
-	char	*normalized_i;
-	char	*normalized_j;
-
-	i = 0;
-	while (v[i])
-	{
-		normalized_i = normalize_num(v[i]);
-		if (!normalized_i)
-			return (1);
-		j = i + 1;
-		while (v[j])
-		{
-			normalized_j = normalize_num(v[j]);
-			if (!normalized_j)
-				return (free(normalized_i), 1);
-			if (strcmp(normalized_i, normalized_j) == 0)
-				return (free(normalized_i), free(normalized_j), 1);
-			free(normalized_j);
-			j++;
-		}
-		free(normalized_i);
-		i++;
-	}
-	return (0);
-}
-
-void	free_split(char **v)
-{
-	int	i;
-
-	if (!v)
-        return;
-	i = 0;
-	while (v[i])
-		free(v[i++]);
-	free(v);
-}
-
-char	**parse_input(char **av)
-{
-	int		i;
-	int		j;
-	char	**vv;
-	char	**all_val;
 	int		total_count;
+	char	**vessel;
+	char	**all_val;
 	int		all_i;
 
 	i = 0;
 	total_count = 0;
-
-	// counting the splits
 	while (av[++i])
-	{
-		vv = ft_split(av[i], ' ');
-		if (!vv)
-			return (NULL);
-		j = 0;
-		while (vv[j])
-		{
-			total_count++;
-			j++;
-		}
-		free_split(vv);
-	}
-	// copying the splits to a new double arr
-	all_val = (char **)malloc(sizeof(char *) * (total_count + 1));
+		total_count += count_words(av[i], ' ');
+	all_val = malloc(sizeof(char *) * (total_count + 1));
 	if (!all_val)
 		return (NULL);
 	i = 0;
 	all_i = 0;
 	while (av[++i])
 	{
-		vv = ft_split(av[i], ' ');
-		if (!vv)
-			return (free_split(all_val), NULL);
+		vessel = ft_split(av[i], ' ');
+		if (!vessel)
+			return (free(all_val), NULL);
 		j = 0;
-		while (vv[j])
+		while (vessel[j])
 		{
-			all_val[all_i] = ft_strdup(vv[j]);
+			all_val[all_i] = ft_strdup(vessel[j]);
 			if (!all_val[all_i])
-				return (free_split(vv), free_split(all_val), NULL);
-			all_i++;
+				return (free_split(vessel), free_split(all_val), NULL);
 			j++;
+			all_i++;
 		}
-		free_split(vv);
+		free_split(vessel);
 	}
 	all_val[all_i] = NULL;
-	// checking for errors
-	i = 0;
-	while (all_val[i])
+	all_i = 0;
+	while (all_val[all_i])
 	{
-		if (is_invalid_num(all_val[i]))
+		if (is_invalid_num(all_val[all_i]))
 			return (free_split(all_val), NULL);
-		i++;
+		all_i++;
 	}
-	if (check_dup(all_val))
+	if (is_dup(all_val))
 		return (free_split(all_val), NULL);
 	return (all_val);
 }

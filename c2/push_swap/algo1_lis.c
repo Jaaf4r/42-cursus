@@ -2,148 +2,82 @@
 
 int	is_sorted(t_node *stack)
 {
-	t_node	*curr;
-
-	if (!stack || !stack->next)
-		return (1);
-
-	curr = stack;
-	while (curr->next)
+	if (stack && stack->next)
 	{
-		if (curr->value > curr->next->value)
-			return (0);
-		curr = curr->next;
+		while (stack->next)
+		{
+			if (stack->value > stack->next->value)
+				return (0);
+			stack = stack->next;
+		}
 	}
 	return (1);
 }
 
-int	*get_lis(t_node *stack_a, int *lis_length)
+int	*find_lis(t_node *stack, int *length)
 {
-	if (!stack_a)
-		return (NULL);
+	int	i;
+	int	j;
+	int	stack_size;
+	int	*lis_arr;
+	int	*lis_length;
+	int	*backtrack;
 
-	t_node	*tmp = stack_a;
-	int		n = ft_lstsize(stack_a);
-	int		*arr = malloc(sizeof(int) * n);
-	int		*length = malloc(sizeof(int) * n);
-	int		*subs = malloc(sizeof(int) * n);
-	if (!arr || !length || !subs)
+	stack_size = ft_lstsize(stack);
+	lis_arr = malloc(sizeof(int) * stack_size);
+	lis_length = malloc(sizeof(int) * stack_size);
+	backtrack = malloc(sizeof(int) * stack_size);
+	if (!lis_arr)
 		return (NULL);
+	else if (!lis_length)
+		return (free(lis_arr), NULL);
+	else if (!backtrack)
+		return (free(lis_arr), free(lis_length), NULL);
 
-	for (int i = 0; i < n; i++)
+	i = 0;
+	while (i < stack_size)
 	{
-		arr[i] = tmp->value;
-		length[i] = 1;
-		subs[i] = -1;
-		tmp = tmp->next;
+		lis_arr[i] = stack->value;
+		lis_length[i] = 1;
+		backtrack[i] = -1;
+		i++;
+		stack = stack->next;
 	}
-
-	int	i = 1;
-	while (i < n)
+	*length = lis_length[0];
+	int	backtrack_i = 0;
+	i = 1;
+	while (i < stack_size)
 	{
-		for (int j = 0; j < i; j++)
+		j = 0;
+		while (j < i)
 		{
-			if (arr[i] > arr[j] && length[i] < length[j] + 1)
+			if (lis_arr[i] > lis_arr[j] && lis_length[i] < lis_length[j] + 1)
 			{
-				length[i] = length[j] + 1;
-				subs[i] = j;
+				lis_length[i] = lis_length[j] + 1;
+				backtrack[i] = j;
 			}
+			j++;
 		}
-		i++;
-	}
-	int	maxlength = 0;
-	int	maxIndx = 0;
-	i = 0; 
-	while (i < n)
-	{
-		if (maxlength < length[i])
+		if (*length < lis_length[i])
 		{
-			maxlength = length[i];
-			maxIndx = i;
+			*length = lis_length[i];
+			backtrack_i = i;
 		}
 		i++;
 	}
-
-	int	*seq = malloc(sizeof(int) * maxlength);
+	int	seq_i = *length - 1;
+	int	*seq = malloc(sizeof(int) * backtrack_i);
 	if (!seq)
-		return (NULL);
-	int	seq_index = maxlength - 1;
-	int	subs_backtrack = maxIndx;
-	while (subs_backtrack != -1)
+		return (free(lis_arr), free(lis_length), free(backtrack), NULL);
+	while (backtrack_i != -1)
 	{
-		seq[seq_index--] = arr[subs_backtrack];
-		subs_backtrack = subs[subs_backtrack];
+		seq[seq_i--] = lis_arr[backtrack_i];
+		backtrack_i = backtrack[backtrack_i];
 	}
-	free(arr);
-	free(subs);
-	free(length);
-	*lis_length = maxlength;
+	free(lis_arr);
+	free(lis_length);
+	free(backtrack);
 	return (seq);
 }
 
-int	is_lis(int value, int *lis, int length)
-{
-	for (int i = 0; i < length; i++)
-	{
-		if (lis[i] == value)
-			return (1);
-	}
-	return (0);
-}
 
-int	find_pivot(t_node *stack_a)
-{
-	int		n = ft_lstsize(stack_a);
-	int		*arr = malloc(sizeof(int) * n);
-	if (!arr)
-		return (0);
-
-	t_node	*tmp = stack_a;
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = tmp->value;
-		tmp = tmp->next;
-	}
-	bubble_sort(arr, n);
-	int	pivot = arr[n / 2];
-	free(arr);
-	return (pivot);
-}
-
-void	bubble_sort(int	*arr, int n)
-{
-	for (int i = 0; i < n - 1; i++)
-	{
-		for (int j = 0; j < n - i - 1; j++)
-		{
-			if (arr[j] < arr[j + 1])
-			{
-				int	tmp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = tmp;
-			}
-		}
-	}
-}
-
-void	push_nonlis(t_node **stack_a, t_node **stack_b, int *lis, int lis_length)
-{
-	int	pivot = find_pivot(*stack_a);
-	int	size = ft_lstsize(*stack_a);
-
-	while (size--)
-	{
-		if (is_lis((*stack_a)->value, lis, lis_length))
-			ra(stack_a);
-		else
-		{
-			if ((*stack_a)->value > pivot)
-				pb(stack_a, stack_b);
-			else
-			{
-				pb(stack_a, stack_b);
-				rrb(stack_b);
-			}
-		}
-	}
-}

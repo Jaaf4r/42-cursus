@@ -1,38 +1,36 @@
 #include "ps.h"
 
-static int	count_words(const char *s, char c)
+int	count_words(char *s, char c)
 {
-	int	i;
 	int	count;
 
-	i = 0;
 	count = 0;
-	while (s[i])
+	while (*s)
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i])
+		while (*s && *s == c)
+			s++;
+		if (*s)
 			count++;
-		while (s[i] && s[i] != c)
-			i++;
+		while (*s && *s != c)
+			s++;
 	}
 	return (count);
 }
 
-static char	*malloc_words(const char *s, char c)
+static char	*malloc_words(char *s, char c)
 {
 	int		i;
-	int		wordlen;
+	int		c_len;
 	char	*word;
 
-	wordlen = 0;
-	while (s[wordlen] && s[wordlen] != c)
-		wordlen++;
-	word = (char *)malloc((wordlen + 1) * sizeof(char));
+	c_len = 0;
+	while (s[c_len] && s[c_len] != c)
+		c_len++;
+	word = malloc(sizeof(char) * (c_len + 1));
 	if (!word)
 		return (NULL);
 	i = 0;
-	while (i < wordlen)
+	while (i < c_len)
 	{
 		word[i] = s[i];
 		i++;
@@ -41,7 +39,7 @@ static char	*malloc_words(const char *s, char c)
 	return (word);
 }
 
-static char	**ft_split_helper(char const *s, char c, char **arr, int *i)
+static char	**ft_split_helper(char *s, char c, int *i, char **sp)
 {
 	while (*s)
 	{
@@ -49,12 +47,12 @@ static char	**ft_split_helper(char const *s, char c, char **arr, int *i)
 			s++;
 		if (*s)
 		{
-			arr[*i] = malloc_words(s, c);
-			if (!arr[*i])
+			sp[*i] = malloc_words(s, c);
+			if (!sp[*i])
 			{
 				while (*i > 0)
-					free(arr[--(*i)]);
-				free(arr);
+					free(sp[--(*i)]);
+				free(sp);
 				return (NULL);
 			}
 			(*i)++;
@@ -62,23 +60,20 @@ static char	**ft_split_helper(char const *s, char c, char **arr, int *i)
 		while (*s && *s != c)
 			s++;
 	}
-	return (arr);
+	return (sp);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
+	char	**sp;
+	int		size = count_words(s, c);
 	int		i;
-	char	**arr;
-	int		wordcount;
 
-	if (!s)
-		return (NULL);
-	wordcount = count_words(s, c);
-	arr = (char **)malloc(sizeof(char *) * (wordcount + 1));
-	if (!arr)
+	sp = malloc(sizeof(char *) * (size + 1));
+	if (!sp)
 		return (NULL);
 	i = 0;
-	arr = ft_split_helper(s, c, arr, &i);
-	arr[i] = NULL;
-	return (arr);
+	sp = ft_split_helper(s, c, &i, sp);
+	sp[i] = NULL;
+	return (sp);
 }
