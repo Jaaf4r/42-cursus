@@ -27,14 +27,13 @@ int	main(int ac, char **av)
 		{
 			printf("Needs Sorting\n");
 			print_stack(stack_a);
-			// printf("Longest Increasing Subsequence:\n");
-			// int	length;
-			// int	*seq = find_lis(stack_a, &length);
-			// for (int i = 0; i < length; i++)
-			// {
-			// 	printf("%d ", seq[i]);
-			// }
-			// printf("\n");
+			int	*sorted_arr = get_non_lis(stack_a);
+			int	len = ft_lstsize(stack_a);
+			for (int i = 0; i < len; i++)
+			{
+				printf("%d ", sorted_arr[i]);
+			}
+			printf("\n");
 			
 		}
 		else
