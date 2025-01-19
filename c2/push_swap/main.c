@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 			t_node	*new_node = create_node(ft_atoi(all_val[i]));
 			if (!new_node)
 				return (free_split(all_val), 1);
-			ft_lstadd_front(&stack_a, new_node);
+			ft_lstadd_back(&stack_a, new_node);
 			i++;
 		}
 
@@ -27,13 +27,10 @@ int	main(int ac, char **av)
 		{
 			printf("Needs Sorting\n");
 			print_stack(stack_a);
-			int	*sorted_arr = get_non_lis(stack_a);
-			int	len = ft_lstsize(stack_a);
-			for (int i = 0; i < len; i++)
-			{
-				printf("%d ", sorted_arr[i]);
-			}
-			printf("\n");
+
+			pushNonLisTo_stack_b(&stack_a, &stack_b);
+			print_stack(stack_a);
+			print_stack(stack_b);
 			
 		}
 		else

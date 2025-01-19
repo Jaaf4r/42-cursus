@@ -12,12 +12,21 @@ t_node	*create_node(int value)
 	return (node);
 }
 
-void	ft_lstadd_front(t_node **lst, t_node *node)
+void	ft_lstadd_back(t_node **lst, t_node *node)
 {
+	t_node	*curr;
+
 	if (!lst || !node)
 		return;
-	node->next = *lst;
-	*lst = node;
+	if (*lst)
+	{
+		curr = *lst;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = node;
+	}
+	else
+		*lst = node;
 }
 
 void	free_stack(t_node *stack)

@@ -26,7 +26,7 @@ char	**parse_input(char **av);
 
 /* LINKEDLIST FUNCTIONS */
 t_node	*create_node(int value);
-void	ft_lstadd_front(t_node **lst, t_node *node);
+void	ft_lstadd_back(t_node **lst, t_node *node);
 void	free_stack(t_node *stack);
 int		ft_lstsize(t_node *stack);
 
@@ -50,7 +50,10 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 int		is_sorted(t_node *stack);
 int		*find_lis(t_node *stack, int *length);
 void	bubble_sort(int *arr, int size);
-int		*get_non_lis(t_node *stack_a);
+int		find_pivot(int *arr, int size);
+int		get_non_lis(t_node *stack_a);
+void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
+
 
 
 #endif
