@@ -65,7 +65,7 @@ int	*find_lis(t_node *stack_a, int *length)
 		i++;
 	}
 	int	seq_i = *length - 1;
-	int	*seq = malloc(sizeof(int) * backtrack_i);
+	int	*seq = malloc(sizeof(int) * (*length));
 	if (!seq)
 		return (free(arr), free(lis_length), free(backtrack), NULL);
 	while (backtrack_i != -1)
@@ -77,29 +77,6 @@ int	*find_lis(t_node *stack_a, int *length)
 	free(lis_length);
 	free(backtrack);
 	return (seq);
-}
-
-void	bubble_sort(int *arr, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size - i - 1)
-		{
-			if (arr[j] > arr[j + 1])
-			{
-				int	tmp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
 }
 
 int	find_pivot(int *arr, int size)
@@ -134,7 +111,7 @@ int	get_non_lis(t_node *stack_a)
 		i++;
 		stack_a = stack_a->next;
 	}
-	bubble_sort(sorted_arr, stack_size);
+	quickSort(sorted_arr, 0, stack_size);
 	pivot = find_pivot(sorted_arr, stack_size);
 	free(sorted_arr);
 	return (pivot);
@@ -148,17 +125,31 @@ void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
 	int		pivot;
 	int		length;
 	t_node	*curr;
-	int		seq_i;
 
-	curr = *stack_a;
 	seq = find_lis(*stack_a, &length);
-	pivot = get_non_lis(curr);
+	pivot = get_non_lis(*stack_a);
+	if (!seq)
+		return;
 	i = 0;
-	seq_i = 0;
-	stack_size = ft_lstsize(curr);
+	stack_size = ft_lstsize(*stack_a);
 	while (i < stack_size)
 	{
-		while (seq_i < length - 1)
+		curr = *stack_a;
+		int	is_lis = 0;
+		int	j = 0;
+		while (j < length)
+		{
+			if (curr->value == seq[j])
+			{
+				is_lis = 1;
+				break;
+			}
+			j++;
+		}
+
+		if (is_lis)
+			ra(stack_a);
+		else
 		{
 			if (curr->value > pivot)
 			{
@@ -171,9 +162,8 @@ void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
 				rrb(stack_b);
 				printf("pb + rrb\n");
 			}
-			seq_i++;
-		}	
-		curr = curr->next;
+		}
 		i++;
 	}
+	free(seq);
 }

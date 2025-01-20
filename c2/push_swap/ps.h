@@ -49,7 +49,7 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 /* ALGO FUNCTIONS */
 int		is_sorted(t_node *stack);
 int		*find_lis(t_node *stack, int *length);
-void	bubble_sort(int *arr, int size);
+void	quickSort(int *arr, int left, int right);
 int		find_pivot(int *arr, int size);
 int		get_non_lis(t_node *stack_a);
 void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
