@@ -53,6 +53,10 @@ void	quickSort(int *arr, int left, int right);
 int		find_pivot(int *arr, int size);
 int		get_non_lis(t_node *stack_a);
 void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
+int		insert_pos(t_node *stack_a, int value);
+int		calculate_rot_cost(int stack_size, int index);
+int		abs_val(int x);
+void	push_to_a(t_node **stack_a, t_node **stack_b);
 
 
 
