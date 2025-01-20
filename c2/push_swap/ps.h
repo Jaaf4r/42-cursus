@@ -2,9 +2,10 @@
 # define PS_H
 
 # include <stdlib.h>
-# include <stdarg.h>
-# include <stdio.h>
 # include <limits.h>
+# include <stdio.h>
+# include <stdbool.h>
+
 
 typedef struct s_node {
 	int				value;
@@ -16,11 +17,12 @@ int		count_words(char *s, char c);
 char	**ft_split(char *s, char c);
 void	free_split(char **ss);
 char	*ft_strdup(char *s);
-long	ft_atoi(char *s);
+bool	ft_atoi(char *s, long *total);
 int		ft_strcmp(char *s1, char *s2);
 
 /* INPUT PARSING */
 int		is_invalid_num(char *s);
+char	*normlize_num(char *s);
 int		is_dup(char **all_val);
 char	**parse_input(char **av);
 
@@ -57,6 +59,10 @@ int		insert_pos(t_node *stack_a, int value);
 int		calculate_rot_cost(int stack_size, int index);
 int		abs_val(int x);
 void	push_to_a(t_node **stack_a, t_node **stack_b);
+
+int		find_min_pos(t_node *stack_a);
+int		calculate_best_rot(int stack_size, int min_pos);
+void	rotate_stack_a(t_node **stack_a);
 
 
 

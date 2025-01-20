@@ -4,6 +4,7 @@ int	is_invalid_num(char *s)
 {
 	long	res;
 	char	*tmp;
+	char	*normalized;
 
 	if (!s || !*s)
 		return (1);
@@ -18,13 +19,16 @@ int	is_invalid_num(char *s)
 			return (1);
 		s++;
 	}
-	res = ft_atoi(tmp);
+	normalized = normlize_num(tmp);
+	if (!normalized)
+		return (1);
+	ft_atoi(normalized, &res);
 	if (res > INT_MAX || res < INT_MIN)
 		return (1);
 	return (0);
 }
 
-static char	*normlize_num(char *s)
+char	*normlize_num(char *s)
 {
 	while (*s == '0' && *(s + 1) != '\0')
 		s++;

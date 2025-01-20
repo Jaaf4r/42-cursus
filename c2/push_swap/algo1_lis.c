@@ -105,11 +105,12 @@ int	get_non_lis(t_node *stack_a)
 	if (!sorted_arr)
 		return (0);
 	i = 0;
+	t_node	*tmp = stack_a;
 	while (i < stack_size)
 	{
-		sorted_arr[i] = stack_a->value;
+		sorted_arr[i] = tmp->value;
 		i++;
-		stack_a = stack_a->next;
+		tmp = tmp->next;
 	}
 	quickSort(sorted_arr, 0, stack_size);
 	pivot = find_pivot(sorted_arr, stack_size);

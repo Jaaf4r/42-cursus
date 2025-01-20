@@ -6,6 +6,7 @@ int	main(int ac, char **av)
 	int		i;
 	t_node	*stack_a = NULL;
 	t_node	*stack_b = NULL;
+	long	value;
 
 	if (ac < 2)
 		return (1);
@@ -17,7 +18,9 @@ int	main(int ac, char **av)
 	i = 0;
 	while (all_val[i])
 	{
-		ft_lstadd_back(&stack_a, create_node(ft_atoi(all_val[i])));
+		if (!ft_atoi(all_val[i], &value))
+			return (free_split(all_val), free_stack(stack_a), 1);
+		ft_lstadd_back(&stack_a, create_node(value));
 		i++;
 	}
 	free_split(all_val);
@@ -33,6 +36,11 @@ int	main(int ac, char **av)
 
 		print_stack(stack_a);
 		print_stack(stack_b);
+
+		printf("THE END\n\n\n");
+		rotate_stack_a(&stack_a);
+		print_stack(stack_a);
+		printf("\n");
 		
 	}
 	else

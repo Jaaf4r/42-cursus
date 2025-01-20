@@ -53,12 +53,14 @@ static int	ft_space_sign(const char *str, int *i)
 	return (sign);
 }
 
-long	ft_atoi(char *s)
+bool	ft_atoi(char *s, long *total)
 {
 	int		i;
     long	res;
     int		sign;
 
+	if (!s)
+		return (false);
 	res = 0;
 	i = 0;
 	sign = ft_space_sign(s, &i);
@@ -67,14 +69,16 @@ long	ft_atoi(char *s)
         if (res > (LONG_MAX - (s[i] - '0')) / 10)
         {
             if (sign == 1)
-                return LONG_MAX;
-            else
-                return LONG_MIN;
-        }
+				*total = LONG_MAX;
+			else
+				*total = LONG_MIN;
+			return (false);
+		}
         res = res * 10 + (s[i] - '0');
         i++;
     }
-    return (res * sign);
+	*total = res * sign;
+    return (true);
 }
 
 int	ft_strcmp(char *s1, char *s2)
