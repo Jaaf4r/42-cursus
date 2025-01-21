@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 void	rotate_stack_a(t_node **stack_a)
 {

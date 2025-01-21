@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 char    **parse_input(char **av)
 {

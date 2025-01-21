@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 int	is_sorted(t_node *stack)
 {

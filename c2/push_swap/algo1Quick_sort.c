@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 static void	swwap(int *a, int *b)
 {

@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 int	insert_pos(t_node *stack_a, int value)
 {

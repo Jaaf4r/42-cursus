@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 int	count_words(char *s, char c)
 {

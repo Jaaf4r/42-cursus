@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 void	ra(t_node **stack_a)
 {

@@ -1,4 +1,4 @@
-#include "ps.h"
+#include "push_swap.h"
 
 t_node	*create_node(int value)
 {
