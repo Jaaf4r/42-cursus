@@ -2,38 +2,52 @@
 
 int	insert_pos(t_node *stack_a, int value)
 {
-	int		pos = 0;
-	t_node	*curr = stack_a;
-	t_node	*first = stack_a;
+	t_node	*current = stack_a;
+	int		position = 0;
 	int		min_pos = 0;
-	int		min_val = first->value;
+	int		min_value = INT_MAX;
+	int		max_value = INT_MIN;
 
-	while (curr->next)
+	// Find min and max values and min position in stack_a
+	current = stack_a;
+	position = 0;
+	while (current)
 	{
-		if (curr->next->value < min_val)
+		if (current->value < min_value)
 		{
-			min_val = curr->next->value;
-			min_pos = pos + 1;
+			min_value = current->value;
+			min_pos = position;
 		}
-		curr = curr->next;
-		pos++;
+		if (current->value > max_value)
+			max_value = current->value;
+		current = current->next;
+		position++;
 	}
 
-	pos = 0;
-	curr = stack_a;
-	while (curr->next)
+	// If value is smaller than min or larger than max,
+	// it should go right before the minimum value
+	if (value < min_value || value > max_value)
+		return (min_pos);
+
+	// Find the correct position between two numbers
+	current = stack_a;
+	position = 0;
+	t_node	*next = current->next;
+	
+	while (next)
 	{
-		if ((curr->value < value && value < curr->next->value) ||
-			(curr->value < value && curr->next->value < curr->value) ||
-			(value < curr->next->value && curr->next->value < curr->value))
-		{
-			return (pos + 1);
-		}
-		curr = curr->next;
-		pos++;
+		if (current->value < value && value < next->value)
+			return (position + 1);
+		current = current->next;
+		next = next->next;
+		position++;
 	}
 
-	return (min_pos);
+	// If we haven't found a position yet, check if it fits between the last and first element
+	if (stack_a->value > value && current->value < value)
+		return (0);
+		
+	return (position + 1);
 }
 
 int	calculate_rot_cost(int stack_size, int index)
@@ -48,6 +62,13 @@ int	abs_val(int x)
 	if (x < 0)
 		return (-x);
 	return (x);
+}
+
+static int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
 
 void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves)
@@ -67,7 +88,12 @@ void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves)
 			int pos_in_a = insert_pos(*stack_a, curr_b->value);
 			int cost_a = calculate_rot_cost(size_a, pos_in_a);
 			int cost_b = calculate_rot_cost(size_b, index);
-			int total_cost = abs_val(cost_a) + abs_val(cost_b);
+
+			int	total_cost;
+            if ((cost_a > 0 && cost_b > 0) || (cost_a < 0 && cost_b < 0))
+                total_cost = max(abs_val(cost_a), abs_val(cost_b));
+            else
+                total_cost = abs_val(cost_a) + abs_val(cost_b);
 
 			if (total_cost < best_cost)
 			{
@@ -78,15 +104,6 @@ void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves)
 			curr_b = curr_b->next;
 			index++;
 		}
-
-		printf("before starting:\n");
-		printf("stack a:\n");
-		print_stack(*stack_a);
-		printf("stack b:\n");
-		print_stack(*stack_b);
-		printf("best a position : %d\n", best_a_pos);
-		printf("best b position : %d\n", best_b_pos);
-		printf("after\n");
 
 		while (best_a_pos > 0 && best_b_pos > 0)
 		{

@@ -41,13 +41,20 @@ int	main(int ac, char **av)
 
 		push_to_a(&stack_a, &stack_b, &total_moves);
 
-		print_stack(stack_a);
-		print_stack(stack_b);
+		// print_stack(stack_a);
+		// print_stack(stack_b);
 
-		printf("THE END\n\n\n");
+		// printf("THE END\n\n\n");
 		rotate_stack_a(&stack_a, &total_moves);
+		printf("stack_a:\n");
 		print_stack(stack_a);
 		printf("Total number of moves is: %d\n", total_moves);
+		if (is_sorted(stack_a))
+		{
+			printf("******************\n*");
+			printf("    VICTORY     *\n");
+			printf("******************\n");
+		}
 
 	}
 	else

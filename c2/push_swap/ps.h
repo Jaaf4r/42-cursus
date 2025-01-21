@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/21 17:17:41 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/21 17:25:06 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PS_H
 # define PS_H
 
@@ -5,7 +17,6 @@
 # include <limits.h>
 # include <stdio.h>
 # include <stdbool.h>
-
 
 typedef struct s_node {
 	int				value;
@@ -62,6 +73,5 @@ void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves);
 
 void	rotate_stack_a(t_node **stack_a, int *total_moves);
 int		is_reversed(t_node *stack_a);
-
 
 #endif

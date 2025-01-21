@@ -4,6 +4,7 @@ void    print_stack(t_node *stack)
 {
     if (stack)
     {
+        printf("==");
         while (stack->next)
         {
             printf("%d -> ", stack->value);
