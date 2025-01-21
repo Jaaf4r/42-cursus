@@ -1,5 +1,18 @@
 #include "ps.h"
 
+int	is_empty_arg(char *s)
+{
+	if (!s)
+		return (1);
+	while (*s)
+	{
+		if (*s != ' ' && *s != '\t')
+			return (0);
+		s++;
+	}
+	return (1);
+}
+
 int	is_invalid_num(char *s)
 {
 	long	res;
@@ -23,6 +36,7 @@ int	is_invalid_num(char *s)
 	if (!normalized)
 		return (1);
 	ft_atoi(normalized, &res);
+	free(normalized);
 	if (res > INT_MAX || res < INT_MIN)
 		return (1);
 	return (0);
@@ -47,9 +61,8 @@ int	is_dup(char **all_val)
 		norm_i = normlize_num(all_val[i]);
 		if (!norm_i)
 			return (1);
+		free(all_val[i]);
 		all_val[i] = norm_i;
-		norm_i = NULL;
-		free(norm_i);
 		i++;
 	}
 	i = 0;

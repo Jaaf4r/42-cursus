@@ -30,9 +30,11 @@ static int	partition(int arr[], int left, int right)
 
 void	quickSort(int *arr, int left, int right)
 {
+	int	part_i;
+
 	if (left < right)
 	{
-		int part_i = partition(arr, left, right);
+		part_i = partition(arr, left, right);
 
 		quickSort(arr, left, part_i - 1);
 		quickSort(arr, part_i + 1, right);

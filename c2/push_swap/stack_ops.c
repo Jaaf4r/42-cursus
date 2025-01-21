@@ -2,9 +2,11 @@
 
 void	sa(t_node **stack_a)
 {
-	t_node	*first = NULL;
-	t_node	*second = NULL;
+	t_node	*first;
+	t_node	*second;
 
+	first = NULL;
+	second = NULL;
 	if (stack_a && (*stack_a)->next)
 	{
 		first = *stack_a;
@@ -17,9 +19,11 @@ void	sa(t_node **stack_a)
 
 void	sb(t_node **stack_b)
 {
-	t_node	*first = NULL;
-	t_node	*second = NULL;
+	t_node	*first;
+	t_node	*second;
 
+	first = NULL;
+	second = NULL;
 	if (*stack_b && (*stack_b)->next)
 	{
 		first = *stack_b;
@@ -38,9 +42,11 @@ void	ss(t_node **stack_a, t_node **stack_b)
 
 void	pa(t_node **stack_a, t_node **stack_b)
 {
+	t_node	*first;
+
 	if (*stack_b)
 	{
-		t_node	*first = *stack_b;
+		first = *stack_b;
 		(*stack_b) = (*stack_b)->next;
 		first->next = *stack_a;
 		*stack_a = first;
@@ -49,9 +55,11 @@ void	pa(t_node **stack_a, t_node **stack_b)
 
 void	pb(t_node **stack_a, t_node **stack_b)
 {
+	t_node	*first;
+
 	if (*stack_a)
 	{
-		t_node	*first = *stack_a;
+		first = *stack_a;
 		*stack_a = (*stack_a)->next;
 		first->next = *stack_b;
 		*stack_b = first;

@@ -28,7 +28,7 @@ char    **parse_input(char **av)
 		{
 			all_val[all_i] = ft_strdup(vessel[j]);
 			if (!all_val[all_i])
-				return (free_split(vessel), free_split(all_val), NULL);
+				return (free_split(vessel), free_all(all_val, all_i), free(all_val), NULL);
 			j++;
 			all_i++;
 		}
@@ -38,11 +38,11 @@ char    **parse_input(char **av)
 	all_i = 0;
 	while (all_val[all_i])
 	{
-		if (is_invalid_num(all_val[all_i]))
-			return (printf("Error\n"), free_split(all_val), NULL);
+		if (is_empty_arg(all_val[all_i]) || is_invalid_num(all_val[all_i]))
+			return (free_split(all_val), NULL);
 		all_i++;
 	}
 	if (is_dup(all_val))
-		return (printf("Error\n"), free_split(all_val), NULL);
+		return (free_split(all_val), NULL);
 	return (all_val);
 }

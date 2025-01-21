@@ -1,6 +1,6 @@
 #include "ps.h"
 
-void	rotate_stack_a(t_node **stack_a, int *total_moves)
+void	rotate_stack_a(t_node **stack_a)
 {
 	t_node	*curr;
 	int		smallest_pos;
@@ -29,14 +29,12 @@ void	rotate_stack_a(t_node **stack_a, int *total_moves)
 	{
 		ra(stack_a);
 		cost--;
-		printf("ra\n");
-		(*total_moves)++;
+		write(1, "ra\n", 3);
 	}
 	while (cost < 0)
 	{
 		rra(stack_a);
 		cost++;
-		printf("rra\n");
-		(*total_moves)++;
+		write(1, "rra\n", 4);
 	}
 }

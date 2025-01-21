@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 17:17:41 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/21 17:25:06 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/21 23:39:03 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <limits.h>
-# include <stdio.h>
+# include <unistd.h>
 # include <stdbool.h>
 
 typedef struct s_node {
@@ -27,11 +27,13 @@ typedef struct s_node {
 int		count_words(char *s, char c);
 char	**ft_split(char *s, char c);
 void	free_split(char **ss);
+void	free_all(char **arr, int count);
 char	*ft_strdup(char *s);
 bool	ft_atoi(char *s, long *total);
 int		ft_strcmp(char *s1, char *s2);
 
 /* INPUT PARSING */
+int		is_empty_arg(char *s);
 int		is_invalid_num(char *s);
 char	*normlize_num(char *s);
 int		is_dup(char **all_val);
@@ -65,13 +67,12 @@ int		*find_lis(t_node *stack, int *length);
 void	quickSort(int *arr, int left, int right);
 int		find_pivot(int *arr, int size);
 int		get_non_lis(t_node *stack_a);
-void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b, int *total_moves);
+void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
 int		insert_pos(t_node *stack_a, int value);
 int		calculate_rot_cost(int stack_size, int index);
 int		abs_val(int x);
-void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves);
-
-void	rotate_stack_a(t_node **stack_a, int *total_moves);
+void	push_to_a(t_node **stack_a, t_node **stack_b);
+void	rotate_stack_a(t_node **stack_a);
 int		is_reversed(t_node *stack_a);
 
 #endif

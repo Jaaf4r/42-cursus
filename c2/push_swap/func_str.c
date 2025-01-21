@@ -25,16 +25,29 @@ char    *ft_strdup(char *s)
 
 void    free_split(char **ss)
 {
-	char	**start = ss;
+	int	i;
 
 	if (!ss)
 		return;
-	while (*ss)
+	i = 0;
+	while (ss[i])
 	{
-		free(*ss);
-		ss++;
+		free(ss[i]);
+		i++;
 	}
-	free(start);
+	free(ss);
+}
+
+void	free_all(char **arr, int count)
+{
+    int	i;
+
+	i = 0;
+    while (i < count)
+    {
+        free(arr[i]);
+        i++;
+    }
 }
 
 static int	ft_space_sign(const char *str, int *i)

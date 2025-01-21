@@ -126,13 +126,13 @@ int	get_non_lis(t_node *stack_a)
 		i++;
 		tmp = tmp->next;
 	}
-	quickSort(sorted_arr, 0, stack_size);
+	quickSort(sorted_arr, 0, stack_size - 1);
 	pivot = find_pivot(sorted_arr, stack_size);
 	free(sorted_arr);
 	return (pivot);
 }
 
-void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b, int *total_moves)
+void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
 {
 	int		i;
 	int		stack_size;
@@ -169,16 +169,14 @@ void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b, int *total_moves)
 			if (curr->value > pivot)
 			{
 				pb(stack_a, stack_b);
-				printf("pb\n");
-				(*total_moves)++;
+				write(1, "pb\n", 3);
 			}
 			else
 			{
 				pb(stack_a, stack_b);
 				rrb(stack_b);
-				printf("pb\n");
-				printf("rrb\n");
-				(*total_moves) += 2;
+				write(1, "pb\n", 3);
+				write(1, "rrb\n", 4);
 			}
 		}
 		i++;
