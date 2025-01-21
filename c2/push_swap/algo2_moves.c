@@ -4,22 +4,36 @@ int	insert_pos(t_node *stack_a, int value)
 {
 	int		pos = 0;
 	t_node	*curr = stack_a;
-
-	if (value < stack_a->value)
-		return (0);
+	t_node	*first = stack_a;
+	int		min_pos = 0;
+	int		min_val = first->value;
 
 	while (curr->next)
 	{
-		if (curr->value < value && curr->next->value > value)
-			break;
+		if (curr->next->value < min_val)
+		{
+			min_val = curr->next->value;
+			min_pos = pos + 1;
+		}
 		curr = curr->next;
 		pos++;
 	}
 
-	if (curr->next == NULL && value > curr->value)
-		return (pos + 1);
+	pos = 0;
+	curr = stack_a;
+	while (curr->next)
+	{
+		if ((curr->value < value && value < curr->next->value) ||
+			(curr->value < value && curr->next->value < curr->value) ||
+			(value < curr->next->value && curr->next->value < curr->value))
+		{
+			return (pos + 1);
+		}
+		curr = curr->next;
+		pos++;
+	}
 
-	return (pos + 1);
+	return (min_pos);
 }
 
 int	calculate_rot_cost(int stack_size, int index)
@@ -36,7 +50,7 @@ int	abs_val(int x)
 	return (x);
 }
 
-void	push_to_a(t_node **stack_a, t_node **stack_b)
+void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves)
 {
 	while (*stack_b)
 	{
@@ -66,12 +80,13 @@ void	push_to_a(t_node **stack_a, t_node **stack_b)
 		}
 
 		printf("before starting:\n");
+		printf("stack a:\n");
 		print_stack(*stack_a);
+		printf("stack b:\n");
 		print_stack(*stack_b);
 		printf("best a position : %d\n", best_a_pos);
 		printf("best b position : %d\n", best_b_pos);
 		printf("after\n");
-
 
 		while (best_a_pos > 0 && best_b_pos > 0)
 		{
@@ -79,6 +94,7 @@ void	push_to_a(t_node **stack_a, t_node **stack_b)
 			best_a_pos--;
 			best_b_pos--;
 			printf("rr\n");
+			(*total_moves)++;
 		}
 		while (best_a_pos < 0 && best_b_pos < 0)
 		{
@@ -86,6 +102,7 @@ void	push_to_a(t_node **stack_a, t_node **stack_b)
 			best_a_pos++;
 			best_b_pos++;
 			printf("rrr\n");
+			(*total_moves)++;
 		}
 
 
@@ -94,12 +111,14 @@ void	push_to_a(t_node **stack_a, t_node **stack_b)
 			rb(stack_b);
 			best_b_pos--;
 			printf("rb\n");
+			(*total_moves)++;
 		}
 		while (best_b_pos < 0)
 		{
 			rrb(stack_b);
 			best_b_pos++;
 			printf("rrb\n");
+			(*total_moves)++;
 		}
 
 		while (best_a_pos > 0)
@@ -107,15 +126,18 @@ void	push_to_a(t_node **stack_a, t_node **stack_b)
 			ra(stack_a);
 			best_a_pos--;
 			printf("ra\n");
+			(*total_moves)++;
 		}
 		while (best_a_pos < 0)
 		{
 			rra(stack_a);
 			best_a_pos++;
 			printf("rra\n");
+			(*total_moves)++;
 		}
 
 		pa(stack_a, stack_b);
 		printf("pa\n");
+		(*total_moves)++;
 	}
 }

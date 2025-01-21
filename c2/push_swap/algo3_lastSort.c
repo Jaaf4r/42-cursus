@@ -1,57 +1,42 @@
 #include "ps.h"
 
-int find_min_pos(t_node *stack_a)
+void	rotate_stack_a(t_node **stack_a, int *total_moves)
 {
-	int min_val = INT_MAX;
-	int min_pos = 0;
-	int pos = 0;
-	t_node  *curr = stack_a;
+	t_node	*curr;
+	int		smallest_pos;
+	int		smallest_value;
+	int		index;
+	int		size;
+	int		cost;
 
+	curr = *stack_a;
+	smallest_pos = 0;
+	index = 0;
+	smallest_value = curr->value;
+	size = ft_lstsize(*stack_a);
 	while (curr)
 	{
-		if (curr->value < min_val)
+		if (curr->value < smallest_value)
 		{
-			min_val = curr->value;
-			min_pos = pos;
+			smallest_value = curr->value;
+			smallest_pos = index;
 		}
 		curr = curr->next;
-		pos++;
+		index++;
 	}
-	return (min_pos);
-}
-
-int calculate_best_rot(int stack_size, int min_pos)
-{
-	int ra_cost = min_pos;
-	int rra_cost = stack_size - min_pos;
-
-	if (ra_cost <= rra_cost)
-		return (ra_cost);
-	else
-		return (-rra_cost);
-}
-
-void    rotate_stack_a(t_node **stack_a)
-{
-	int	stack_size = ft_lstsize(*stack_a);
-	int	min_pos = find_min_pos(*stack_a);
-	int	best_rot = calculate_best_rot(stack_size, min_pos);
-
-	if (best_rot > 0)
+	cost = calculate_rot_cost(size, smallest_pos);
+	while (cost > 0)
 	{
-		while (best_rot-- > 0)
-		{
-			ra(stack_a);
-			printf("ra\n");
-		}
+		ra(stack_a);
+		cost--;
+		printf("ra\n");
+		(*total_moves)++;
 	}
-	else
+	while (cost < 0)
 	{
-		best_rot = -best_rot;
-		while (best_rot-- > 0)
-		{
-			rra(stack_a);
-			printf("rra\n");
-		}
+		rra(stack_a);
+		cost++;
+		printf("rra\n");
+		(*total_moves)++;
 	}
 }

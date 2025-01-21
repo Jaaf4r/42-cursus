@@ -14,6 +14,20 @@ int	is_sorted(t_node *stack)
 	return (1);
 }
 
+int	is_reversed(t_node *stack_a)
+{
+	if (stack_a && stack_a->value)
+	{
+		while (stack_a->next)
+		{
+			if (stack_a->value < stack_a->next->value)
+				return (0);
+			stack_a = stack_a->next;
+		}
+	}
+	return (1);
+}
+
 int	*find_lis(t_node *stack_a, int *length)
 {
 	int	i;
@@ -118,7 +132,7 @@ int	get_non_lis(t_node *stack_a)
 	return (pivot);
 }
 
-void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
+void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b, int *total_moves)
 {
 	int		i;
 	int		stack_size;
@@ -156,12 +170,15 @@ void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b)
 			{
 				pb(stack_a, stack_b);
 				printf("pb\n");
+				(*total_moves)++;
 			}
 			else
 			{
 				pb(stack_a, stack_b);
 				rrb(stack_b);
-				printf("pb + rrb\n");
+				printf("pb\n");
+				printf("rrb\n");
+				(*total_moves) += 2;
 			}
 		}
 		i++;

@@ -54,16 +54,14 @@ int		*find_lis(t_node *stack, int *length);
 void	quickSort(int *arr, int left, int right);
 int		find_pivot(int *arr, int size);
 int		get_non_lis(t_node *stack_a);
-void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
+void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b, int *total_moves);
 int		insert_pos(t_node *stack_a, int value);
 int		calculate_rot_cost(int stack_size, int index);
 int		abs_val(int x);
-void	push_to_a(t_node **stack_a, t_node **stack_b);
+void	push_to_a(t_node **stack_a, t_node **stack_b, int *total_moves);
 
-int		find_min_pos(t_node *stack_a);
-int		calculate_best_rot(int stack_size, int min_pos);
-void	rotate_stack_a(t_node **stack_a);
-
+void	rotate_stack_a(t_node **stack_a, int *total_moves);
+int		is_reversed(t_node *stack_a);
 
 
 #endif
