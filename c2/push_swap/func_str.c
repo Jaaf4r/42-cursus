@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_str.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 11:43:16 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/22 11:43:17 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-char    *ft_strdup(char *s)
+char	*ft_strdup(char *s)
 {
 	size_t	i;
 	char	*dst;
@@ -23,12 +35,12 @@ char    *ft_strdup(char *s)
 	return (dst);
 }
 
-void    free_split(char **ss)
+void	free_split(char **ss)
 {
 	int	i;
 
 	if (!ss)
-		return;
+		return ;
 	i = 0;
 	while (ss[i])
 	{
@@ -36,18 +48,6 @@ void    free_split(char **ss)
 		i++;
 	}
 	free(ss);
-}
-
-void	free_all(char **arr, int count)
-{
-    int	i;
-
-	i = 0;
-    while (i < count)
-    {
-        free(arr[i]);
-        i++;
-    }
 }
 
 static int	ft_space_sign(const char *str, int *i)
@@ -69,29 +69,29 @@ static int	ft_space_sign(const char *str, int *i)
 bool	ft_atoi(char *s, long *total)
 {
 	int		i;
-    long	res;
-    int		sign;
+	long	res;
+	int		sign;
 
 	if (!s)
 		return (false);
 	res = 0;
 	i = 0;
 	sign = ft_space_sign(s, &i);
-    while (s[i] >= '0' && s[i] <= '9')
-    {
-        if (res > (LONG_MAX - (s[i] - '0')) / 10)
-        {
-            if (sign == 1)
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		if (res > (LONG_MAX - (s[i] - '0')) / 10)
+		{
+			if (sign == 1)
 				*total = LONG_MAX;
 			else
 				*total = LONG_MIN;
 			return (false);
 		}
-        res = res * 10 + (s[i] - '0');
-        i++;
-    }
+		res = res * 10 + (s[i] - '0');
+		i++;
+	}
 	*total = res * sign;
-    return (true);
+	return (true);
 }
 
 int	ft_strcmp(char *s1, char *s2)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/22 11:57:01 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -11,21 +23,25 @@ typedef struct s_node {
 	struct s_node	*next;
 }	t_node;
 
-/* STRING FUNCTIONS */
-int		count_words(char *s, char c);
-char	**ft_split(char *s, char c);
-void	free_split(char **ss);
-void	free_all(char **arr, int count);
-char	*ft_strdup(char *s);
-bool	ft_atoi(char *s, long *total);
-int		ft_strcmp(char *s1, char *s2);
+/* just call this func in a main ^-^ */
+t_node	*valid_stack(char **av);
+void	former_main(int ac, char **av);
 
 /* INPUT PARSING */
 int		is_empty_arg(char *s);
 int		is_invalid_num(char *s);
 char	*normlize_num(char *s);
 int		is_dup(char **all_val);
+char	**fill_all_val(char **av, char **all_val);
 char	**parse_input(char **av);
+
+/* STRING FUNCTIONS */
+int		count_words(char *s, char c);
+char	**ft_split(char *s, char c);
+void	free_split(char **ss);
+char	*ft_strdup(char *s);
+bool	ft_atoi(char *s, long *total);
+int		ft_strcmp(char *s1, char *s2);
 
 /* LINKEDLIST FUNCTIONS */
 t_node	*create_node(int value);
@@ -54,7 +70,7 @@ int		is_sorted(t_node *stack);
 int		*find_lis(t_node *stack, int *length);
 void	quickSort(int *arr, int left, int right);
 int		find_pivot(int *arr, int size);
-int		get_non_lis(t_node *stack_a);
+int		get_stack_pivot(t_node *stack_a);
 void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
 int		insert_pos(t_node *stack_a, int value);
 int		calculate_rot_cost(int stack_size, int index);

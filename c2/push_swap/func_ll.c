@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   func_ll.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 11:38:09 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/22 11:38:10 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_node	*create_node(int value)
@@ -17,7 +29,7 @@ void	ft_lstadd_back(t_node **lst, t_node *node)
 	t_node	*curr;
 
 	if (!lst || !node)
-		return;
+		return ;
 	if (*lst)
 	{
 		curr = *lst;

@@ -1,76 +1,52 @@
 #include "push_swap.h"
 
-int	is_sorted(t_node *stack)
-{
-	if (stack && stack->next)
-	{
-		while (stack->next)
-		{
-			if (stack->value > stack->next->value)
-				return (0);
-			stack = stack->next;
-		}
-	}
-	return (1);
-}
-
-int	is_reversed(t_node *stack_a)
-{
-	if (stack_a && stack_a->value)
-	{
-		while (stack_a->next)
-		{
-			if (stack_a->value < stack_a->next->value)
-				return (0);
-			stack_a = stack_a->next;
-		}
-	}
-	return (1);
-}
-
-int	*find_lis(t_node *stack_a, int *length)
+static void	init_arrays(t_node *stack_a, int *arr, int *lis_len, int *backtrack)
 {
 	int	i;
-	int	j;
-	int	stack_size;
-	int	*arr;
-	int	*lis_length;
-	int	*backtrack;
 
-	stack_size = ft_lstsize(stack_a);
-	arr = malloc(sizeof(int) * stack_size);
-	lis_length = malloc(sizeof(int) * stack_size);
-	backtrack = malloc(sizeof(int) * stack_size);
-	if (!arr)
-		return (NULL);
-	else if (!lis_length)
-		return (free(arr), NULL);
-	else if (!backtrack)
-		return (free(arr), free(lis_length), NULL);
 	i = 0;
-	while (i < stack_size)
+	while (stack_a)
 	{
 		arr[i] = stack_a->value;
-		lis_length[i] = 1;
+		lis_len[i] = 1;
 		backtrack[i] = -1;
 		i++;
 		stack_a = stack_a->next;
 	}
-	*length = lis_length[0];
-	int	backtrack_i = 0;
+}
+
+static void	find_lis_sub(int *arr, int *lis_len, int *backtrack, int stack_size)
+{
+	int	backtrack_i;
+	int	i;
+	int	j;
+
+	backtrack_i = 0;
 	i = 1;
 	while (i < stack_size)
 	{
 		j = 0;
 		while (j < i)
 		{
-			if (arr[i] > arr[j] && lis_length[i] < lis_length[j] + 1)
+			if (arr[i] > arr[j] && lis_len[i] < lis_len[j] + 1)
 			{
-				lis_length[i] = lis_length[j] + 1;
+				lis_len[i] = lis_len[j] + 1;
 				backtrack[i] = j;
 			}
 			j++;
 		}
+		i++;
+	}
+}
+
+static void	update_length(int stack_size, int *length, int *lis_length, int *backtrack_i)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	while (i < stack_size)
+	{
 		if (*length < lis_length[i])
 		{
 			*length = lis_length[i];
@@ -78,19 +54,47 @@ int	*find_lis(t_node *stack_a, int *length)
 		}
 		i++;
 	}
-	int	seq_i = *length - 1;
-	int	*seq = malloc(sizeof(int) * (*length));
+}
+
+static int	*get_final_lis(int *arr, int *backtrack, int len, int backtrack_i)
+{
+	int	*seq;
+	int	seq_i;
+
+	seq = malloc(sizeof(int) * len);
 	if (!seq)
-		return (free(arr), free(lis_length), free(backtrack), NULL);
+		return (NULL);
+	seq_i = len - 1;
 	while (backtrack_i != -1)
 	{
 		seq[seq_i--] = arr[backtrack_i];
 		backtrack_i = backtrack[backtrack_i];
 	}
-	free(arr);
-	free(lis_length);
-	free(backtrack);
 	return (seq);
+}
+
+int	*find_lis(t_node *stack_a, int *length)
+{
+	int	stack_size;
+	int	*arr;
+	int	*lis_len;
+	int	*backtrack;
+	int	backtrack_i;
+	int	*seq;
+
+	stack_size = ft_lstsize(stack_a);
+	arr = malloc(sizeof(int) * stack_size);
+	lis_len = malloc(sizeof(int) * stack_size);
+	backtrack = malloc(sizeof(int) * stack_size);
+	if (!arr || !lis_len || !backtrack)
+		return (free(arr), free(lis_len), free(backtrack), NULL);
+	init_arrays(stack_a, arr, lis_len, backtrack);
+	get_lis_sub(arr, lis_len, backtrack, stack_size);
+	*length = lis_len[0];
+	backtrack_i = 0;
+	update_length(stack_size, length, lis_len, &backtrack_i);
+	seq = get_final_lis(arr, backtrack, *length, backtrack_i);
+	return (free(arr), free(lis_len), free(backtrack), seq);
 }
 
 int	find_pivot(int *arr, int size)
@@ -107,7 +111,7 @@ int	find_pivot(int *arr, int size)
 	return (pivot_num);
 }
 
-int	get_non_lis(t_node *stack_a)
+int	get_stack_pivot(t_node *stack_a)
 {
 	int	i;
 	int	stack_size;

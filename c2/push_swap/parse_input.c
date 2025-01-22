@@ -1,21 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 11:33:43 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/22 11:42:40 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-char    **parse_input(char **av)
+char	**fill_all_val(char **av, char **all_val)
 {
 	int		i;
 	int		j;
-	int		total_count;
 	char	**vessel;
-	char	**all_val;
 	int		all_i;
 
-	i = 0;
-	total_count = 0;
-	while (av[++i])
-		total_count += count_words(av[i], ' ');
-	all_val = malloc(sizeof(char *) * (total_count + 1));
-	if (!all_val)
-		return (NULL);
 	i = 0;
 	all_i = 0;
 	while (av[++i])
@@ -28,19 +31,35 @@ char    **parse_input(char **av)
 		{
 			all_val[all_i] = ft_strdup(vessel[j]);
 			if (!all_val[all_i])
-				return (free_split(vessel), free_all(all_val, all_i), free(all_val), NULL);
+				return (free_split(vessel), free_split(all_val), NULL);
 			j++;
 			all_i++;
 		}
 		free_split(vessel);
 	}
-	all_val[all_i] = NULL;
-	all_i = 0;
-	while (all_val[all_i])
+	return (all_val[all_i] = NULL, all_val);
+}
+
+char	**parse_input(char **av)
+{
+	int		i;
+	int		total_count;
+	char	**all_val;
+
+	i = 0;
+	total_count = 0;
+	while (av[++i])
+		total_count += count_words(av[i], ' ');
+	all_val = malloc(sizeof(char *) * (total_count + 1));
+	if (!all_val)
+		return (NULL);
+	all_val = fill_all_val(av, all_val);
+	i = 0;
+	while (all_val[i])
 	{
-		if (is_empty_arg(all_val[all_i]) || is_invalid_num(all_val[all_i]))
+		if (is_empty_arg(all_val[i]) || is_invalid_num(all_val[i]))
 			return (free_split(all_val), NULL);
-		all_i++;
+		i++;
 	}
 	if (is_dup(all_val))
 		return (free_split(all_val), NULL);
