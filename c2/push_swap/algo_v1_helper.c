@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:45:47 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/22 11:46:00 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:36:30 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,25 @@ int	is_reversed(t_node *stack_a)
 		}
 	}
 	return (1);
+}
+
+int	calculate_rot_cost(int stack_size, int index)
+{
+	if (index <= stack_size / 2)
+		return (index);
+	return (-(stack_size - index));
+}
+
+int	abs_val(int x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
+}
+
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }

@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 12:51:55 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:34:32 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ int		is_reversed(t_node *stack_a);
 
 int		*find_lis(t_node *stack, int *length);
 void	quickSort(int *arr, int left, int right);
-int		get_stack_pivot(t_node *stack_a);
-void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
+void	push_nonlis_to_stack_b(t_node **stack_a, t_node **stack_b);
+
 int		insert_pos(t_node *stack_a, int value);
 int		calculate_rot_cost(int stack_size, int index);
 int		abs_val(int x);
+int		max(int a, int b);
 void	push_to_a(t_node **stack_a, t_node **stack_b);
 void	rotate_stack_a(t_node **stack_a);
 

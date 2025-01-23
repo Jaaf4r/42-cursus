@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_v1_lis.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 16:30:19 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/23 16:30:20 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	init_arrays(t_node *stack_a, int *arr, int *lis_len, int *backtrack)
@@ -37,7 +49,8 @@ static void	find_lis_sub(int *arr, int *lis_len, int *backtrack, int stack_size)
 	}
 }
 
-static void	update_length(int stack_size, int *length, int *lis_length, int *backtrack_i)
+static void	update_length(int stack_size, int *length, int *lis_length
+, int *backtrack_i)
 {
 	int	i;
 
@@ -73,17 +86,17 @@ static int	*get_final_lis(int *arr, int *backtrack, int len, int backtrack_i)
 int	*find_lis(t_node *stack_a, int *length)
 {
 	int	stack_size;
-	int	*arr[3]; // combined arr, lis_length, and backtrack.. n9ss stora xd
+	int	*arr[3];
 	int	backtrack_i;
 	int	*seq;
 
 	stack_size = ft_lstsize(stack_a);
-	arr[0] = malloc(sizeof(int) * stack_size); // arr
-	arr[1] = malloc(sizeof(int) * stack_size); // lis_length
-	arr[2] = malloc(sizeof(int) * stack_size); // backtrack
+	arr[0] = malloc(sizeof(int) * stack_size);
+	arr[1] = malloc(sizeof(int) * stack_size);
+	arr[2] = malloc(sizeof(int) * stack_size);
 	if (!arr[0] || !arr[1] || !arr[2])
 		return (free(arr[0]), free(arr[1]), free(arr[2])
-		, arr[0] = NULL,  arr[1] = NULL, arr[2] = NULL, NULL);
+			, arr[0] = NULL, arr[1] = NULL, arr[2] = NULL, NULL);
 	init_arrays(stack_a, arr[0], arr[1], arr[2]);
 	find_lis_sub(arr[0], arr[1], arr[2], stack_size);
 	*length = arr[1][0];
@@ -91,5 +104,5 @@ int	*find_lis(t_node *stack_a, int *length)
 	update_length(stack_size, length, arr[1], &backtrack_i);
 	seq = get_final_lis(arr[0], arr[2], *length, backtrack_i);
 	return (free(arr[0]), free(arr[1]), free(arr[2])
-		, arr[0] = NULL,  arr[1] = NULL, arr[2] = NULL, seq);
+		, arr[0] = NULL, arr[1] = NULL, arr[2] = NULL, seq);
 }

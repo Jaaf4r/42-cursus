@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:59:27 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 12:03:15 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:35:01 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	former_main(int ac, char **av)
 			sa(&stack_a);
 			write(1, "sa\n", 3);
 		}
-		pushNonLisTo_stack_b(&stack_a, &stack_b);
+		push_nonlis_to_stack_b(&stack_a, &stack_b);
 		push_to_a(&stack_a, &stack_b);
 		rotate_stack_a(&stack_a);
 	}
