@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 19:15:23 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:51:21 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ typedef struct s_calc {
 	int	total_cost;
 }	t_calc;
 
-/* just call this func in a main ^-^ */
-t_node	*valid_stack(char **av);
-void	former_main(int ac, char **av);
+/* MAIN FUNCTION ^-^ */
+int	main(int ac, char **av);
 
 /* INPUT PARSING */
 int		is_empty_arg(char *s);
@@ -61,9 +60,6 @@ t_node	*create_node(int value);
 void	ft_lstadd_back(t_node **lst, t_node *node);
 void	free_stack(t_node *stack);
 int		ft_lstsize(t_node *stack);
-
-/* TESTING FUNCTIONS */
-void	print_stack(t_node *stack);
 
 /* STACK OPERATIONS */
 void	sa(t_node **stack_a);

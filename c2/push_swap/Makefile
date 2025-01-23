@@ -1,31 +1,31 @@
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
-SRC		=	former_main_xd.c parse_input.c ft_split.c func_str.c error_checks.c \
-			func_ll.c stack_ops.c stack_ops2.c stack_ops3.c \
+SRC		=	main.c parse_input.c ft_split.c func_str.c \
+			error_checks.c func_ll.c stack_ops.c stack_ops2.c stack_ops3.c \
 			algo_v1_lis.c algo_v1_helper.c algo_v2_nonlis.c \
 			algo_v2_quick_sort.c algo_v3_best_pos.c algo_v3_pushback_to_a.c \
-			algo3_lastSort.c funcs_for_testing.c \
+			algo3_lastSort.c \
 
-OBJ		= $(SRC:.c=.o)
-RM		= rm -f
-LIBC	= ar rcs
-NAME	= pushswap.a
+OBJ			= $(SRC:.c=.o)
+RM			= rm -f
+LIBC		= ar rcs
+PROGNAME	= push_swap
 
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJ)
-		$(LIBC) $(NAME) $(OBJ)
+$(PROGNAME) : $(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) -o $(PROGNAME)
 
-all: $(NAME)
+all: $(PROGNAME)
 
 clean:
 		$(RM) $(OBJ)
 
 fclean: clean
-		$(RM) $(NAME)
+		$(RM) $(LIBNAME) $(PROGNAME)
 
 re: fclean all
 
-.PHONY: all fclean fclean re
+.PHONY: all clean fclean re
