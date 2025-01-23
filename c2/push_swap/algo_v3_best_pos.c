@@ -1,33 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_v3_best_pos.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 18:03:01 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/23 18:03:02 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+
+int	smallest_or_largest(t_node *curr, int *min_val, int *max_val)
+{
+	int	min_pos;
+	int	pos;
+
+	min_pos = 0;
+	pos = 0;
+	while (curr)
+	{
+		if (curr->value < *min_val)
+		{
+			*min_val = curr->value;
+			min_pos = pos;
+		}
+		if (curr->value > *max_val)
+			*max_val = curr->value;
+		curr = curr->next;
+		pos++;
+	}
+	return (min_pos);
+}
 
 int	insert_pos(t_node *stack_a, int value)
 {
 	t_node	*curr;
 	int		pos;
-	int		min_pos = 0;
-	int		min_value = INT_MAX;
-	int		max_value = INT_MIN;
+	int		min_val;
+	int		max_val;
+	int		min_pos;
 
-	curr = stack_a;
-	pos = 0;
-	while (curr)
-	{
-		if (curr->value < min_value)
-		{
-			min_value = curr->value;
-			min_pos = pos;
-		}
-		if (curr->value > max_value)
-			max_value = curr->value;
-		curr = curr->next;
-		pos++;
-	}
-
-	if (value < min_value || value > max_value)
+	min_val = INT_MAX;
+	max_val = INT_MIN;
+	min_pos = smallest_or_largest(stack_a, &min_val, &max_val);
+	if (value < min_val || value > max_val)
 		return (min_pos);
-
-	curr = stack_a;
 	pos = 0;
+	curr = stack_a;
 	while (curr->next)
 	{
 		if (curr->value < value && value < curr->next->value)
@@ -35,9 +56,7 @@ int	insert_pos(t_node *stack_a, int value)
 		curr = curr->next;
 		pos++;
 	}
-
 	if (stack_a->value > value && curr->value < value)
 		return (0);
-
 	return (pos + 1);
 }

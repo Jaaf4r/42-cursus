@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_v2_quick_sort.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 19:13:52 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/23 19:21:27 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	swwap(int *a, int *b)
+static void	ft_swap(int *a, int *b)
 {
 	int	tmp;
 
@@ -11,32 +23,34 @@ static void	swwap(int *a, int *b)
 
 static int	partition(int arr[], int left, int right)
 {
-	int	pivot = arr[right];
-	int	i = left - 1;
-	int	j = left;
+	int	pivot;
+	int	i;
+	int	j;
 
+	pivot = arr[right];
+	i = left - 1;
+	j = left;
 	while (j < right)
 	{
 		if (arr[j] < pivot)
 		{
 			i++;
-			swwap(&arr[i], &arr[j]);
+			ft_swap(&arr[i], &arr[j]);
 		}
 		j++;
 	}
-	swwap(&arr[i + 1], &arr[right]);
+	ft_swap(&arr[i + 1], &arr[right]);
 	return (i + 1);
 }
 
-void	quickSort(int *arr, int left, int right)
+void	quick_sort(int *arr, int left, int right)
 {
 	int	part_i;
 
 	if (left < right)
 	{
 		part_i = partition(arr, left, right);
-
-		quickSort(arr, left, part_i - 1);
-		quickSort(arr, part_i + 1, right);
+		quick_sort(arr, left, part_i - 1);
+		quick_sort(arr, part_i + 1, right);
 	}
 }

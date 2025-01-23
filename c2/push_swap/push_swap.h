@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 16:34:32 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:15:23 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,18 @@ typedef struct s_node {
 	struct s_node	*next;
 }	t_node;
 
-typedef struct s_lis {
-	int	*lis_length;
-	int	*backtrack;
-	int	length;
-	int	backtrack_i;
-}	t_lis;
+typedef struct s_calc {
+	int	size_a;
+	int	size_b;
+	int	best_cost;
+	int	best_a_pos;
+	int	best_b_pos;
+	int	index;
+	int	pos_in_a;
+	int	cost_a;
+	int	cost_b;
+	int	total_cost;
+}	t_calc;
 
 /* just call this func in a main ^-^ */
 t_node	*valid_stack(char **av);
@@ -77,7 +83,7 @@ int		is_sorted(t_node *stack);
 int		is_reversed(t_node *stack_a);
 
 int		*find_lis(t_node *stack, int *length);
-void	quickSort(int *arr, int left, int right);
+void	quick_sort(int *arr, int left, int right);
 void	push_nonlis_to_stack_b(t_node **stack_a, t_node **stack_b);
 
 int		insert_pos(t_node *stack_a, int value);

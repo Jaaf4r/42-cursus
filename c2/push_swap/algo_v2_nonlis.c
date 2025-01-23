@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:21:53 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 16:34:22 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:20:38 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	get_stack_pivot(t_node *stack_a)
 		i++;
 		tmp = tmp->next;
 	}
-	quickSort(sorted_arr, 0, stack_size - 1);
+	quick_sort(sorted_arr, 0, stack_size - 1);
 	pivot = find_pivot(sorted_arr, stack_size);
 	free(sorted_arr);
 	return (pivot);
