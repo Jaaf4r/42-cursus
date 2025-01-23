@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:33:43 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/22 11:42:40 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:03:36 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ char	**fill_all_val(char **av, char **all_val)
 		{
 			all_val[all_i] = ft_strdup(vessel[j]);
 			if (!all_val[all_i])
-				return (free_split(vessel), free_split(all_val), NULL);
+				return (free_all(vessel), free_all(all_val), NULL);
 			j++;
 			all_i++;
 		}
-		free_split(vessel);
+		free_all(vessel);
 	}
 	return (all_val[all_i] = NULL, all_val);
 }
@@ -49,7 +49,11 @@ char	**parse_input(char **av)
 	i = 0;
 	total_count = 0;
 	while (av[++i])
+	{
+		if (is_empty_arg(av[i]))
+			return (NULL);
 		total_count += count_words(av[i], ' ');
+	}
 	all_val = malloc(sizeof(char *) * (total_count + 1));
 	if (!all_val)
 		return (NULL);
@@ -57,11 +61,10 @@ char	**parse_input(char **av)
 	i = 0;
 	while (all_val[i])
 	{
-		if (is_empty_arg(all_val[i]) || is_invalid_num(all_val[i]))
-			return (free_split(all_val), NULL);
-		i++;
+		if (is_invalid_num(all_val[i++]))
+			return (free_all(all_val), NULL);
 	}
 	if (is_dup(all_val))
-		return (free_split(all_val), NULL);
+		return (free_all(all_val), NULL);
 	return (all_val);
 }

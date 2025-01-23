@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_checks.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 11:05:46 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/23 11:05:47 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	is_empty_arg(char *s)
@@ -70,11 +82,8 @@ int	is_dup(char **all_val)
 	{
 		j = i + 1;
 		while (all_val[j])
-		{
-			if (ft_strcmp(all_val[i], all_val[j]) == 0)
+			if (ft_strcmp(all_val[i], all_val[j++]) == 0)
 				return (1);
-			j++;
-		}
 		i++;
 	}
 	return (0);

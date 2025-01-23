@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 10:44:09 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/23 10:44:10 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	count_words(char *s, char c)
@@ -66,9 +78,10 @@ static char	**ft_split_helper(char *s, char c, int *i, char **sp)
 char	**ft_split(char *s, char c)
 {
 	char	**sp;
-	int		size = count_words(s, c);
+	int		size;
 	int		i;
 
+	size = count_words(s, c);
 	sp = malloc(sizeof(char *) * (size + 1));
 	if (!sp)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:43:16 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/22 11:43:17 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:02:05 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strdup(char *s)
 	return (dst);
 }
 
-void	free_split(char **ss)
+void	free_all(char **ss)
 {
 	int	i;
 

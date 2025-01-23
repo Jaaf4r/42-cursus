@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 10:59:27 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/22 10:59:28 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:03:15 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ t_node	*valid_stack(char **av)
 
 	all_val = parse_input(av);
 	if (!all_val)
-		return (NULL);
+		return (free_all(all_val), NULL);
 	stack_a = NULL;
 	i = 0;
 	while (all_val[i])
 	{
 		if (!ft_atoi(all_val[i], &value))
-			return (free_split(all_val), NULL);
+			return (free_all(all_val), NULL);
 		ft_lstadd_back(&stack_a, create_node(value));
 		i++;
 	}
-	free_split(all_val);
+	free_all(all_val);
 	return (stack_a);
 }
 
@@ -43,6 +43,8 @@ void	former_main(int ac, char **av)
 	if (ac < 2)
 		return ;
 	stack_a = valid_stack(av);
+	if (!stack_a)
+		return ;
 	stack_b = NULL;
 	if (!is_sorted(stack_a))
 	{

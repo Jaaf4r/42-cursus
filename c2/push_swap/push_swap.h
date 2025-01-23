@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/22 11:57:01 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:51:55 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ typedef struct s_node {
 	struct s_node	*next;
 }	t_node;
 
+typedef struct s_lis {
+	int	*lis_length;
+	int	*backtrack;
+	int	length;
+	int	backtrack_i;
+}	t_lis;
+
 /* just call this func in a main ^-^ */
 t_node	*valid_stack(char **av);
 void	former_main(int ac, char **av);
@@ -38,7 +45,7 @@ char	**parse_input(char **av);
 /* STRING FUNCTIONS */
 int		count_words(char *s, char c);
 char	**ft_split(char *s, char c);
-void	free_split(char **ss);
+void	free_all(char **ss);
 char	*ft_strdup(char *s);
 bool	ft_atoi(char *s, long *total);
 int		ft_strcmp(char *s1, char *s2);
@@ -67,9 +74,10 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 
 /* ALGO FUNCTIONS */
 int		is_sorted(t_node *stack);
+int		is_reversed(t_node *stack_a);
+
 int		*find_lis(t_node *stack, int *length);
 void	quickSort(int *arr, int left, int right);
-int		find_pivot(int *arr, int size);
 int		get_stack_pivot(t_node *stack_a);
 void	pushNonLisTo_stack_b(t_node **stack_a, t_node **stack_b);
 int		insert_pos(t_node *stack_a, int value);
@@ -77,6 +85,5 @@ int		calculate_rot_cost(int stack_size, int index);
 int		abs_val(int x);
 void	push_to_a(t_node **stack_a, t_node **stack_b);
 void	rotate_stack_a(t_node **stack_a);
-int		is_reversed(t_node *stack_a);
 
 #endif

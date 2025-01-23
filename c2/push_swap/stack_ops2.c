@@ -1,12 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_ops2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 11:07:50 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/23 11:07:51 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ra(t_node **stack_a)
 {
+	t_node	*first;
+	t_node	*tmp;
+
 	if (*stack_a && (*stack_a)->next)
 	{
-		t_node	*first = *stack_a;
+		first = *stack_a;
 		*stack_a = (*stack_a)->next;
-		t_node	*tmp = *stack_a;
+		tmp = *stack_a;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = first;
@@ -16,11 +31,14 @@ void	ra(t_node **stack_a)
 
 void	rb(t_node **stack_b)
 {
+	t_node	*first;
+	t_node	*tmp;
+
 	if (*stack_b && (*stack_b)->next)
 	{
-		t_node	*first = *stack_b;
+		first = *stack_b;
 		*stack_b = (*stack_b)->next;
-		t_node	*tmp = *stack_b;
+		tmp = *stack_b;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = first;
