@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 22:28:20 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/24 21:39:48 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 /* ALGO FUNCTIONS */
 int		is_sorted(t_node *stack);
 int		is_reversed(t_node *stack_a);
+
+// STEP [0]:
+void	sort_three(t_node **stack_a);
+void	sort_five(t_node **stack_a, t_node **stack_b);
 // STEP [1]:
 int		*find_lis(t_node *stack, int *length);
 void	quick_sort(int *arr, int left, int right);

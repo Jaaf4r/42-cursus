@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:59:27 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/24 10:26:44 by jabouhni         ###   ########.fr       */
+/*   Created: 2025/01/24 22:26:00 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/24 22:44:21 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,28 @@ static t_node	*valid_stack(char **av)
 	return (stack_a);
 }
 
+static void	main_conditions(t_node **stack_a, t_node **stack_b)
+{
+	int	size;
+
+	size = ft_lstsize(*stack_a);
+	if (size <= 3)
+		sort_three(stack_a);
+	else if (size <= 5)
+		sort_five(stack_a, stack_b);
+	else
+	{
+		if (is_reversed(*stack_a))
+		{
+			sa(stack_a);
+			write(1, "sa\n", 3);
+		}
+		push_nonlis_to_stack_b(stack_a, stack_b);
+		push_to_a(stack_a, stack_b);
+		rotate_stack_a(stack_a);
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_node	*stack_a;
@@ -50,16 +72,8 @@ int	main(int ac, char **av)
 		return (1);
 	stack_b = NULL;
 	if (!is_sorted(stack_a))
-	{
-		if (is_reversed(stack_a))
-		{
-			sa(&stack_a);
-			write(1, "sa\n", 3);
-		}
-		push_nonlis_to_stack_b(&stack_a, &stack_b);
-		push_to_a(&stack_a, &stack_b);
-		rotate_stack_a(&stack_a);
-	}
-	free_stack(stack_a);
-	return (0);
+		main_conditions(&stack_a, &stack_b);
+	if (is_sorted(stack_a))
+		write(1, "nice\n", 5);
+	return (free_stack(stack_a), 0);
 }
