@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 21:51:21 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:28:20 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_calc {
 }	t_calc;
 
 /* MAIN FUNCTION ^-^ */
-int	main(int ac, char **av);
+int		main(int ac, char **av);
 
 /* INPUT PARSING */
 int		is_empty_arg(char *s);
@@ -77,16 +77,18 @@ void	rrr(t_node **stack_a, t_node **stack_b);
 /* ALGO FUNCTIONS */
 int		is_sorted(t_node *stack);
 int		is_reversed(t_node *stack_a);
-
+// STEP [1]:
 int		*find_lis(t_node *stack, int *length);
 void	quick_sort(int *arr, int left, int right);
 void	push_nonlis_to_stack_b(t_node **stack_a, t_node **stack_b);
-
+// STEP [2]:
 int		insert_pos(t_node *stack_a, int value);
 int		calculate_rot_cost(int stack_size, int index);
 int		abs_val(int x);
 int		max(int a, int b);
+// STEP [3]:
 void	push_to_a(t_node **stack_a, t_node **stack_b);
+// STEP [4]:
 void	rotate_stack_a(t_node **stack_a);
 
 #endif

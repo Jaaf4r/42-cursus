@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 22:15:25 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/23 22:16:19 by jabouhni         ###   ########.fr       */
+/*   Created: 2025/01/22 10:59:27 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/01/24 10:26:44 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static t_node	*valid_stack(char **av)
 
 	all_val = parse_input(av);
 	if (!all_val)
+	{
+		write(1, "Error\n", 6);
 		return (free_all(all_val), NULL);
+	}
 	stack_a = NULL;
 	i = 0;
 	while (all_val[i])
