@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:26:00 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/24 22:44:21 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/25 10:12:34 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,5 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	if (!is_sorted(stack_a))
 		main_conditions(&stack_a, &stack_b);
-	if (is_sorted(stack_a))
-		write(1, "nice\n", 5);
 	return (free_stack(stack_a), 0);
 }
