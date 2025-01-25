@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:26:00 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/25 18:41:11 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/25 23:10:29 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_node	*valid_stack(char **av)
 	all_val = parse_input(av);
 	if (!all_val)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (free_all(all_val), NULL);
 	}
 	stack_a = NULL;
@@ -49,7 +49,7 @@ static void	main_conditions(t_node **stack_a, t_node **stack_b)
 		write(1, "sa\n", 3);
 		return ;
 	}
-	if (size == 3)
+	else if (size == 3)
 		sort_three(stack_a);
 	else if (size <= 5)
 		sort_five(stack_a, stack_b);
