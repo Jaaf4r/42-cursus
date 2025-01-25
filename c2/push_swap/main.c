@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:26:00 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/25 23:10:29 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/25 23:18:31 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 	t_node	*stack_b;
 
 	if (ac < 2)
-		return (0);
+		return (1);
 	stack_a = valid_stack(av);
 	if (!stack_a)
 		return (1);

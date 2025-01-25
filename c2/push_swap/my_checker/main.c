@@ -67,11 +67,13 @@ int	main(int ac, char **av)
 	if (!stack_a)
 		return (1);
 	stack_b = NULL;
-	while ((operation = get_next_line(0)))
+	operation = get_next_line(0);
+	while (operation)
 	{
 		if (which_operation(&stack_a, &stack_b, operation) == 0)
 			return (free(operation), write(2, "Error\n", 6), 1);
 		free(operation);
+		operation = get_next_line(0);
 	}
 	if (is_sorted(stack_a) && !ft_lstsize(stack_b))
 		write(1, "OK\n", 3);
