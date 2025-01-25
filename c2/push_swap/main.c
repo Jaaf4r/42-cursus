@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:26:00 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/25 12:27:17 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:41:11 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	main_conditions(t_node **stack_a, t_node **stack_b)
 	int	size;
 
 	size = ft_lstsize(*stack_a);
-	if (is_reversed(*stack_a))
+	if (size == 2)
 	{
 		sa(stack_a);
 		write(1, "sa\n", 3);
@@ -79,7 +79,5 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	if (!is_sorted(stack_a))
 		main_conditions(&stack_a, &stack_b);
-	if (is_sorted(stack_a))
-		write(1, "Ws in the chat\n", 15);
 	return (free_stack(stack_a), 0);
 }
