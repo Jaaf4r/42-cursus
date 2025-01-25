@@ -75,9 +75,9 @@ int	main(int ac, char **av)
 		free(operation);
 		operation = get_next_line(0);
 	}
-	if (is_sorted(stack_a) && !ft_lstsize(stack_b))
-		write(1, "OK\n", 3);
-	else
+	if (!is_sorted(stack_a))
 		write(1, "KO\n", 3);
+	else
+		write(1, "OK\n", 3);
 	return (free_stack(stack_a), 0);
 }
