@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:25:52 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/26 18:02:07 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/26 23:49:08 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,15 @@ bool	ft_atoi(char *s, long *total)
 	sign = ft_space_sign(s, &i);
 	while (s[i] >= '0' && s[i] <= '9')
 	{
-		if (res > (LONG_MAX - (s[i] - '0')) / 10)
-		{
-			if (sign == 1)
-				*total = LONG_MAX;
-			else
-				*total = LONG_MIN;
-			return (false);
-		}
 		res = res * 10 + (s[i] - '0');
+		if ((sign == 1 && res > INT_MAX)
+			|| (sign == -1 && res > (long)INT_MAX + 1))
+			return (false);
 		i++;
 	}
 	*total = res * sign;
+	if (*total < INT_MIN || *total > INT_MAX)
+		return (false);
 	return (true);
 }
 

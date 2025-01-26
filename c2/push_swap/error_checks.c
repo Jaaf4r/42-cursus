@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:25:38 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/26 18:04:12 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/26 23:57:57 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	is_invalid_num(char *s)
 
 	if (!s || !*s)
 		return (1);
+	tmp = s;
 	if (*s == '-' || *s == '+')
 		s++;
-	tmp = s;
 	if (!*s)
 		return (1);
 	while (*s)
@@ -43,8 +43,7 @@ int	is_invalid_num(char *s)
 			return (1);
 		s++;
 	}
-	ft_atoi(tmp, &res);
-	if (res > INT_MAX || res < INT_MIN)
+	if (!ft_atoi(tmp, &res))
 		return (1);
 	return (0);
 }
