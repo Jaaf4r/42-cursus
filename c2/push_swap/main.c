@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:26:00 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/25 23:18:31 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:04:53 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_node	*valid_stack(char **av)
 	i = 0;
 	while (all_val[i])
 	{
-		if (!ft_atoi(all_val[i], &value))
+		if (!(ft_atoi(all_val[i], &value)))
 			return (free_all(all_val), NULL);
 		ft_lstadd_back(&stack_a, create_node(value));
 		i++;

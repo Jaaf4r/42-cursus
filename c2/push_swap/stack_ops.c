@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 22:26:13 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/24 22:26:16 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:51:07 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sa(t_node **stack_a)
 
 	first = NULL;
 	second = NULL;
-	if (stack_a && (*stack_a)->next)
+	if (*stack_a && (*stack_a)->next)
 	{
 		first = *stack_a;
 		second = (*stack_a)->next;

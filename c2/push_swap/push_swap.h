@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:34:11 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/01/24 21:39:48 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/01/26 18:03:13 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		main(int ac, char **av);
 /* INPUT PARSING */
 int		is_empty_arg(char *s);
 int		is_invalid_num(char *s);
-char	*normlize_num(char *s);
 int		is_dup(char **all_val);
 char	**fill_all_val(char **av, char **all_val);
 char	**parse_input(char **av);
@@ -52,7 +51,7 @@ int		count_words(char *s, char c);
 char	**ft_split(char *s, char c);
 void	free_all(char **ss);
 char	*ft_strdup(char *s);
-bool	ft_atoi(char *s, long *total);
+bool	ft_atoi(char *s, long *value);
 int		ft_strcmp(char *s1, char *s2);
 
 /* LINKEDLIST FUNCTIONS */

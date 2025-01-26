@@ -1,5 +1,5 @@
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g 
+CFLAGS	= -Wall -Wextra -Werror
 
 SRC		=	main.c parse_input.c ft_split.c func_str.c \
 			error_checks.c func_ll.c stack_ops.c stack_ops2.c stack_ops3.c \
@@ -9,7 +9,7 @@ SRC		=	main.c parse_input.c ft_split.c func_str.c \
 
 SRCBONUS =	parse_input.c ft_split.c func_str.c error_checks.c \
 			func_ll.c stack_ops.c stack_ops2.c stack_ops3.c \
-			my_checker/main.c my_checker/get_next_line/get_next_line.c \
+			my_checker/checker.c my_checker/get_next_line/get_next_line.c \
 			my_checker/get_next_line/get_next_line_utils.c \
 			algo_v1_helper.c 
 
