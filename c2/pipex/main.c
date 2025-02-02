@@ -5,9 +5,11 @@ static int	valid_arg_files(char **av, int i)
 {
 	int	fd;
 
-	if (i == 1 && (!av[i] || access(av[i], F_OK) != 0))
+	if (!av[i])
+		return (0);
+	if (i == 1 && access(av[i], F_OK) != 0)
 		return (perror(av[i]), 0);
-	else if (i == 4 && !av[i])
+	else if (i == 4)
 	{
 		fd = open(av[i], O_RDWR | O_CREAT, 0644);
 		if (fd == -1)
@@ -19,17 +21,29 @@ static int	valid_arg_files(char **av, int i)
 
 static int	valid_arg_commands(char **av, int i)
 {
-	int	status;
+	char	**env;
+	char	*full_path;
+	int		k;
 
-	status = system(av[i]);
-	if (status == -1)
-		return (system("echo $0"), perror(": command not found: %s\n"), 0);
-	return (1);
+	env = ft_split(getenv("PATH"), ':');
+	if (!env)
+		return (0);
+	k = 0;
+	while (env[k])
+	{
+		full_path = ft_strjoin(env[k], "/");
+		full_path = ft_strjoin(full_path, av[i]);
+		if (access(full_path, X_OK) == 0)
+			return (free(full_path), free_all(env), 1);
+		free(full_path);
+		k++;
+	}
+	return (free_all(env), printf("Command not found: %s\n", av[i]), 0);
 }
 
 static int	valid_args(char **av)
 {
-	if (!valid_arg_files(av, 1) || !valid_arg_files(av, 2)
+	if (!valid_arg_files(av, 1) || !valid_arg_commands(av, 2)
 		|| !valid_arg_commands(av, 3) || !valid_arg_files(av, 4))
 		return (0);
 	return (1);
