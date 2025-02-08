@@ -1,59 +1,162 @@
 #include "pipex.h"
-#include <string.h>
-
-static int	valid_arg_files(char **av, int i)
-{
-	int	fd;
-
-	if (!av[i])
-		return (0);
-	if (i == 1 && access(av[i], F_OK) != 0)
-		return (perror(av[i]), 0);
-	else if (i == 4)
-	{
-		fd = open(av[i], O_RDWR | O_CREAT, 0644);
-		if (fd == -1)
-			return (perror(av[i]), 0);
-		close (fd);
-	}
-	return (1);
-}
 
 static int	valid_arg_commands(char **av, int i)
 {
+	int		k;
+	char	**cmd_args;
+	char	*path_env;
 	char	**env;
 	char	*full_path;
-	int		k;
+	char	*cmd_path;
 
-	env = ft_split(getenv("PATH"), ':');
+	cmd_args = ft_split(av[i], ' ');
+	if (!cmd_args)
+		return (printf("Error: Failed to split command\n"), 0);
+	path_env = getenv("PATH");
+	if (!path_env)
+		return (printf("Error: PATH not set\n"), 0);
+	env = ft_split(path_env, ':');
 	if (!env)
-		return (0);
+		return (free_all(cmd_args), 0);
 	k = 0;
 	while (env[k])
 	{
 		full_path = ft_strjoin(env[k], "/");
-		full_path = ft_strjoin(full_path, av[i]);
-		if (access(full_path, X_OK) == 0)
-			return (free(full_path), free_all(env), 1);
+		cmd_path = ft_strjoin(full_path, cmd_args[0]);
 		free(full_path);
+		if (access(cmd_path, X_OK) == 0)
+			return (free(cmd_path), free_all(cmd_args), free_all(env), 1);
+		free(cmd_path);
 		k++;
 	}
-	return (free_all(env), printf("Command not found: %s\n", av[i]), 0);
+	free_all(env);
+	printf("Command not found: %s\n", cmd_args[0]);
+	free_all(cmd_args);
+	return (0);
 }
 
-static int	valid_args(char **av)
+char	*get_path(char *cmd, char **env)
 {
-	if (!valid_arg_files(av, 1) || !valid_arg_commands(av, 2)
-		|| !valid_arg_commands(av, 3) || !valid_arg_files(av, 4))
-		return (0);
-	return (1);
+	int		i;
+	char	*full_path;
+	char	*path_env;
+	char	**paths;
+	char	*cmd_path;
+
+	if (!cmd || !env)
+		return (NULL);
+
+	path_env = getenv("PATH");
+	if (!path_env)
+		return (NULL);
+
+	paths = ft_split(path_env, ':');
+	if (!paths)
+		return (NULL);
+
+	i = 0;
+	while (paths[i])
+	{
+		full_path = ft_strjoin(paths[i], "/");
+		cmd_path = ft_strjoin(full_path, cmd);
+		free(full_path);
+		if (access(cmd_path, X_OK) == 0)
+			return (free_all(paths),cmd_path);
+		i++;
+	}
+	return (free_all(paths), NULL);
 }
 
-int	main(int ac, char **av)
+void	execute_command(char *cmd, char **env)
 {
+	char	**cmd_args = ft_split(cmd, ' ');
+	char	*cmd_path = get_path(cmd_args[0], env);
+
+	if (!cmd_path)
+	{
+		free_all(cmd_args);
+		exit(127);
+	}
+	execve(cmd_path, cmd_args, env);
+	perror("execve failed\n");
+	free_all(cmd_args);
+	exit(1);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	int		infile_fd;
+	int		outfile_fd;
+	int		pipefd[2];
+	pid_t	pid1;
+	pid_t	pid2;
+
 	if (ac != 5)
 		return (1);
-	if (!valid_args(av))
-		return (printf("shi haja ghalat\n"), 1);
-	printf("kolshi tamam\n");
+
+	if (!valid_arg_commands(av, 2) || !valid_arg_commands(av, 3))
+		return (1);
+
+	infile_fd = open(av[1], O_RDONLY);
+	if (infile_fd == -1)
+	{
+		perror(av[1]);
+		return (1);
+	}
+	outfile_fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (outfile_fd == -1)
+	{
+		perror(av[4]);
+		close (infile_fd);
+		return (1);
+	}
+
+	if (pipe(pipefd) == -1) {
+		perror("Error opening the pipe\n");
+		return (1);
+	}
+	pid1 = fork();
+	if (pid1 == -1) {
+		perror("Error with fork\n");
+		return (1);
+	}
+	if (pid1 == 0)
+	{
+		dup2(infile_fd, STDIN_FILENO);
+		dup2(pipefd[1], STDOUT_FILENO);
+		
+		close(pipefd[0]);
+		close(infile_fd);
+		close(outfile_fd);
+		close(pipefd[1]);
+
+		execute_command(av[2], env);
+	}
+
+	pid2 = fork();
+	if (pid2 == -1) {
+		perror("Error with fork\n");
+		return (1);
+	}
+	if (pid2 == 0)
+	{
+		dup2(pipefd[0], STDIN_FILENO);
+		dup2(outfile_fd, STDOUT_FILENO);
+
+		close(pipefd[0]);
+		close(outfile_fd);
+		close(infile_fd);
+		close(pipefd[1]);
+
+		execute_command(av[3], env);
+	}
+
+
+	close(infile_fd);
+	close(outfile_fd);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
+	return (0);
 }

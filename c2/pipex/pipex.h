@@ -6,8 +6,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "libft/libft.h"
+# include <sys/wait.h>
 
-int		main(int ac, char **av);
+int		main(int ac, char **av, char **env);
 
 void	free_all(char **ss);
 
