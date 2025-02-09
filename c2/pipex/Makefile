@@ -1,7 +1,7 @@
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -I $(LIBFT_DIR)
 
-SRC		= main.c helper.c 
+SRC		= main.c helper.c pipex.c execution.c path_utils.c 
 
 OBJ			= $(SRC:.c=.o)
 RM			= rm -f
