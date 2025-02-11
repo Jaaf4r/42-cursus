@@ -9,7 +9,7 @@ NAME		= pipex
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
-.c.o:
+.o: .c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJ) $(LIBFT)
