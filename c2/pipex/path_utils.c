@@ -41,6 +41,8 @@ char	*find_command(char *cmd)
 	char	*cmd_path;
 	char	**env_path;
 
+	if (!cmd)
+		return (NULL);
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	env_path = get_env_path();
