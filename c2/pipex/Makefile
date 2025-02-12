@@ -1,7 +1,7 @@
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-SRC			= main.c helper.c processes.c path_utils.c 
+SRC			= main.c process.c path_utils.c 
 
 OBJ			= $(SRC:.c=.o)
 RM			= rm -rf
@@ -9,8 +9,8 @@ NAME		= pipex
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
-.o: .c
-		$(CC) $(CFLAGS) $< -o $@
+.c.o:
+		$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
