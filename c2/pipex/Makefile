@@ -1,24 +1,24 @@
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -I $(LIBFT_DIR)
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
-SRC		= main.c helper.c pipex.c execution.c path_utils.c 
+SRC			= main.c helper.c processes.c path_utils.c 
 
 OBJ			= $(SRC:.c=.o)
-RM			= rm -f
+RM			= rm -rf
 NAME		= pipex
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 .o: .c
-	$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) $< -o $@
 
-$(NAME)	: $(OBJ) $(LIBFT)
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT)
 		$(CC) $(CFLAGS) $^ -o $@
 
 $(LIBFT):
 		@make -C $(LIBFT_DIR)
-
-all: $(NAME)
 
 clean:
 		$(RM) $(OBJ)

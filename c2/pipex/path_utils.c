@@ -5,55 +5,90 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/09 22:50:09 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/02/09 22:50:10 by jabouhni         ###   ########.fr       */
+/*   Created: 2025/02/12 01:17:43 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/02/12 01:19:01 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	**init_paths(void)
+int	handle_absolute_path(char **cmd, char *cmd_str)
 {
-	char	*path_env;
-	char	**paths;
-
-	path_env = getenv("PATH");
-	if (!path_env)
-		return (NULL);
-	paths = ft_split(path_env, ':');
-	return (paths);
+	*cmd = ft_strdup(cmd_str);
+	if (!*cmd)
+		return (0);
+	return (1);
 }
 
-static char	*try_path_combinations(char **paths, char *cmd)
+int	path_search(char **cmd_args, char **cmd)
 {
-	int		i;
-	char	*full_path;
+	char	**env_path;
 	char	*cmd_path;
 
-	i = 0;
-	while (paths[i])
+	env_path = get_env_path();
+	if (!env_path)
+		return (free_all(cmd_args), 0);
+	cmd_path = find_cmd_path(cmd_args[0], env_path);
+	if (cmd_path)
 	{
-		full_path = ft_strjoin(paths[i], "/");
-		cmd_path = ft_strjoin(full_path, cmd);
-		free(full_path);
-		if (access(cmd_path, X_OK) == 0)
-			return (free_all(paths), cmd_path);
+		*cmd = ft_strdup(cmd_path);
 		free(cmd_path);
-		i++;
+		if (!*cmd)
+			return (free_all(cmd_args), free_all(env_path), 0);
+		return (free_all(cmd_args), free_all(env_path), 1);
 	}
-	return (NULL);
+	ft_putstr_fd("Command not found\n", 2);
+	return (free_all(cmd_args), free_all(env_path), 0);
 }
 
-char	*get_path(char *cmd, char **env)
+int	valid_path(char **av, char **env, int i, char **cmd)
 {
-	char	**paths;
+	char	**cmd_args;
 
-	if (!cmd || !env)
+	if (!env)
+		return (0);
+	if (access(av[i], X_OK) == 0)
+		handle_absolute_path(cmd, av[i]);
+	cmd_args = ft_split(av[i], ' ');
+	if (!cmd_args)
+		return (0);
+	return (path_search(cmd_args, cmd));
+}
+
+char	**get_env_path(void)
+{
+	char	*tmp;
+	char	**env_path;
+
+	tmp = getenv("PATH");
+	if (!tmp)
 		return (NULL);
-	if (access(cmd, X_OK) == 0)
-		return (cmd);
-	paths = init_paths();
-	if (!paths)
+	env_path = ft_split(tmp, ':');
+	if (!env_path)
 		return (NULL);
-	return (try_path_combinations(paths, cmd));
+	return (env_path);
+}
+
+char	*find_cmd_path(char *command, char **env_path)
+{
+	int		k;
+	char	*tmp;
+	char	*cmd_path;
+
+	k = 0;
+	while (env_path[k])
+	{
+		tmp = ft_strjoin(env_path[k], "/");
+		if (!tmp)
+			return (NULL);
+		cmd_path = ft_strjoin(tmp, command);
+		free(tmp);
+		if (!cmd_path)
+			return (NULL);
+		if (access(cmd_path, X_OK) == 0)
+			return (cmd_path);
+		free(cmd_path);
+		k++;
+	}
+	return (NULL);
 }

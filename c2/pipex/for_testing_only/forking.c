@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 
 // fork() + wait()
-/*int	main()
+int	main()
 {
 	int	id = fork();
 	int	n;
@@ -18,7 +18,7 @@
 	else
 	{
 		n = 6;
-		wait();
+		wait(NULL);
 		// printf("parent proc\n");
 	}
 	
@@ -31,7 +31,7 @@
 	if (id != 0)
 		printf("\n");
 	return (0);
-}*/
+}
 
 // process IDs
 /*int	main()
