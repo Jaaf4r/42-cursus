@@ -14,7 +14,7 @@ void	free_all(char **s)
 	free(s);
 }
 
-static int execute_command(char *cmd, char **env, int in_fd, int out_fd)
+static int	execute_command(char *cmd, char **env, int in_fd, int out_fd)
 {
 	char	**cmd_args;
 	char	*cmd_path;
@@ -30,10 +30,10 @@ static int execute_command(char *cmd, char **env, int in_fd, int out_fd)
 	if (!cmd_path)
 	{
 		ft_putstr_fd("Command not found: ", 2);
-        ft_putstr_fd(cmd_args[0], 2);
-        ft_putstr_fd("\n", 2);
-        free_all(cmd_args);
-        exit(127);
+		ft_putstr_fd(cmd_args[0], 2);
+		ft_putstr_fd("\n", 2);
+		free_all(cmd_args);
+		exit(127);
 	}
 	execve(cmd_path, cmd_args, env);
 	free_all(cmd_args);
@@ -41,70 +41,125 @@ static int execute_command(char *cmd, char **env, int in_fd, int out_fd)
 	exit(127);
 }
 
-static void	handle_pipes(int ac, char **av, char **env)
+static void	all_pipes_exc_last(int ac, char **av, char **env, t_fd *tools)
 {
-	int		pipefd[2];
-	pid_t	pid;
-	int		in_fd;
-	int		i;
-	int		status;
-
-	in_fd = open(av[1], O_RDONLY);
-	if (in_fd == -1)
-		perror(av[1]);
-
-	i = 2;
-	while (i < ac - 2)
+	while (tools->i < ac - 2)
 	{
-		if (pipe(pipefd) == -1)
+		if (pipe(tools->pipefd) == -1)
 		{
 			perror("pipe");
 			exit(1);
 		}
-		pid = fork();
-		if (pid == -1)
+		tools->pid = fork();
+		if (tools->pid == -1)
 		{
 			perror("fork");
 			exit(1);
 		}
-		if (pid == 0)
+		if (tools->pid == 0)
 		{
-			close(pipefd[0]);
-			execute_command(av[i], env, in_fd, pipefd[1]);
+			close(tools->pipefd[0]);
+			execute_command(av[tools->i], env, tools->infile_fd, tools->pipefd[1]);
 		}
-		close(pipefd[1]);
-		if (in_fd != -1)
-			close(in_fd);
-		in_fd = pipefd[0];
-		i++;
+		close(tools->pipefd[1]);
+		if (tools->infile_fd != -1)
+			close(tools->infile_fd);
+		tools->infile_fd = tools->pipefd[0];
+		tools->i++;
 	}
+}
 
-	pid = fork();
-	if (pid == -1)
+static void	handle_pipes(int ac, char **av, char **env, t_fd *tools)
+{
+	int	out_fd;
+
+	if (!tools)
+		return ;
+	if (tools->heredoc_flag == 0)
+	{
+		tools->infile_fd = open(av[1], O_RDONLY);
+		if (tools->infile_fd == -1)
+			perror(av[1]);
+	}
+	all_pipes_exc_last(ac, av, env, tools);
+	tools->pid = fork();
+	if (tools->pid == -1)
 	{
 		perror("fork");
 		exit(1);
 	}
-	if (pid == 0)
+	if (tools->pid == 0)
 	{
-		int	out_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		out_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (out_fd == -1)
 		{
 			perror(av[ac - 1]);
 			exit(1);
 		}
-		execute_command(av[ac - 2], env, in_fd, out_fd);
+		execute_command(av[ac - 2], env, tools->infile_fd, out_fd);
 	}
-	if (in_fd != -1)
-		close(in_fd);
-	while (wait(&status) > 0)
+	if (tools->infile_fd != -1)
+		close(tools->infile_fd);
+	while (wait(&tools->status) > 0)
 		;
+}
+
+static int	handle_heredoc(char *limiter, t_fd *tools)
+{
+	char	*line;
+
+	if (pipe(tools->pipefd) == -1)
+		return (-1);
+	while (1)
+	{
+		ft_putstr_fd("heredoc> ", 1);
+		line = get_next_line(0);
+		if (!line)
+			break;
+		if (ft_strncmp(limiter, line, ft_strlen(limiter)) == 0 &&
+			(line[ft_strlen(limiter)] == '\n'))
+		{
+			free(line);
+			break;
+		}
+		ft_putstr_fd(line, tools->pipefd[1]);
+		free(line);
+	}
+	close(tools->pipefd[1]);
+	return (tools->pipefd[0]);
 }
 
 int	main(int ac, char **av, char **env)
 {
+	t_fd	tools;
+
+	tools.i = 0;
+	tools.infile_fd = -1;
+	tools.status = 0;
 	if (ac < 5)
 		return (ft_putstr_fd("./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2\n", 2), 1);
-	handle_pipes(ac, av, env);
+	if (ft_strncmp("here_doc", av[1], 9) == 0)
+	{
+		if (ac < 6)
+			return (ft_putstr_fd("./pipex here_doc LIMITER cmd cmd1 file", 2), 1);
+		tools.infile_fd = handle_heredoc(av[2], &tools);
+		if (tools.infile_fd == -1)
+			return (1);
+		tools.outfile_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (tools.outfile_fd == -1)
+		{
+			perror(av[ac - 1]);
+			return (1);
+		}
+		tools.i = 3;
+		tools.heredoc_flag = 1;
+		handle_pipes(ac, av, env, &tools);
+	}
+	else
+	{
+		tools.i = 2;
+		tools.heredoc_flag = 0;
+		handle_pipes(ac, av, env, &tools);
+	}
 	return (0);
 }

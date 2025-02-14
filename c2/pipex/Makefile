@@ -3,7 +3,9 @@ CFLAGS		= -Wall -Wextra -Werror
 
 SRC			= main.c process.c path_utils.c 
 
-SRCBNS		=	bonus/main_bonus.c bonus/path_utils_bonus.c 
+SRCBNS		=	bonus/main_bonus.c bonus/path_utils_bonus.c \
+				bonus/get_next_line/get_next_line_utils.c \
+				bonus/get_next_line/get_next_line.c 
 
 OBJ			= $(SRC:.c=.o)
 OBJBNS		= $(SRCBNS:.c=.o)

@@ -7,7 +7,7 @@ char	**get_env_path(void)
 
 	tmp = getenv("PATH");
 	if (!tmp)
-        return (NULL);
+		return (NULL);
 	paths = ft_split(tmp, ':');
 	return (paths);
 }

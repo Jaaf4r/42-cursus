@@ -6,6 +6,17 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include <sys/wait.h>
+# include "./get_next_line/get_next_line.h"
+
+typedef struct s_fd {
+	int		infile_fd;
+	int		outfile_fd;
+	pid_t	pid;
+	int		pipefd[2];
+	int		status;
+	int		i;
+	int		heredoc_flag;
+}	t_fd;
 
 int		main(int ac, char **av, char **env);
 
