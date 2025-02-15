@@ -4,6 +4,7 @@ CFLAGS		= -Wall -Wextra -Werror
 SRC			= main.c process.c path_utils.c 
 
 SRCBNS		=	bonus/main_bonus.c bonus/path_utils_bonus.c \
+				bonus/multiple_pipes_bonus.c \
 				bonus/get_next_line/get_next_line_utils.c \
 				bonus/get_next_line/get_next_line.c 
 

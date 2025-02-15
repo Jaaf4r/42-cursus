@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 12:38:47 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/02/15 12:38:48 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 char	**get_env_path(void)
@@ -7,7 +19,7 @@ char	**get_env_path(void)
 
 	tmp = getenv("PATH");
 	if (!tmp)
-        return (NULL);
+		return (NULL);
 	paths = ft_split(tmp, ':');
 	return (paths);
 }

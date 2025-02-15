@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_utils_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 12:35:03 by jabouhni          #+#    #+#             */
+/*   Updated: 2025/02/15 12:35:05 by jabouhni         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
+
+void	free_all(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		s[i] = NULL;
+		i++;
+	}
+	free(s);
+}
 
 char	**get_env_path(void)
 {
@@ -52,4 +78,31 @@ char	*find_command(char *cmd)
 	if (!cmd_path)
 		return (free_all(env_path), NULL);
 	return (free_all(env_path), cmd_path);
+}
+
+int	execute_command(char *cmd, char **env, int in_fd, int out_fd)
+{
+	char	**cmd_args;
+	char	*cmd_path;
+
+	dup2(in_fd, STDIN_FILENO);
+	dup2(out_fd, STDOUT_FILENO);
+	close(in_fd);
+	close(out_fd);
+	cmd_args = ft_split(cmd, ' ');
+	if (!cmd_args)
+		exit(1);
+	cmd_path = find_command(cmd_args[0]);
+	if (!cmd_path)
+	{
+		ft_putstr_fd("Command not found: ", 2);
+		ft_putstr_fd(cmd_args[0], 2);
+		ft_putstr_fd("\n", 2);
+		free_all(cmd_args);
+		exit(127);
+	}
+	execve(cmd_path, cmd_args, env);
+	free_all(cmd_args);
+	free(cmd_path);
+	exit(127);
 }
