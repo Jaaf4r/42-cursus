@@ -6,22 +6,34 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:38:47 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/02/15 12:38:48 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:22:13 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**get_env_path(void)
+char	*my_getenv(char *name, char **env)
 {
-	char	**paths;
-	char	*tmp;
+	int		i;
+	int		j;
+	char	*sub;
 
-	tmp = getenv("PATH");
-	if (!tmp)
-		return (NULL);
-	paths = ft_split(tmp, ':');
-	return (paths);
+	i = 0;
+	while (env[i])
+	{
+		j = 0;
+		while (env[i][j] && env[i][j] != '=')
+			j++;
+		sub = ft_substr(env[i], 0, j);
+		if (ft_strncmp(sub, name, ft_strlen(name)) == 0)
+		{
+			free(sub);
+			return (env[i] + j + 1);
+		}
+		free(sub);
+		i++;
+	}
+	return (NULL);
 }
 
 char	*join_paths(char *cmd, char **env_path)
@@ -48,20 +60,20 @@ char	*join_paths(char *cmd, char **env_path)
 	return (NULL);
 }
 
-char	*find_command(char *cmd)
+char	*find_command(char *cmd, char **env)
 {
 	char	*cmd_path;
-	char	**env_path;
+	char	**paths;
 
 	if (!cmd)
 		return (NULL);
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
-	env_path = get_env_path();
-	if (!env_path)
+	paths = ft_split(my_getenv("PATH", env), ':');
+	if (!paths)
 		return (NULL);
-	cmd_path = join_paths(cmd, env_path);
+	cmd_path = join_paths(cmd, paths);
 	if (!cmd_path)
-		return (free_all(env_path), NULL);
-	return (free_all(env_path), cmd_path);
+		return (free_all(paths), NULL);
+	return (free_all(paths), cmd_path);
 }

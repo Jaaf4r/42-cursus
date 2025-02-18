@@ -6,7 +6,7 @@
 /*   By: jabouhni <jabouhni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:39:03 by jabouhni          #+#    #+#             */
-/*   Updated: 2025/02/15 12:39:04 by jabouhni         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:25:26 by jabouhni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	execute_command(char **cmd_args, char **env)
 {
 	char	*cmd_path;
 
-	cmd_path = find_command(cmd_args[0]);
+	cmd_path = find_command(cmd_args[0], env);
 	if (!cmd_path)
 	{
 		ft_putstr_fd("Command not found: ", 2);
@@ -32,39 +32,39 @@ int	execute_command(char **cmd_args, char **env)
 	exit(127);
 }
 
-int	handle_first_child(int *file_fd, int *pipefd, char **av, char **env)
+int	handle_first_child(t_tool *tool, char **av, char **env)
 {
 	char	**cmd_args;
 
-	if (file_fd[0] == -1)
+	if (tool->infile_fd == -1)
 	{
-		close(pipefd[0]);
-		close(pipefd[1]);
-		close(file_fd[1]);
+		close(tool->pipefd[0]);
+		close(tool->pipefd[1]);
+		close(tool->outfile_fd);
 		exit(1);
 	}
-	dup2(file_fd[0], STDIN_FILENO);
-	close(file_fd[0]);
-	dup2(pipefd[1], STDOUT_FILENO);
-	close(pipefd[1]);
-	close(file_fd[1]);
-	close(pipefd[0]);
+	dup2(tool->infile_fd, STDIN_FILENO);
+	close(tool->infile_fd);
+	dup2(tool->pipefd[1], STDOUT_FILENO);
+	close(tool->pipefd[1]);
+	close(tool->outfile_fd);
+	close(tool->pipefd[0]);
 	cmd_args = ft_split(av[2], ' ');
 	if (!cmd_args)
 		exit(1);
 	return (execute_command(cmd_args, env));
 }
 
-int	handle_second_child(int *pipefd, int *file_fd, char **av, char **env)
+int	handle_second_child(t_tool *tool, char **av, char **env)
 {
 	char	**cmd_args;
 
-	dup2(pipefd[0], STDIN_FILENO);
-	dup2(file_fd[1], STDOUT_FILENO);
-	close(pipefd[0]);
-	close(file_fd[1]);
-	close(file_fd[0]);
-	close(pipefd[1]);
+	dup2(tool->pipefd[0], STDIN_FILENO);
+	dup2(tool->outfile_fd, STDOUT_FILENO);
+	close(tool->pipefd[0]);
+	close(tool->outfile_fd);
+	close(tool->infile_fd);
+	close(tool->pipefd[1]);
 	cmd_args = ft_split(av[3], ' ');
 	if (!cmd_args)
 		exit(1);
