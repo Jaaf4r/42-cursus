@@ -1,25 +1,32 @@
-CC		= gcc
-CFlAGS	= -Wall -Wextra -Werror
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
-SRC		= so_long.c 
+SRC			= so_long.c 
 
-OBJ		= $(SRC:.c=.o)
-RM		= rm -f
-NAME	= so_long
+OBJ			= $(SRC:.c=.o)
+RM			= rm -f
+NAME		= so_long
+LIBFT_DIR	= libft
+LIBFT		= $(LIBFT_DIR)/libft.a
 
-.o: .c
-		$(CC) $(CFlAGS) -c $< -o $@
+.c.o:
+		$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
-		$(CC) $(CFlAGS) $^ -o $@
+$(NAME): $(OBJ) $(LIBFT)
+		$(CC) $(CFLAGS) $^ -o $@
+
+$(LIBFT):
+		@make -C $(LIBFT_DIR)
 
 clean:
 		$(RM) $(OBJ)
+		@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 		$(RM) $(NAME)
+		@make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
