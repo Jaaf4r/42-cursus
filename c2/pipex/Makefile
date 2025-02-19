@@ -10,7 +10,7 @@ SRCBNS		=	bonus/main_bonus.c bonus/path_utils_bonus.c \
 
 OBJ			= $(SRC:.c=.o)
 OBJBNS		= $(SRCBNS:.c=.o)
-RM			= rm -rf
+RM			= rm -f
 NAME		= pipex
 LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
