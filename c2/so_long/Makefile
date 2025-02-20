@@ -1,7 +1,8 @@
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-SRC			= so_long.c 
+SRC			=	so_long.c get_next_line/get_next_line_utils.c \
+				get_next_line/get_next_line.c 
 
 OBJ			= $(SRC:.c=.o)
 RM			= rm -f
