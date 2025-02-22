@@ -1,8 +1,9 @@
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
-SRC			=	so_long.c get_next_line/get_next_line_utils.c \
-				get_next_line/get_next_line.c 
+SRC			=	so_long.c map_validation_helper.c \
+				map_validation.c get_next_line/get_next_line.c \
+				get_next_line/get_next_line_utils.c 
 
 OBJ			= $(SRC:.c=.o)
 RM			= rm -f
