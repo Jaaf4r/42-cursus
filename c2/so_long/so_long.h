@@ -17,16 +17,12 @@ typedef struct s_game
 	int		line_count;
 	int		line_length;
 	int		index;
+	int		p_count;
+	int		e_count;
+	int		c_count;
 	int		x;
 	int		y;
 }	t_game;
-
-typedef struct s_count
-{
-	int	p_count;
-	int	e_count;
-	int	c_count;
-}	t_count;
 
 int		main(int ac, char **av);
 
@@ -37,8 +33,8 @@ void	open_andstore_mapfile(char *map, t_game *tool);
 
 int		valid_rectangular_size(t_game *tool);
 int		up_down_walls(char *s);
-int		check_map_characters(t_game *tool, char *s, t_count *counter);
-int		check_walls(t_game *tool, t_count *counter);
-int		valid_map_file(char *map, t_game *tool, t_count *counter);
+int		check_map_characters(t_game *tool, char *s, int y);
+int		check_walls(t_game *tool);
+int		valid_map_file(char *map, t_game *tool);
 
 #endif

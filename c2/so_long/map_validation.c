@@ -34,7 +34,7 @@ int	up_down_walls(char *s)
 	return (1);
 }
 
-int	check_map_characters(t_game *tool, char *s, t_count *counter, int y)
+int	check_map_characters(t_game *tool, char *s, int y)
 {
 	int	i;
 
@@ -45,12 +45,12 @@ int	check_map_characters(t_game *tool, char *s, t_count *counter, int y)
 		{
 			tool->x = i;
 			tool->y = y;
-			counter->p_count++;
+			tool->p_count++;
 		}
 		else if (s[i] == 'E')
-			counter->e_count++;
+			tool->e_count++;
 		else if (s[i] == 'C')
-			counter->c_count++;
+			tool->c_count++;
 		else if (s[i] != 'P' && s[i] != 'E' && s[i] != 'C' && s[i] != '1'
 			&& s[i] != '0')
 			return (ft_putstr_fd("Error\nMap contains an unknown character\n", 2)
@@ -60,31 +60,31 @@ int	check_map_characters(t_game *tool, char *s, t_count *counter, int y)
 	return (1);
 }
 
-int	check_walls(t_game *tool, t_count *counter)
+int	check_walls(t_game *tool)
 {
 	int	i;
 
 	if (!up_down_walls(tool->map_2d[0])
 		|| !up_down_walls(tool->map_2d[tool->line_count - 1]))
 		return (ft_putstr_fd("Error\nMissing wall\n", 2), 0);
-	counter->p_count = 0;
-	counter->e_count = 0;
-	counter->c_count = 0;
+	tool->p_count = 0;
+	tool->e_count = 0;
+	tool->c_count = 0;
 	i = 1;
 	while (tool->map_2d[i])
 	{
 		if (tool->map_2d[i][0] != '1'
 			|| tool->map_2d[i][tool->line_length - 1] != '1'
-			|| !check_map_characters(tool, tool->map_2d[i], counter, i))
+			|| !check_map_characters(tool, tool->map_2d[i], i))
 			return (0);
 		i++;
 	}
-	if (counter->p_count != 1 || counter->e_count != 1 || counter->c_count < 1)
+	if (tool->p_count != 1 || tool->e_count != 1 || tool->c_count < 1)
 		return (ft_putstr_fd("Error\nInvalid map\n", 2), 0);
 	return (1);
 }
 
-int	valid_map_file(char *map, t_game *tool, t_count *counter)
+int	valid_map_file(char *map, t_game *tool)
 {
 	count_file_lines(map, tool);
 	if (tool->line_count < 3)
@@ -94,7 +94,7 @@ int	valid_map_file(char *map, t_game *tool, t_count *counter)
 	}
 	open_andstore_mapfile(map, tool);
 	if (!tool->map_2d || !valid_rectangular_size(tool)
-		|| !check_walls(tool, counter))
+		|| !check_walls(tool))
 		return (free_arr2d(tool->map_2d), 0);
 	return (1);
 }
