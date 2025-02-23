@@ -14,7 +14,7 @@ static char	**visited_array(t_game *tool)
 		visited[i] = malloc(sizeof(char) * tool->line_length);
 		if (!visited[i])
 		{
-			while (--i > 0)
+			while (--i >= 0)
 				free(visited[i]);
 			free(visited);
 			return (NULL);
@@ -33,15 +33,13 @@ static void	check_all_paths(t_game *tool, int x, int y, char **visited)
 		return ;
 	if (tool->map_2d[x][y] == '1' || visited[x][y] == '1')
 		return ;
-
 	visited[x][y] = '1';
 	if (tool->map_2d[x][y] == 'C')
 		tool->collectibles++;
-
-	check_all_paths(tool, x + 1, y, visited);
-	check_all_paths(tool, x - 1, y, visited);
 	check_all_paths(tool, x, y + 1, visited);
 	check_all_paths(tool, x, y - 1, visited);
+	check_all_paths(tool, x + 1, y, visited);
+	check_all_paths(tool, x - 1, y, visited);
 }
 
 static void	free_visited_arr(char **visited, int height)
@@ -56,14 +54,10 @@ static void	free_visited_arr(char **visited, int height)
 
 static int	valid_path(t_game *tool)
 {
-	char	**visited;
+	int	i;
+	int	j;
+	int	exit_reachable;
 
-	int	(i), (j), (exit_reachable);
-	visited = visited_array(tool);
-	if (!visited)
-		return (0);
-	tool->collectibles = 0;
-	check_all_paths(tool, tool->x, tool->y, visited);
 	i = 0;
 	exit_reachable = 0;
 	while (i < tool->line_count)
@@ -71,22 +65,28 @@ static int	valid_path(t_game *tool)
 		j = 0;
 		while (j < tool->line_length)
 		{
-			if (tool->map_2d[i][j] == 'E' && visited[i][j] == '1')
+			if (tool->map_2d[i][j] == 'E' && tool->visited[i][j] == '1')
 				exit_reachable = 1;
 			j++;
 		}
 		i++;
 	}
-	free_visited_arr(visited, tool->line_count);
+	free_visited_arr(tool->visited, tool->line_count);
+	if (tool->collectibles != tool->c_count)
+		return (ft_putstr_fd("Error\nNot all collectibles are reachable\n", 2)
+			, 0);
 	if (!exit_reachable)
 		return (ft_putstr_fd("Error\nExit is not reachable\n", 2), 0);
-	if (tool->collectibles != tool->c_count)
-		return (ft_putstr_fd("Error\nNot all collectibles are reachable\n", 2), 0);
 	return (1);
 }
 
-void    road_check(t_game *tool)
+void	road_check(t_game *tool)
 {
+	tool->visited = visited_array(tool);
+	if (!tool->visited)
+		return ;
+	tool->collectibles = 0;
+	check_all_paths(tool, tool->y, tool->x, tool->visited);
 	if (!valid_path(tool))
 	{
 		free_arr2d(tool->map_2d);

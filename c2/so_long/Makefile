@@ -1,5 +1,5 @@
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror 
 
 SRC			=	so_long.c store_map.c map_validation.c \
 				road_check.c get_next_line/get_next_line.c \

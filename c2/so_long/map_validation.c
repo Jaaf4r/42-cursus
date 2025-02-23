@@ -95,8 +95,9 @@ int	valid_map_file(char *map, t_game *tool)
 		return (free_arr2d(tool->map_2d), 0);
 	}
 	store_mapfile(map, tool);
-	if (!tool->map_2d || !valid_rectangular_size(tool)
-		|| !check_walls(tool))
+	if (!tool->map_2d)
+		return (0);
+	if (!valid_rectangular_size(tool) || !check_walls(tool))
 		return (free_arr2d(tool->map_2d), 0);
 	return (1);
 }

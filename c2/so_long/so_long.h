@@ -23,6 +23,7 @@ typedef struct s_game
 	int		x;
 	int		y;
 	int		collectibles;
+	char	**visited;
 }	t_game;
 
 int		main(int ac, char **av);

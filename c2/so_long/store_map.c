@@ -58,7 +58,10 @@ static void	store_map_2d_arr(t_game *tool)
 {
 	tool->map_2d = malloc(sizeof(char *) * (tool->line_count + 1));
 	if (!tool->map_2d)
+	{
 		close(tool->map_fd);
+		return ;
+	}
 	tool->index = 0;
 	tool->line = get_next_line(tool->map_fd);
 	while (tool->line)
