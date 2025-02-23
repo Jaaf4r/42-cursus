@@ -30,12 +30,10 @@ int		main(int ac, char **av);
 void	free_arr2d(char **arr);
 int		valid_map_name(char *map);
 void	count_file_lines(char *map, t_game *tool);
-void	open_andstore_mapfile(char *map, t_game *tool);
+void	store_mapfile(char *map, t_game *tool);
 
-int		valid_rectangular_size(t_game *tool);
-int		up_down_walls(char *s);
-int		check_map_characters(t_game *tool, char *s, int y);
-int		check_walls(t_game *tool);
 int		valid_map_file(char *map, t_game *tool);
+
+void	road_check(t_game *tool);
 
 #endif

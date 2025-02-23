@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-int	valid_rectangular_size(t_game *tool)
+static int	valid_rectangular_size(t_game *tool)
 {
 	int	i;
 
@@ -18,7 +18,7 @@ int	valid_rectangular_size(t_game *tool)
 	return (1);
 }
 
-int	up_down_walls(char *s)
+static int	up_down_walls(char *s)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	up_down_walls(char *s)
 	return (1);
 }
 
-int	check_map_characters(t_game *tool, char *s, int y)
+static int	check_map_characters(t_game *tool, char *s, int y)
 {
 	int	i;
 
@@ -60,7 +60,7 @@ int	check_map_characters(t_game *tool, char *s, int y)
 	return (1);
 }
 
-int	check_walls(t_game *tool)
+static int	check_walls(t_game *tool)
 {
 	int	i;
 
@@ -86,13 +86,15 @@ int	check_walls(t_game *tool)
 
 int	valid_map_file(char *map, t_game *tool)
 {
+	if (!valid_map_name(map))
+		return (ft_putstr_fd("Error\nMap name is not valid\n", 2), 0);
 	count_file_lines(map, tool);
 	if (tool->line_count < 3)
 	{
 		ft_putstr_fd("Error\nMap is too smol xd\n", 2);
 		return (free_arr2d(tool->map_2d), 0);
 	}
-	open_andstore_mapfile(map, tool);
+	store_mapfile(map, tool);
 	if (!tool->map_2d || !valid_rectangular_size(tool)
 		|| !check_walls(tool))
 		return (free_arr2d(tool->map_2d), 0);

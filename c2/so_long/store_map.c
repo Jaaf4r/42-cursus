@@ -54,7 +54,7 @@ void	count_file_lines(char *map, t_game *tool)
 	close(tool->map_fd);
 }
 
-static void	store_map(t_game *tool)
+static void	store_map_2d_arr(t_game *tool)
 {
 	tool->map_2d = malloc(sizeof(char *) * (tool->line_count + 1));
 	if (!tool->map_2d)
@@ -78,7 +78,7 @@ static void	store_map(t_game *tool)
 	tool->map_2d[tool->index] = NULL;
 }
 
-void	open_andstore_mapfile(char *map, t_game *tool)
+void	store_mapfile(char *map, t_game *tool)
 {
 	tool->map_fd = open(map, O_RDONLY);
 	if (tool->map_fd == -1)
@@ -86,6 +86,6 @@ void	open_andstore_mapfile(char *map, t_game *tool)
 		ft_putstr_fd("Error\nMap doesn't exist\n", 2);
 		exit(1);
 	}
-	store_map(tool);
+	store_map_2d_arr(tool);
 	close(tool->map_fd);
 }
