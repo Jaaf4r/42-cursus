@@ -22,6 +22,7 @@ typedef struct s_game
 	int		c_count;
 	int		x;
 	int		y;
+	int		collectibles;
 }	t_game;
 
 int		main(int ac, char **av);
