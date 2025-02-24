@@ -12,6 +12,7 @@
 typedef struct s_game
 {
 	int		map_fd;
+	int		tmp_fd;
 	char	*line;
 	char	*map_1d;
 	char	**map_2d;
