@@ -17,7 +17,6 @@ typedef struct s_game
 	char	**map_2d;
 	int		line_count;
 	int		line_length;
-	// int		index;
 	int		p_count;
 	int		e_count;
 	int		c_count;

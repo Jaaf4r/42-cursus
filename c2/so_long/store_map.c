@@ -35,16 +35,10 @@ int	valid_map_name(char *map)
 	return (0);
 }
 
-static void	store_map_1d_arr(char *map, t_game *tool)
+static void	store_map_1d_arr(t_game *tool)
 {
 	char	*tmp;
 
-	tool->map_fd = open(map, O_RDONLY);
-	if (tool->map_fd == -1)
-	{
-		ft_putstr_fd("Error\nMap doesn't exist\n", 2);
-		exit(1);
-	}
 	tool->line = get_next_line(tool->map_fd);
 	tool->map_1d = ft_strdup("");
 	if (!tool->map_1d)
@@ -63,12 +57,18 @@ static void	store_map_1d_arr(char *map, t_game *tool)
 		tool->line = get_next_line(tool->map_fd);
 		tool->line_count++;
 	}
-	close(tool->map_fd);
 }
 
 static void	store_map_2d_arr(char *map, t_game *tool)
 {
-	store_map_1d_arr(map, tool);
+	tool->map_fd = open(map, O_RDONLY);
+	if (tool->map_fd == -1)
+	{
+		ft_putstr_fd("Error\nMap doesn't exist\n", 2);
+		exit(1);
+	}
+	store_map_1d_arr(tool);
+	close(tool->map_fd);
 	if (tool->map_1d[ft_strlen(tool->map_1d) - 1] == '\n')
 	{
 		ft_putstr_fd("Error\nNew line(s) at the end\n", 2);
