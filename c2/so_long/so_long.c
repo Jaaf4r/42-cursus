@@ -4,6 +4,7 @@ int	main(int ac, char **av)
 {
 	t_game	tool;
 
+	tool = (t_game){0};
 	if (ac != 2 || !valid_map_file(av[1], &tool))
 		return (1);
 	road_check(&tool);

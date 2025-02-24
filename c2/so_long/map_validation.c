@@ -13,8 +13,6 @@ static int	valid_rectangular_size(t_game *tool)
 		i++;
 	}
 	tool->line_length = (int)ft_strlen(tool->map_2d[0]);
-	if (tool->line_count >= tool->line_length)
-		return (ft_putstr_fd("Error\nMap shape is not a rectangle", 2), 0);
 	return (1);
 }
 
@@ -60,22 +58,22 @@ static int	check_map_characters(t_game *tool, char *s, int y)
 	return (1);
 }
 
-static int	check_walls(t_game *tool)
+static int	check_map(t_game *tool)
 {
 	int	i;
 
 	if (!up_down_walls(tool->map_2d[0])
 		|| !up_down_walls(tool->map_2d[tool->line_count - 1]))
 		return (ft_putstr_fd("Error\nMissing wall\n", 2), 0);
-	tool->p_count = 0;
-	tool->e_count = 0;
-	tool->c_count = 0;
+	if (!valid_rectangular_size(tool))
+		return (0);
 	i = 1;
-	while (tool->map_2d[i])
+	while (i < tool->line_count - 1)
 	{
 		if (tool->map_2d[i][0] != '1'
-			|| tool->map_2d[i][tool->line_length - 1] != '1'
-			|| !check_map_characters(tool, tool->map_2d[i], i))
+			|| tool->map_2d[i][tool->line_length - 1] != '1')
+			return (ft_putstr_fd("Error\nMap lacks wall(s)\n", 2), 0);
+		if (!check_map_characters(tool, tool->map_2d[i], i))
 			return (0);
 		i++;
 	}
@@ -87,17 +85,16 @@ static int	check_walls(t_game *tool)
 int	valid_map_file(char *map, t_game *tool)
 {
 	if (!valid_map_name(map))
-		return (ft_putstr_fd("Error\nMap name is not valid\n", 2), 0);
-	count_file_lines(map, tool);
+		return (ft_putstr_fd("Error\nInvalid map name\n", 2), 0);
+	store_mapfile(map, tool);
+	if (!tool->map_2d)
+		return (0);
 	if (tool->line_count < 3)
 	{
 		ft_putstr_fd("Error\nMap is too smol xd\n", 2);
 		return (free_arr2d(tool->map_2d), 0);
 	}
-	store_mapfile(map, tool);
-	if (!tool->map_2d)
-		return (0);
-	if (!valid_rectangular_size(tool) || !check_walls(tool))
+	if (!check_map(tool))
 		return (free_arr2d(tool->map_2d), 0);
 	return (1);
 }

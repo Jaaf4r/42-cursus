@@ -35,60 +35,76 @@ int	valid_map_name(char *map)
 	return (0);
 }
 
-void	count_file_lines(char *map, t_game *tool)
+static void	store_map_1d_arr(char *map, t_game *tool)
 {
+	char	*tmp;
+
 	tool->map_fd = open(map, O_RDONLY);
 	if (tool->map_fd == -1)
 	{
 		ft_putstr_fd("Error\nMap doesn't exist\n", 2);
 		exit(1);
 	}
-	tool->line_count = 0;
 	tool->line = get_next_line(tool->map_fd);
+	tool->map_1d = ft_strdup("");
+	if (!tool->map_1d)
+	{
+		free(tool->line);
+		close(tool->map_fd);
+		return ;
+	}
 	while (tool->line)
 	{
-		tool->line_count++;
+		tmp = ft_strjoin(tool->map_1d, tool->line);
+		free(tool->map_1d);
+		tool->map_1d = ft_strdup(tmp);
+		free(tmp);
 		free(tool->line);
 		tool->line = get_next_line(tool->map_fd);
+		tool->line_count++;
 	}
 	close(tool->map_fd);
 }
 
-static void	store_map_2d_arr(t_game *tool)
+static void	store_map_2d_arr(char *map, t_game *tool)
 {
-	tool->map_2d = malloc(sizeof(char *) * (tool->line_count + 1));
+	store_map_1d_arr(map, tool);
+	if (tool->map_1d[ft_strlen(tool->map_1d) - 1] == '\n')
+	{
+		ft_putstr_fd("Error\nNew line(s) at the end\n", 2);
+		return ;
+	}
+	tool->map_2d = ft_split(tool->map_1d, '\n');
+	if (!tool->map_2d)
+	{
+		free(tool->map_1d);
+		return ;
+	}
+	free(tool->map_1d);
+}
+
+void	store_mapfile(char *map, t_game *tool)
+{
+	int	i;
+
+	tool->map_fd = open(map, O_RDONLY);
+	if (tool->map_fd == -1)
+	{
+		ft_putstr_fd("Error\nMap doesn't exist\n", 2);
+		exit(1);
+	}
+	store_map_2d_arr(map, tool);
 	if (!tool->map_2d)
 	{
 		close(tool->map_fd);
 		return ;
 	}
-	tool->index = 0;
-	tool->line = get_next_line(tool->map_fd);
-	while (tool->line)
+	i = 0;
+	while (tool->map_2d[i])
 	{
-		if (tool->line[ft_strlen(tool->line) - 1] == '\n')
-			tool->line[ft_strlen(tool->line) - 1] = '\0';
-		tool->map_2d[tool->index] = ft_strdup(tool->line);
-		if (!tool->map_2d[tool->index])
-		{
-			free(tool->line);
-			free_arr2d(tool->map_2d);
-		}
-		tool->index++;
-		free(tool->line);
-		tool->line = get_next_line(tool->map_fd);
+		if (tool->map_2d[i][tool->line_length - 1] == '\n')
+			tool->map_2d[i][tool->line_length - 1] = '\0';
+		i++;
 	}
-	tool->map_2d[tool->index] = NULL;
-}
-
-void	store_mapfile(char *map, t_game *tool)
-{
-	tool->map_fd = open(map, O_RDONLY);
-	if (tool->map_fd == -1)
-	{
-		ft_putstr_fd("Error\nMap doesn't exist\n", 2);
-		exit(1);
-	}
-	store_map_2d_arr(tool);
 	close(tool->map_fd);
 }
