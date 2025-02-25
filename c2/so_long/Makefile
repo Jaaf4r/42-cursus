@@ -12,12 +12,12 @@ LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 .c.o:
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -O3 -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-		$(CC) $(CFLAGS) $^ -o $@
+		$(CC) $(CFLAGS) $^ -L/usr/include/minilibx-linux -lmlx -lX11 -lXext -lm -o $@
 
 $(LIBFT):
 		@make -C $(LIBFT_DIR)
@@ -28,7 +28,7 @@ clean:
 
 fclean: clean
 		$(RM) $(NAME)
-		@make -C $(LIBFT_DIR) fclean
+		@make -C $(LIBFT_DIR) fclean 
 
 re: fclean all
 

@@ -9,8 +9,7 @@
 # include "get_next_line/get_next_line.h"
 # include "/usr/include/minilibx-linux/mlx.h"
 
-typedef struct s_game
-{
+typedef struct s_game {
 	int		map_fd;
 	int		tmp_fd;
 	char	*line;
@@ -26,6 +25,14 @@ typedef struct s_game
 	int		collectibles;
 	char	**visited;
 }	t_game;
+
+typedef struct s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
 
 int		main(int ac, char **av);
 
