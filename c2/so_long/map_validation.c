@@ -77,8 +77,12 @@ static int	check_map(t_game *tool)
 			return (0);
 		i++;
 	}
-	if (tool->p_count != 1 || tool->e_count != 1 || tool->c_count < 1)
-		return (ft_putstr_fd("Error\nInvalid map\n", 2), 0);
+	if (tool->p_count == 0 || tool->p_count > 1)
+		return (ft_putstr_fd("Error\nThere must be only 1 player\n", 2), 0);
+	if (tool->e_count == 0 || tool->e_count > 1)
+		return (ft_putstr_fd("Error\nThere must be only 1 exit\n", 2), 0);
+	if (tool->c_count == 0)
+		return (ft_putstr_fd("Error\nThere must be at least 1 collectible\n", 2), 0);
 	return (1);
 }
 

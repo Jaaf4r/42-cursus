@@ -40,11 +40,12 @@ static void	store_map_1d_arr(t_game *tool)
 	char	*tmp;
 
 	tool->line = get_next_line(tool->tmp_fd);
+	if (!tool->line)
+		return ;
 	tool->map_1d = ft_strdup("");
 	if (!tool->map_1d)
 	{
 		free(tool->line);
-		close(tool->tmp_fd);
 		return ;
 	}
 	while (tool->line)
@@ -69,6 +70,12 @@ static void	store_map_2d_arr(char *map, t_game *tool)
 		exit(1);
 	}
 	store_map_1d_arr(tool);
+	if (!tool->map_1d)
+	{
+		ft_putstr_fd("Error\nEmpty map file\n", 2);
+		close(tool->tmp_fd);
+		return ;
+	}
 	close(tool->tmp_fd);
 	if (tool->map_1d[ft_strlen(tool->map_1d) - 1] == '\n')
 	{
@@ -77,11 +84,6 @@ static void	store_map_2d_arr(char *map, t_game *tool)
 		return ;
 	}
 	tool->map_2d = ft_split(tool->map_1d, '\n');
-	if (!tool->map_2d)
-	{
-		free(tool->map_1d);
-		return ;
-	}
 	free(tool->map_1d);
 }
 
@@ -105,7 +107,7 @@ void	store_mapfile(char *map, t_game *tool)
 	while (tool->map_2d[i])
 	{
 		tool->line_length = ft_strlen(tool->map_2d[i]);
-		if (tool->map_2d[i][tool->line_length - 1] == '\n')
+		if (tool->line_length > 0 && tool->map_2d[i][tool->line_length - 1] == '\n')
 			tool->map_2d[i][tool->line_length - 1] = '\0';
 		i++;
 	}
